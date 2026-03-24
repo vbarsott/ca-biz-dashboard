@@ -5,4 +5,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/ca-biz-dashboard/", // 👈 repo name, with leading and trailing slash
+
+  server: {
+    port: 5500,
+  },
 });

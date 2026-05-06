@@ -12,12 +12,14 @@
 
 ```
 src/
+  assets/
   components/
-  screens/
-  data/
-  utils/
-  styles/
   config/
+  data/
+  hooks/
+  screens/
+  styles/
+  utils/
 ```
 
 ## 3. Screen Flow
@@ -37,7 +39,7 @@ src/
 
 ## 5. Charting
 
-- Use a consistent chart library (TBD).
+- Chart library: Chart.js.
 - All charts must:
   - Use large fonts
   - Use high contrast

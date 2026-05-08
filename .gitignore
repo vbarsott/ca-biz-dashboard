@@ -49,5 +49,7 @@ dist/
 
 # Sensitive project docs (optional—adjust based on your comfort level)
 claude/
+docs/
 docs/tasks-decisions-log.md
 docs/risks-constraints.md
+src/data/raw/

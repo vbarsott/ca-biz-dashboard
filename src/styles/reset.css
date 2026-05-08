@@ -1,0 +1,68 @@
+/* =============================================================
+   reset.css
+   Canadian Business Dashboard — Minimal Browser Reset
+   Scoped to the needs of a non-interactive TV display.
+   ============================================================= */
+
+/* Box model — everything includes border and padding in size */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Root font size: 20 px so 1 rem = 20 px (TV-friendly baseline) */
+html {
+  font-size: 20px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--ink);   /* letterbox colour behind 16:9 canvas */
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove list styling — lists in this project are data-driven */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Images fill their container and never overflow */
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inherit fonts in form elements (not interactive, but just in case) */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Consistent heading rendering */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--navy);
+}
+
+/* Remove default anchor decoration */
+a {
+  color: inherit;
+  text-decoration: none;
+}

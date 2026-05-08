@@ -1,0 +1,47 @@
+/* =============================================================
+   global.css
+   Canadian Business Dashboard — Style Entry Point
+   Import this file once in main.jsx. Do not import tokens,
+   reset, or typography directly in components.
+
+   Load order matters:
+     1. tokens  — custom properties (no output, just variables)
+     2. reset   — baseline normalisation
+     3. typography — base type rules built on the token scale
+   ============================================================= */
+
+@import './tokens.css';
+@import './reset.css';
+@import './typography.css';
+
+
+/* ── TV Container Layout ───────────────────────────────────── */
+/* (Moved from App.css so all layout lives in one place.)       */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Full-viewport letterbox — centres the 16:9 canvas */
+#tv-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ink);   /* dark surround outside the canvas */
+}
+
+/* The 16:9 slide canvas */
+#hero {
+  aspect-ratio: var(--aspect-ratio-dashboard);
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--paper);
+}

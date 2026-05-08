@@ -1,0 +1,155 @@
+/* =============================================================
+   tokens.css
+   Canadian Business Dashboard — Design Tokens
+   Single source of truth for all CSS custom properties.
+   Import via global.css — do not import directly in components.
+   Last updated: 2026-05-08
+   ============================================================= */
+
+:root {
+
+  /* ───────────────────────────────────────────
+     COLOUR PALETTE — CORE
+     ─────────────────────────────────────────── */
+
+  /* Primary Brand */
+  --navy:      #003366;   /* headings, dark backgrounds, primary brand */
+  --navy-mid:  #1A4A7A;   /* secondary navy, hover states, emphasis     */
+  --navy-pale: #EAF0F8;   /* navy-tinted backgrounds, subtle accents    */
+
+  /* Alert & Action */
+  --red:       #CC0000;   /* primary action, alerts, accent bars        */
+  --red-dark:  #990000;   /* hover / active red states                  */
+  --red-pale:  #FDF0F0;   /* red-tinted background, soft callouts       */
+
+  /* Positive / Growth */
+  --green:     #1D7A4F;   /* positive trend, growth indicators          */
+  --teal:      #006B5E;   /* accent, alt-positive, supporting visual    */
+  --teal-pale: #E5F3F1;   /* teal-tinted background, soft emphasis      */
+
+  /* Caution / Decline */
+  --orange:    #B54708;   /* caution, decline indicators                */
+
+  /* Neutral & Type */
+  --ink:       #1A1A1A;   /* body text, primary copy                    */
+  --mid:       #555555;   /* secondary text, labels, metadata           */
+  --ghost:     #888888;   /* muted labels, disabled states              */
+  --border:    #CCCCCC;   /* dividers, borders, grid lines              */
+
+  /* Backgrounds */
+  --paper:     #F8F8F8;   /* slide / card / page background             */
+  --white:     #FFFFFF;   /* pure white, high-contrast elements         */
+
+
+  /* ───────────────────────────────────────────
+     COLOUR PALETTE — ACCENT (use sparingly)
+     Only for cases the core palette can't cover
+     (gradient overlays, secondary data series).
+     ─────────────────────────────────────────── */
+
+  --accent-red-bright: #FF6B6B;  /* hero headlines, eye-catching accents   */
+  --accent-red-light:  #FF9999;  /* secondary stats, hover on hero         */
+  --projection-blue:   #7aafd4;  /* projected / future data in timelines   */
+  --pre-covid-blue:    #B3C8E0;  /* pre-COVID historical data in timelines */
+
+
+  /* ───────────────────────────────────────────
+     TYPOGRAPHY
+     Font families + fluid scale for TV display.
+     Base size 20px → everything else in rem.
+     ─────────────────────────────────────────── */
+
+  --font-sans:    'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  /* Type scale (rem — base 20 px) */
+  --text-xs:   0.65rem;   /*  13 px — fine print, source lines          */
+  --text-sm:   0.8rem;    /*  16 px — captions, metadata                */
+  --text-base: 1rem;      /*  20 px — body copy                         */
+  --text-md:   1.25rem;   /*  25 px — secondary labels                  */
+  --text-lg:   1.6rem;    /*  32 px — card headings                     */
+  --text-xl:   2rem;      /*  40 px — section headings                  */
+  --text-2xl:  2.5rem;    /*  50 px — slide titles                      */
+  --text-3xl:  3.25rem;   /*  65 px — hero numbers                      */
+  --text-4xl:  4.5rem;    /*  90 px — cover / splash display            */
+
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+  --weight-black:   900;
+
+  /* Line heights */
+  --leading-tight:  1.1;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+
+
+  /* ───────────────────────────────────────────
+     SPACING SCALE
+     4 px base grid — used for padding / margins.
+     ─────────────────────────────────────────── */
+
+  --space-1:  0.25rem;   /*  4 px */
+  --space-2:  0.5rem;    /*  8 px */
+  --space-3:  0.75rem;   /* 12 px */
+  --space-4:  1rem;      /* 16 px — default inner padding               */
+  --space-6:  1.5rem;    /* 24 px */
+  --space-8:  2rem;      /* 32 px — section padding                     */
+  --space-10: 2.5rem;    /* 40 px */
+  --space-12: 3rem;      /* 48 px */
+  --space-16: 4rem;      /* 64 px — generous slide margins              */
+  --space-20: 5rem;      /* 80 px */
+  --space-24: 6rem;      /* 96 px */
+
+
+  /* ───────────────────────────────────────────
+     BORDER RADIUS
+     ─────────────────────────────────────────── */
+
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+
+  /* ───────────────────────────────────────────
+     TRANSITIONS
+     Used for EN → FR language fade and slide rotation.
+     ─────────────────────────────────────────── */
+
+  --duration-fast:   200ms;
+  --duration-base:   400ms;
+  --duration-slow:   700ms;
+  --duration-xslow: 1200ms;   /* EN → FR crossfade                      */
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+
+  --transition-fade: opacity var(--duration-xslow) var(--ease-out);
+  --transition-slide: transform var(--duration-slow) var(--ease-out),
+                      opacity var(--duration-slow) var(--ease-out);
+
+
+  /* ───────────────────────────────────────────
+     SHADOWS
+     Subtle depth for card elements.
+     ─────────────────────────────────────────── */
+
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.10);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.15);
+
+
+  /* ───────────────────────────────────────────
+     LAYOUT
+     Dashboard always renders in a 16:9 canvas.
+     ─────────────────────────────────────────── */
+
+  --aspect-ratio-dashboard: 16 / 9;
+  --slide-duration: 10s;   /* how long each slide is visible            */
+}

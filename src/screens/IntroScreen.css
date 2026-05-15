@@ -110,6 +110,15 @@
   color: var(--accent-red-bright);
 }
 
+/* Collapse the trailing <br> when titleLine2 is empty.
+   CSS `:last-child` matches the final element child of the h1,
+   which is the second <br> when the text node after it is empty.
+   This prevents a phantom blank line (~71 px) below the accent line.
+   Safe to remove if a 3-line title is ever restored. */
+.intro-title > br:last-child {
+  display: none;
+}
+
 
 /* ── DESCRIPTION ──────────────────────────────────────────────
    Kept narrow (≈40% width) so it reads as a column, not a block.

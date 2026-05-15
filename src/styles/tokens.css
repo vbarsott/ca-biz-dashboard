@@ -124,7 +124,7 @@
   --duration-fast:   200ms;
   --duration-base:   400ms;
   --duration-slow:   700ms;
-  --duration-xslow: 1200ms;   /* EN → FR crossfade                      */
+  --duration-xslow: 1500ms;   /* EN → FR crossfade                      */
 
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-in:      cubic-bezier(0.4, 0, 1, 1);

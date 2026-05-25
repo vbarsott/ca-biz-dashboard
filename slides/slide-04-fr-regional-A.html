@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Régional A — Où la croissance des entreprises employeuses s'est-elle
+      produite?
+    </title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="slide-source">
+        Statistique Canada · Portail du gouvernement ouvert<br />
+        Dénombrements des entreprises canadiennes · Tableau 33-10-0034-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>Où la croissance des entreprises employeuses s'est-elle produite?</h1>
+      <p class="subtitle">
+        Le portrait provincial est nettement divisé. Plusieurs provinces, dont
+        Newfoundland et les NWT, ont terminé la décennie avec moins
+        d'entreprises qu'au départ.
+      </p>
+    </div>
+
+    <!-- ── TWO-COLUMN LAYOUT: Chart (left) · Insight (right) ────────────── -->
+    <div class="chart-row ratio-55-45 fade-in">
+      <!-- LEFT: Provincial growth ranking bar chart -->
+      <div class="chart-col">
+        <div class="chart-section accent-navy">
+          <div class="chart-header">
+            <span class="chart-title">
+              Classement provincial — Variation en % des entreprises
+              employeuses, 2015→2025
+            </span>
+          </div>
+          <div class="chart-canvas-wrap h-360">
+            <canvas
+              id="chart-prov-growth"
+              role="img"
+              aria-label="Diagramme à barres horizontales. Ontario +14,7 %, Terre-Neuve −9,5 %."
+            ></canvas>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--green)"></div>
+              En croissance
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--ghost)"></div>
+              Stable
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--red)"></div>
+              En déclin
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Insight chip -->
+      <div class="chart-col">
+        <div class="insight-panel">
+          <div class="insight-chip">
+            <div class="chip-label">Concentration de la croissance</div>
+            <div class="chip-stat">
+              L'Ontario et la British Columbia. ont capté environ les deux tiers
+              des nouvelles entreprises employeuses nettes depuis 2015.
+            </div>
+            <div class="chip-detail">
+              L'Ontario a ajouté ~66 000 entreprises; la British Columbia, ~27
+              000. Les Prairies et le Canada atlantique ensemble ont ajouté
+              moins d'entreprises que l'Ontario seul.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
+    <p class="source-line">
+      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux
+      33-10-0034-01 à 33-10-1096-01) &nbsp;|&nbsp; Entreprises employeuses (avec
+      employés) · Instantanés de la période de référence de décembre, 2015–2025
+    </p>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/transitions.js"></script>
+    <script>
+      /* ── DONNÉES ────────────────────────────────────────────────────────────
+         Source : Statistique Canada, Dénombrements des entreprises canadiennes
+         Entreprises employeuses (avec employés) · Instantanés de décembre
+         Variation en % : dénombrements de déc. 2015 à déc. 2025, triés par ordre décroissant.
+      ────────────────────────────────────────────────────────────────────── */
+      const provs = [
+        "Ontario",
+        "British Columbia",
+        "PEI",
+        "Quebec",
+        "Manitoba",
+        "Nova Scotia",
+        "Yukon",
+        "Alberta",
+        "Nunavut",
+        "Saskatchewan",
+        "New Brunswick",
+        "NWT",
+        "Newfoundland",
+      ];
+      const pcts = [
+        14.7, 11.8, 8.9, 8.4, 7.6, 5.8, 5.2, -0.3, 0.0, -0.0, -0.1, -7.0, -9.5,
+      ];
+
+      new Chart(document.getElementById("chart-prov-growth"), {
+        type: "bar",
+        data: {
+          labels: provs,
+          datasets: [
+            {
+              data: pcts,
+              backgroundColor: pcts.map((v) =>
+                v > 1 ? PALETTE.green : v >= -1 ? PALETTE.ghost : PALETTE.red,
+              ),
+              borderWidth: 0,
+              borderRadius: 3,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          ...RESPONSIVE_OPTS,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) => "  " + fmtPct(ctx.raw),
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: PALETTE.ghost,
+                font: { size: 10, family: FONT },
+                callback: (v) => (v > 0 ? "+" : "") + v + "%",
+              },
+              grid: GRID_SUBTLE,
+              min: -12,
+              max: 17,
+            },
+            y: {
+              ticks: { color: PALETTE.ink, font: { size: 11, family: FONT } },
+              grid: { display: false },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+/* ============================================================
+   slideshow.css — Canadian Business Dashboard
+   Fullscreen 16:9 layout with two transition modes:
+     1. Crossfade  (EN → FR)  — opacity only
+     2. Horizontal slide (FR → EN) — transform only (inline JS)
+
+   Architecture:
+   - #slideshow-wrapper   fills the entire viewport (100vw × 100vh)
+   - #slideshow-stage     is a 16:9 box centred inside the wrapper;
+                          dimensions are written by slideshow.js on
+                          init and every resize event.
+   - .slide-frame         two absolutely-positioned iframes that are
+                          always stacked at the same position (inset:0).
+                          Only one is ever visible at a time.
+
+   Crossfade transitions use CSS opacity (this file).
+   Horizontal transitions use inline transform styles set by JS.
+
+   IMPORTANT: TRANSITION_MS in slideshow.js (800 ms) must stay in
+   sync with the transition duration on .slide-frame below.
+   ============================================================ */
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Viewport root ─────────────────────────────────────────── */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Letterbox colour — pure black gives the cleanest TV look */
+  background-color: #000;
+}
+
+/* ── Full-viewport wrapper ─────────────────────────────────── */
+#slideshow-wrapper {
+  position: fixed;
+  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+
+/* ── 16:9 stage (dimensions injected by slideshow.js) ─────── */
+#slideshow-stage {
+  position: relative;
+  /*
+    overflow: hidden is critical — it clips frames that are
+    translating in/out during horizontal slide transitions so
+    they never appear beside the active slide.
+  */
+  overflow: hidden;
+
+  /*
+    slideshow.js writes:
+      stage.style.width  = "<px>";
+      stage.style.height = "<px>";
+    on init and on every resize, maintaining exact 16:9.
+    The flex-centering on #slideshow-wrapper handles letterboxing.
+  */
+}
+
+/* ── Slide frames ─────────────────────────────────────────── */
+.slide-frame {
+  /*
+    Both frames are always stacked at the exact same position
+    covering the full stage. This prevents any side-by-side layout.
+  */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+
+  /* All slides start invisible and below the active layer */
+  opacity: 0;
+  z-index: 1;
+
+  /*
+    Crossfade transition (EN → FR).
+    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (800 ms).
+
+    NOTE: For horizontal slide transitions (FR → EN), slideshow.js
+    overrides this via element.style.transition so only `transform`
+    is animated and opacity stays at 1 for both frames. The inline
+    override is cleaned up after the transition completes.
+  */
+  transition: opacity 1.8s ease-in-out;
+}
+
+/* ── Active slide — fully visible, sits on top ────────────── */
+.slide-frame.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* ── Stage backdrop ───────────────────────────────────────── */
+/*
+  Solid black layer behind both frames so there is never a flash
+  of the browser's white default background during transitions.
+*/
+#slideshow-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 0;
+  pointer-events: none;
+}

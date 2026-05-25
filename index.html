@@ -1,22 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Dashboard</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canadian Business Dashboard</title>
+  <link rel="stylesheet" href="slideshow.css" />
+</head>
+<body>
 
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!--
+    ================================================================
+    Canadian Business Dashboard — Slideshow Controller
+    ================================================================
+    This shell dynamically loads 14 bilingual HTML slide files
+    from slides/ using two alternating iframes.
 
-    <!-- Your styles -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    Controller logic   → slideshow.js
+    Layout/transitions → slideshow.css
+    Slide files        → slides/*.html  (never modified here)
 
-  <body>
-    <h1>My Dashboard</h1>
+    Transition types (managed entirely by slideshow.js):
+      EN → FR  :  crossfade (opacity 0 → 1)
+      FR → EN  :  horizontal slide (translateX 100% → 0)
 
-    <canvas id="myChart"></canvas>
+    Chart re-animation:
+      Charts in each slide animate immediately when the iframe
+      loads (DOMContentLoaded fires in background). slideshow.js
+      calls chart.reset() + chart.update() on every Chart.js
+      instance inside the incoming frame right before each
+      transition, so animations always play from scratch when a
+      slide becomes visible.
+    ================================================================
+  -->
 
-    <script src="script.js"></script>
-  </body>
+  <div id="slideshow-wrapper">
+    <div id="slideshow-stage">
+
+      <!--
+        Frame A — starts as the active (visible) frame.
+        Receives slides/slide-01-en-cover.html on init.
+
+        data-loaded-index: tracks which slide index is currently
+        loaded so slideshow.js can skip re-loading if already
+        preloaded. Initialised to -1 (nothing loaded).
+      -->
+      <iframe
+        id="frame-a"
+        class="slide-frame"
+        data-loaded-index="-1"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true"
+        title="Slide Frame A"
+      ></iframe>
+
+      <!--
+        Frame B — starts as the preload (hidden) frame.
+        Receives slides/slide-01-fr-cover.html on init.
+        Becomes active on the first transition.
+
+        data-loaded-index: same tracking attribute as frame-a.
+      -->
+      <iframe
+        id="frame-b"
+        class="slide-frame"
+        data-loaded-index="-1"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true"
+        title="Slide Frame B"
+      ></iframe>
+
+    </div>
+  </div>
+
+  <script src="slideshow.js"></script>
+</body>
 </html>

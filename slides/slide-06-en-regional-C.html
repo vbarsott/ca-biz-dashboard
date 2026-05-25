@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Regional C — Canada's Business Landscape Is Increasingly Solo-Driven
+    </title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Government of Canada"></div>
+      <div class="slide-source">
+        Statistics Canada · Open Government Portal<br />
+        Canadian Business Counts · Tables 33-10-0034-01 to 33-10-1096-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>Canada's Business Landscape Is Increasingly Solo-Driven</h1>
+      <p class="subtitle">
+        Self-employed businesses now outnumber employer firms by nearly 3 to 1
+        in some provinces. The shift toward solo operators is reshaping what
+        "business growth" means across the country.
+      </p>
+    </div>
+
+    <!-- ── TWO-COLUMN LAYOUT: Chart (left) · Insight chips (right) ──────── -->
+    <div class="chart-row ratio-55-45 fade-in">
+      <!-- LEFT: Self-employment ratio chart -->
+      <div class="chart-col">
+        <div class="chart-section accent-teal">
+          <div class="chart-header">
+            <span class="chart-title">
+              Self-employment ratio by province &amp; territory — Dec 2025
+            </span>
+          </div>
+          <div class="chart-canvas-wrap h-420">
+            <canvas
+              id="chart-selfemp-ratio"
+              role="img"
+              aria-label="Ontario 2.93×, BC 2.77×, Quebec 2.67×. Nunavut 0.87× — employer-dominant."
+            ></canvas>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--navy)"></div>
+              Above national avg (2.67×)
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--ghost)"></div>
+              Below avg
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--red)"></div>
+              Employer-dominant (&lt;1×)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Two stacked insight chips -->
+      <div class="chart-col">
+        <div class="insight-panel">
+          <div class="insight-chip accent-teal">
+            <div class="chip-label">Solo Operator Nation</div>
+            <div class="chip-stat">
+              Ontario (2.93×) leads the country — nearly 3 solo firms for every
+              employer business.
+            </div>
+            <div class="chip-detail">
+              Nunavut is the only jurisdiction where employers outnumber the
+              self-employed (0.87×). Atlantic provinces cluster well below the
+              national average of 2.67×.
+            </div>
+          </div>
+
+          <div class="insight-chip accent-orange">
+            <div class="chip-label">Structural Shift</div>
+            <div class="chip-stat">
+              Most provinces now have more than 2 self-employed businesses per
+              employer firm.
+            </div>
+            <div class="chip-detail">
+              10 of 13 provinces and territories report a self-employment ratio
+              above 1.3×, signalling a broad structural shift — not a regional
+              anomaly. Canada's business base is becoming predominantly
+              solo-driven.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
+    <p class="source-line">
+      Statistics Canada — Canadian Business Counts (Tables 33-10-0034-01 to
+      33-10-1096-01) &nbsp;|&nbsp; Self-employment ratio: December 2025 snapshot
+      &nbsp;|&nbsp; Ratio = self-employed businesses ÷ employer businesses, by
+      province
+    </p>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/transitions.js"></script>
+    <script>
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Ratio = self-employed businesses ÷ employer businesses, by province.
+         December 2025 snapshot · National average: 2.67×
+      ────────────────────────────────────────────────────────────────────── */
+      const provRatioLabels = [
+        "Ontario",
+        "British Columbia",
+        "Quebec",
+        "Saskatchewan",
+        "Alberta",
+        "Manitoba",
+        "Yukon",
+        "Nova Scotia",
+        "PEI",
+        "New Brunswick",
+        "Newfoundland",
+        "NWT",
+        "Nunavut",
+      ];
+      const provRatios = [
+        2.93, 2.77, 2.67, 2.66, 2.44, 2.27, 1.98, 1.92, 1.87, 1.46, 1.39, 1.31,
+        0.87,
+      ];
+      const nationalAvg = 2.67;
+
+      new Chart(document.getElementById("chart-selfemp-ratio"), {
+        type: "bar",
+        data: {
+          labels: provRatioLabels,
+          datasets: [
+            {
+              label: "Self-employment ratio",
+              data: provRatios,
+              backgroundColor: provRatios.map((v) =>
+                v >= nationalAvg
+                  ? PALETTE.navy
+                  : v < 1.0
+                    ? PALETTE.red
+                    : PALETTE.ghost,
+              ),
+              borderWidth: 0,
+              borderRadius: 3,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          ...RESPONSIVE_OPTS,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) =>
+                  "  " +
+                  ctx.raw.toFixed(2) +
+                  "× self-employed per employer business",
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: PALETTE.ghost,
+                font: { size: 10, family: FONT },
+                callback: (v) => v.toFixed(1) + "×",
+              },
+              grid: GRID_SUBTLE,
+              min: 0,
+              max: 3.3,
+            },
+            y: {
+              ticks: { color: PALETTE.ink, font: { size: 11, family: FONT } },
+              grid: { display: false },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

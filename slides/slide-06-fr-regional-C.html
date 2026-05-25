@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Régional C — L'essor des travailleurs autonomes redéfinit le paysage
+      entrepreneurial canadien
+    </title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="slide-source">
+        Statistique Canada · Portail du gouvernement ouvert<br />
+        Dénombrements des entreprises canadiennes · Tableaux 33-10-0034-01 à
+        33-10-1096-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>
+        L'essor des travailleurs autonomes redéfinit le paysage entrepreneurial
+        canadien
+      </h1>
+      <p class="subtitle">
+        Les entreprises sans employés surpassent désormais les entreprises
+        employeuses dans un rapport de presque 3 pour 1 dans certaines
+        provinces. Ce virage transforme la notion même de « croissance des
+        entreprises » à l'échelle du pays.
+      </p>
+    </div>
+
+    <!-- ── TWO-COLUMN LAYOUT: Chart (left) · Insight chips (right) ──────── -->
+    <div class="chart-row ratio-55-45 fade-in">
+      <!-- LEFT: Self-employment ratio chart -->
+      <div class="chart-col">
+        <div class="chart-section accent-teal">
+          <div class="chart-header">
+            <span class="chart-title">
+              Ratio de travail autonome par province et territoire — Déc. 2025
+            </span>
+          </div>
+          <div class="chart-canvas-wrap h-420">
+            <canvas
+              id="chart-selfemp-ratio"
+              role="img"
+              aria-label="Ontario 2,93×, C.-B. 2,77×, Québec 2,67×. Nunavut 0,87× — à prédominance d'employeurs."
+            ></canvas>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--navy)"></div>
+              Au-dessus de la moyenne nationale (2,67×)
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--ghost)"></div>
+              Sous la moyenne
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--red)"></div>
+              Prédominance d'employeurs (&lt;1×)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Two stacked insight chips -->
+      <div class="chart-col">
+        <div class="insight-panel">
+          <div class="insight-chip accent-teal">
+            <div class="chip-label">Nation d'entrepreneurs autonomes</div>
+            <div class="chip-stat">
+              L'Ontario (2,93×) mène le pays — près de 3 entreprises autonomes
+              pour chaque entreprise employeuse.
+            </div>
+            <div class="chip-detail">
+              Le Nunavut est la seule province où les employeurs sont plus
+              nombreux que les travailleurs autonomes (0,87×). Les provinces
+              atlantiques se situent bien en dessous de la moyenne nationale de
+              2,67×.
+            </div>
+          </div>
+
+          <div class="insight-chip accent-orange">
+            <div class="chip-label">Changement structurel</div>
+            <div class="chip-stat">
+              La plupart des provinces comptent maintenant plus de 2 entreprises
+              autonomes pour chaque entreprise employeuse.
+            </div>
+            <div class="chip-detail">
+              10 des 13 provinces et territoires affichent un ratio de travail
+              autonome supérieur à 1,3×, signalant un changement structurel
+              généralisé — et non une anomalie régionale. La base
+              entrepreneuriale du Canada devient à prédominance autonome.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
+    <p class="source-line">
+      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux
+      33-10-0034-01 à 33-10-1096-01) &nbsp;|&nbsp; Ratio de travail autonome :
+      instantané de décembre 2025 &nbsp;|&nbsp; Ratio = entreprises sans
+      employés ÷ entreprises employeuses, par province
+    </p>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/transitions.js"></script>
+    <script>
+      /* ── DONNÉES ────────────────────────────────────────────────────────────
+         Source : Statistique Canada, Dénombrements des entreprises canadiennes
+         Ratio = entreprises sans employés ÷ entreprises employeuses, par province.
+         Instantané de décembre 2025 · Moyenne nationale : 2,67×
+      ────────────────────────────────────────────────────────────────────── */
+      const provRatioLabels = [
+        "Ontario",
+        "British Columbia",
+        "Quebec",
+        "Saskatchewan",
+        "Alberta",
+        "Manitoba",
+        "Yukon",
+        "Nova Scotia",
+        "PEI",
+        "New Brunswick",
+        "Newfoundland",
+        "NWT",
+        "Nunavut",
+      ];
+      const provRatios = [
+        2.93, 2.77, 2.67, 2.66, 2.44, 2.27, 1.98, 1.92, 1.87, 1.46, 1.39, 1.31,
+        0.87,
+      ];
+      const nationalAvg = 2.67;
+
+      new Chart(document.getElementById("chart-selfemp-ratio"), {
+        type: "bar",
+        data: {
+          labels: provRatioLabels,
+          datasets: [
+            {
+              label: "Ratio de travail autonome",
+              data: provRatios,
+              backgroundColor: provRatios.map((v) =>
+                v >= nationalAvg
+                  ? PALETTE.navy
+                  : v < 1.0
+                    ? PALETTE.red
+                    : PALETTE.ghost,
+              ),
+              borderWidth: 0,
+              borderRadius: 3,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          ...RESPONSIVE_OPTS,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) =>
+                  "  " +
+                  ctx.raw.toFixed(2) +
+                  "× travailleurs autonomes par entreprise employeuse",
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: PALETTE.ghost,
+                font: { size: 10, family: FONT },
+                callback: (v) => v.toFixed(1) + "×",
+              },
+              grid: GRID_SUBTLE,
+              min: 0,
+              max: 3.3,
+            },
+            y: {
+              ticks: { color: PALETTE.ink, font: { size: 11, family: FONT } },
+              grid: { display: false },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

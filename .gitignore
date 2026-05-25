@@ -53,3 +53,6 @@ docs/
 docs/tasks-decisions-log.md
 docs/risks-constraints.md
 src/data/raw/
+
+# Local symlink — exists only on dev machine, not needed for deployment
+CLAUDE.md

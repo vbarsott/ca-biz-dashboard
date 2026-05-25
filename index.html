@@ -2,12 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ca-biz-dashboard</title>
+    <title>My Dashboard</title>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <h1>My Dashboard</h1>
+
+    <canvas id="myChart"></canvas>
+
+    <script src="script.js"></script>
   </body>
 </html>

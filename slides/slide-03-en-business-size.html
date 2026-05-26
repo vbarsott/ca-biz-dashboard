@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
   <body>
-
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
       <div class="goc-wordmark" aria-label="Government of Canada"></div>
@@ -24,17 +23,20 @@
     <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
     <div class="hero-zone fade-in">
       <h1>Canada's Employer Economy Is Built on Very Small Firms</h1>
-      <p class="subtitle">Over half of employer businesses have just 1–4 employees.</p>
+      <p class="subtitle">
+        Over half of employer businesses have just 1–4 employees.
+      </p>
     </div>
 
     <!-- ── TWO-COLUMN MAIN LAYOUT: Chart (left) + Insights (right) ──────── -->
     <div class="main-layout fade-in">
-
       <!-- LEFT: Chart section — full height -->
       <div class="layout-left">
         <div class="chart-section">
           <div class="chart-header">
-            <span class="chart-title">Employer business size breakdown – Dec 2025</span>
+            <span class="chart-title"
+              >Employer business size breakdown – Dec 2025</span
+            >
           </div>
 
           <!-- Donut canvas centred -->
@@ -71,7 +73,11 @@
       </div>
 
       <!-- RIGHT: Two stacked insight chips -->
-      <div class="layout-right" role="region" aria-label="Key analytical insights">
+      <div
+        class="layout-right"
+        role="region"
+        aria-label="Key analytical insights"
+      >
         <div class="insight-chip accent-orange">
           <div class="chip-label">Key Insight</div>
           <div class="chip-stat">
@@ -102,12 +108,13 @@
     <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
     <p class="source-line">
       Statistics Canada — Canadian Business Counts (Table 33-10-0034-01)
-      &nbsp;|&nbsp; December 2025 reference period &nbsp;|&nbsp; Employer businesses only
+      &nbsp;|&nbsp; December 2025 reference period &nbsp;|&nbsp; Employer
+      businesses only
     </p>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <script src="../js/transitions.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DATA ──────────────────────────────────────────────────────────────
          Source: Statistics Canada, Table 33-10-0034-01, December 2025.
@@ -123,7 +130,7 @@
 
       /* Centre-text plugin override for this slide's fixed label */
       const centreTextFixed = {
-        id: 'centreText',
+        id: "centreText",
         afterDatasetDraw(chart) {
           const {
             ctx,
@@ -133,52 +140,58 @@
           const cy = (top + bottom) / 2;
 
           ctx.save();
-          ctx.textAlign    = 'center';
-          ctx.textBaseline = 'middle';
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
 
-          ctx.font      = `800 2.2rem ${FONT}, system-ui, sans-serif`;
+          ctx.font = `800 2.2rem ${FONT}, system-ui, sans-serif`;
           ctx.fillStyle = PALETTE.navy;
-          ctx.fillText('56.5%', cx, cy - 12);
+          ctx.fillText("56.5%", cx, cy - 12);
 
-          ctx.font      = `600 0.75rem ${FONT}, system-ui, sans-serif`;
+          ctx.font = `600 0.75rem ${FONT}, system-ui, sans-serif`;
           ctx.fillStyle = PALETTE.mid;
-          ctx.fillText('have 1–4 employees', cx, cy + 18);
+          ctx.fillText("have 1–4 employees", cx, cy + 18);
 
           ctx.restore();
         },
       };
 
-      const donutCtx = document.getElementById('sizeDonut').getContext('2d');
+      const donutCtx = document.getElementById("sizeDonut").getContext("2d");
 
       new Chart(donutCtx, {
-        type: 'doughnut',
+        type: "doughnut",
         plugins: [centreTextFixed],
         data: {
           labels: [
-            '1–4 employees',
-            '5–19 employees',
-            '20–49 employees',
-            '50–499 employees',
-            '500+ employees',
+            "1–4 employees",
+            "5–19 employees",
+            "20–49 employees",
+            "50–499 employees",
+            "500+ employees",
           ],
-          datasets: [{
-            /* Raw counts Dec 2025: 775,662 | 416,280 | 113,364 | 63,284 | 3,519 */
-            data: [775662, 416280, 113364, 63284, 3519],
-            backgroundColor: [
-              PALETTE.navy,           /* 1–4 */
-              PALETTE.navyMid,        /* 5–19 */
-              PALETTE.projectionBlue, /* 20–49 */
-              PALETTE.ghost,          /* 50–499 */
-              PALETTE.orange,         /* 500+ */
-            ],
-            borderWidth: 2,
-            borderColor: PALETTE.paper,
-            hoverOffset: 10,
-          }],
+          datasets: [
+            {
+              /* Raw counts Dec 2025: 775,662 | 416,280 | 113,364 | 63,284 | 3,519 */
+              data: [775662, 416280, 113364, 63284, 3519],
+              backgroundColor: [
+                PALETTE.navy /* 1–4 */,
+                PALETTE.navyMid /* 5–19 */,
+                PALETTE.projectionBlue /* 20–49 */,
+                PALETTE.ghost /* 50–499 */,
+                PALETTE.orange /* 500+ */,
+              ],
+              borderWidth: 2,
+              borderColor: PALETTE.paper,
+              hoverOffset: 10,
+            },
+          ],
         },
         options: {
           ...RESPONSIVE_OPTS,
-          cutout: '65%',
+          cutout: "65%",
+          animation: {
+            duration: 3000,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -186,7 +199,7 @@
               callbacks: {
                 label(ctx) {
                   const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                  const pct   = ((ctx.raw / total) * 100).toFixed(1);
+                  const pct = ((ctx.raw / total) * 100).toFixed(1);
                   return `  ${ctx.label}: ${fmtLocale(ctx.raw)} (${pct}%)`;
                 },
               },

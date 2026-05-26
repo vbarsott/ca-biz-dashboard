@@ -44,7 +44,7 @@
               employeuses, 2015→2025
             </span>
           </div>
-          <div class="chart-canvas-wrap h-360">
+          <div class="chart-canvas-wrap h-420">
             <canvas
               id="chart-prov-growth"
               role="img"
@@ -96,7 +96,7 @@
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <script src="../js/transitions.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DONNÉES ────────────────────────────────────────────────────────────
          Source : Statistique Canada, Dénombrements des entreprises canadiennes
@@ -140,6 +140,10 @@
         options: {
           indexAxis: "y",
           ...RESPONSIVE_OPTS,
+          animation: {
+            duration: 3000,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {

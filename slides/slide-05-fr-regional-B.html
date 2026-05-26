@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Régional B — L'Alberta face à la décennie de croissance de l'Ontario</title>
+    <title>
+      Régional B — L'Alberta face à la décennie de croissance de l'Ontario
+    </title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
   <body>
-
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
       <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
@@ -23,16 +24,23 @@
 
     <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
     <div class="hero-zone fade-in">
-      <h1>L'Alberta — une décennie pour se relever face à la décennie de croissance de l'Ontario</h1>
-      <p class="subtitle">Deux provinces. Une décennie. Des résultats radicalement différents.</p>
+      <h1>
+        L'Alberta — une décennie pour se relever face à la décennie de
+        croissance de l'Ontario
+      </h1>
+      <p class="subtitle">
+        Deux provinces. Une décennie. Des résultats radicalement différents.
+      </p>
     </div>
 
     <!-- ── FULL-WIDTH CHART ─────────────────────────────────────────────── -->
     <div class="chart-section accent-orange fade-in">
       <div class="chart-header">
-        <span class="chart-title">Alberta c. Ontario — entreprises employeuses, 2015–2025</span>
+        <span class="chart-title"
+          >Alberta c. Ontario — entreprises employeuses, 2015–2025</span
+        >
       </div>
-      <div class="chart-canvas-wrap h-350">
+      <div class="chart-canvas-wrap h-400">
         <canvas
           id="chart-ab-on"
           role="img"
@@ -52,8 +60,11 @@
     </div>
 
     <!-- ── BOTTOM ROW: insight chip (left) | stats block (right) ────────── -->
-    <div class="insight-row fade-in" role="region" aria-label="La décennie de l'Alberta">
-
+    <div
+      class="insight-row fade-in"
+      role="region"
+      aria-label="La décennie de l'Alberta"
+    >
       <!-- Left: insight chip -->
       <div class="insight-chip">
         <div class="chip-label">La décennie de l'Alberta</div>
@@ -62,10 +73,10 @@
           (181 254) était quasi identique à déc. 2015 (181 773).
         </div>
         <div class="chip-detail">
-          Une décennie entière marquée par l'effondrement du pétrole, une pandémie
-          et une lente reprise, se terminant par une perte nette de 519 entreprises.
-          L'Ontario a progressé de +14,7 % sur la même période, ajoutant près de
-          66 000 entreprises employeuses nettes.
+          Une décennie entière marquée par l'effondrement du pétrole, une
+          pandémie et une lente reprise, se terminant par une perte nette de 519
+          entreprises. L'Ontario a progressé de +14,7 % sur la même période,
+          ajoutant près de 66 000 entreprises employeuses nettes.
         </div>
       </div>
 
@@ -82,7 +93,8 @@
           <div class="panel-kpi">
             <div class="panel-kpi-val">+65 943</div>
             <div class="panel-kpi-label">
-              Nouvelles entreprises employeuses nettes en Ontario sur la même période<br />
+              Nouvelles entreprises employeuses nettes en Ontario sur la même
+              période<br />
               (449 541 → 515 484)
             </div>
           </div>
@@ -92,14 +104,14 @@
 
     <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
     <p class="source-line">
-      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux 33-10-0034-01 à
-      33-10-1096-01) &nbsp;|&nbsp; Entreprises employeuses (avec employés) ·
-      Instantanés de la période de référence de décembre, 2015–2025
+      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux
+      33-10-0034-01 à 33-10-1096-01) &nbsp;|&nbsp; Entreprises employeuses (avec
+      employés) · Instantanés de la période de référence de décembre, 2015–2025
     </p>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <script src="../js/transitions.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DONNÉES ────────────────────────────────────────────────────────────
          Source : Statistique Canada, Dénombrements des entreprises canadiennes
@@ -107,101 +119,124 @@
          L'Alberta utilise l'axe y gauche (yAB); l'Ontario utilise l'axe y droit (yON).
       ────────────────────────────────────────────────────────────────────── */
       const decLabels = [
-        'Déc. 2015','Déc. 2016','Déc. 2017','Déc. 2018','Déc. 2019',
-        'Déc. 2020','Déc. 2021','Déc. 2022','Déc. 2023','Déc. 2024','Déc. 2025',
+        "Déc. 2015",
+        "Déc. 2016",
+        "Déc. 2017",
+        "Déc. 2018",
+        "Déc. 2019",
+        "Déc. 2020",
+        "Déc. 2021",
+        "Déc. 2022",
+        "Déc. 2023",
+        "Déc. 2024",
+        "Déc. 2025",
       ];
 
-      const abData = [181773, 179341, 175921, 175346, 175385, 172755, 170266, 173441, 175383, 177582, 181254];
-      const onData = [449541, 459107, 463721, 471846, 484399, 480929, 482575, 499516, 506632, 509150, 515484];
+      const abData = [
+        181773, 179341, 175921, 175346, 175385, 172755, 170266, 173441, 175383,
+        177582, 181254,
+      ];
+      const onData = [
+        449541, 459107, 463721, 471846, 484399, 480929, 482575, 499516, 506632,
+        509150, 515484,
+      ];
 
-      new Chart(document.getElementById('chart-ab-on'), {
-        type: 'line',
+      new Chart(document.getElementById("chart-ab-on"), {
+        type: "line",
         data: {
           labels: decLabels,
           datasets: [
             {
-              label: 'Alberta',
+              label: "Alberta",
               data: abData,
-              borderColor:          PALETTE.orange,
-              backgroundColor:      'rgba(181,71,8,0.08)',
-              borderWidth:          2.5,
-              pointRadius:          5,
-              pointHoverRadius:     8,
+              borderColor: PALETTE.orange,
+              backgroundColor: "rgba(181,71,8,0.08)",
+              borderWidth: 2.5,
+              pointRadius: 5,
+              pointHoverRadius: 8,
               pointBackgroundColor: PALETTE.orange,
-              pointBorderColor:     PALETTE.white,
-              pointBorderWidth:     2,
-              fill:    true,
+              pointBorderColor: PALETTE.white,
+              pointBorderWidth: 2,
+              fill: true,
               tension: 0.3,
-              yAxisID: 'yAB',
+              yAxisID: "yAB",
             },
             {
-              label: 'Ontario',
+              label: "Ontario",
               data: onData,
-              borderColor:          PALETTE.navy,
-              backgroundColor:      'transparent',
-              borderWidth:          2.5,
-              borderDash:           [7, 3],
-              pointRadius:          5,
-              pointHoverRadius:     8,
+              borderColor: PALETTE.navy,
+              backgroundColor: "transparent",
+              borderWidth: 2.5,
+              borderDash: [7, 3],
+              pointRadius: 5,
+              pointHoverRadius: 8,
               pointBackgroundColor: PALETTE.navy,
-              pointBorderColor:     PALETTE.white,
-              pointBorderWidth:     2,
-              fill:    false,
+              pointBorderColor: PALETTE.white,
+              pointBorderWidth: 2,
+              fill: false,
               tension: 0.3,
-              yAxisID: 'yON',
+              yAxisID: "yON",
             },
           ],
         },
         options: {
           ...RESPONSIVE_OPTS,
-          interaction: { mode: 'index', intersect: false },
+          interaction: { mode: "index", intersect: false },
+          animation: {
+            duration: 3000,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
               ...TOOLTIP_DEFAULTS,
               callbacks: {
-                label: ctx => `  ${ctx.dataset.label}: ${fmtLocale(ctx.raw)}`,
+                label: (ctx) => `  ${ctx.dataset.label}: ${fmtLocale(ctx.raw)}`,
               },
             },
           },
           scales: {
             x: {
-              ticks:  { color: PALETTE.mid, font: { size: 12, family: FONT }, maxRotation: 30 },
-              grid:   GRID_SUBTLE,
+              ticks: {
+                color: PALETTE.mid,
+                font: { size: 12, family: FONT },
+                maxRotation: 30,
+              },
+              grid: GRID_SUBTLE,
               border: { color: PALETTE.border },
             },
             yAB: {
-              position: 'left',
+              position: "left",
               min: 163000,
               max: 193000,
               ticks: {
                 color: PALETTE.orange,
-                font:  { size: 12, family: FONT },
-                callback: v => (v / 1000).toFixed(0) + 'k',
+                font: { size: 12, family: FONT },
+                callback: (v) => (v / 1000).toFixed(0) + "k",
               },
-              grid:  GRID_SUBTLE,
+              grid: GRID_SUBTLE,
               title: {
                 display: true,
-                text:    'Alberta (milliers)',
-                color:   PALETTE.orange,
-                font:    { size: 12, family: FONT },
+                text: "Alberta (milliers)",
+                color: PALETTE.orange,
+                font: { size: 12, family: FONT },
               },
             },
             yON: {
-              position: 'right',
+              position: "right",
               min: 430000,
               max: 530000,
               ticks: {
                 color: PALETTE.navy,
-                font:  { size: 12, family: FONT },
-                callback: v => (v / 1000).toFixed(0) + 'k',
+                font: { size: 12, family: FONT },
+                callback: (v) => (v / 1000).toFixed(0) + "k",
               },
-              grid:  { display: false },
+              grid: { display: false },
               title: {
                 display: true,
-                text:    'Ontario (milliers)',
-                color:   PALETTE.navy,
-                font:    { size: 12, family: FONT },
+                text: "Ontario (milliers)",
+                color: PALETTE.navy,
+                font: { size: 12, family: FONT },
               },
             },
           },

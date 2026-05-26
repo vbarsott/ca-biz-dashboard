@@ -3,18 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aperçu national — L'essor des entreprises canadiennes : qui embauche vraiment?</title>
+    <title>
+      Aperçu national — L'essor des entreprises canadiennes : qui embauche
+      vraiment?
+    </title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
   <body>
-
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
       <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
       <div class="slide-source">
         Statistique Canada · Portail du gouvernement ouvert<br />
-        Dénombrements des entreprises canadiennes · Tableaux 33-10-0034-01 à 33-10-1096-01
+        Dénombrements des entreprises canadiennes · Tableaux 33-10-0034-01 à
+        33-10-1096-01
       </div>
     </div>
 
@@ -33,26 +36,38 @@
       </div>
 
       <!-- KPI strip — 3 cards -->
-      <div class="kpi-strip" role="region" aria-label="Indicateurs de performance clés">
+      <div
+        class="kpi-strip"
+        role="region"
+        aria-label="Indicateurs de performance clés"
+      >
         <!-- Non-Employer Growth — PRIMARY story -->
         <div class="kpi-card accent-green primary">
           <div class="kpi-label">Croissance sans employés</div>
           <div class="kpi-value">+40,3&nbsp;%</div>
-          <div class="kpi-sublabel">2015 → 2025 &nbsp;·&nbsp; 2,6 M → 3,7 M entreprises</div>
+          <div class="kpi-sublabel">
+            2015 → 2025 &nbsp;·&nbsp; 2,6 M → 3,7 M entreprises
+          </div>
         </div>
 
         <!-- Employer Growth — SECONDARY -->
         <div class="kpi-card">
           <div class="kpi-label">Croissance des employeurs</div>
           <div class="kpi-value">+9,3&nbsp;%</div>
-          <div class="kpi-sublabel">2015 → 2025 &nbsp;·&nbsp; 1,25 M → 1,37 M entreprises</div>
+          <div class="kpi-sublabel">
+            2015 → 2025 &nbsp;·&nbsp; 1,25 M → 1,37 M entreprises
+          </div>
         </div>
 
         <!-- Employer Firms per 1,000 — TERTIARY -->
         <div class="kpi-card accent-orange">
-          <div class="kpi-label">Entreprises employeuses pour 1 000 Canadiens</div>
+          <div class="kpi-label">
+            Entreprises employeuses pour 1 000 Canadiens
+          </div>
           <div class="kpi-value">~33</div>
-          <div class="kpi-sublabel">↓ depuis ~35 en 2015 &nbsp;·&nbsp; En recul per capita</div>
+          <div class="kpi-sublabel">
+            ↓ depuis ~35 en 2015 &nbsp;·&nbsp; En recul per capita
+          </div>
         </div>
       </div>
     </div>
@@ -60,7 +75,9 @@
     <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
     <div class="chart-section fade-in">
       <div class="chart-header">
-        <span class="chart-title">Nombre d'entreprises par type d'emploi, 2015–2025</span>
+        <span class="chart-title"
+          >Nombre d'entreprises par type d'emploi, 2015–2025</span
+        >
       </div>
       <div class="chart-canvas-wrap h-380">
         <canvas id="bizChart"></canvas>
@@ -78,61 +95,86 @@
     </div>
 
     <!-- ── MICRO-INSIGHT CHIP ────────────────────────────────────────────── -->
-    <div class="insight-row fade-in" role="region" aria-label="Constats analytiques clés">
+    <div
+      class="insight-row fade-in"
+      role="region"
+      aria-label="Constats analytiques clés"
+    >
       <div class="insight-chip">
         <div class="chip-label">Déséquilibre de croissance</div>
         <div class="chip-stat">
-          Le travail autonome a créé 9 fois plus d'entreprises que les entreprises employeuses depuis 2015.
+          Le travail autonome a créé 9 fois plus d'entreprises que les
+          entreprises employeuses depuis 2015.
         </div>
         <div class="chip-detail">
-          Post-COVID (2022–2025) : 646 000 entreprises sans employés ajoutées contre 35 800 entreprises employeuses.
+          Post-COVID (2022–2025) : 646 000 entreprises sans employés ajoutées
+          contre 35 800 entreprises employeuses.
         </div>
       </div>
     </div>
 
     <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
     <p class="source-line">
-      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux 33-10-0034-01 à
-      33-10-1096-01) &nbsp;|&nbsp; Instantanés de la période de référence de décembre,
-      2015–2025 &nbsp;|&nbsp; Pré-COVID : ≤ 2019 · COVID : 2020–2021 · Post-COVID : 2022+
+      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux
+      33-10-0034-01 à 33-10-1096-01) &nbsp;|&nbsp; Instantanés de la période de
+      référence de décembre, 2015–2025 &nbsp;|&nbsp; Pré-COVID : ≤ 2019 · COVID
+      : 2020–2021 · Post-COVID : 2022+
     </p>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <script src="../js/transitions.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DONNÉES ────────────────────────────────────────────────────────────
          Source : Statistique Canada, Dénombrements des entreprises canadiennes
          Période de référence : instantanés de décembre (CSV daté de janvier selon le cycle de StatCan)
          Pré-COVID ≤ 2019 | COVID 2020–2021 | Post-COVID 2022+
       ────────────────────────────────────────────────────────────────────── */
-      const labels = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+      const labels = [
+        2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
+      ];
 
       const withEmp = [
-        1254937, 1265751, 1270783, 1283789, 1311397, // pré-COVID 2015–2019
-        1302392, 1300633,                             // COVID 2020–2021
-        1336336, 1351744, 1358077, 1372109,           // post-COVID 2022–2025
+        1254937,
+        1265751,
+        1270783,
+        1283789,
+        1311397, // pré-COVID 2015–2019
+        1302392,
+        1300633, // COVID 2020–2021
+        1336336,
+        1351744,
+        1358077,
+        1372109, // post-COVID 2022–2025
       ];
 
       const withoutEmp = [
-        2614908, 2631372, 2777670, 2859965, 2835732,  // pré-COVID 2015–2019
-        2860194, 2850191,                              // COVID 2020–2021
-        3021567, 3236753, 3483724, 3667853,            // post-COVID 2022–2025
+        2614908,
+        2631372,
+        2777670,
+        2859965,
+        2835732, // pré-COVID 2015–2019
+        2860194,
+        2850191, // COVID 2020–2021
+        3021567,
+        3236753,
+        3483724,
+        3667853, // post-COVID 2022–2025
       ];
 
-      const ctx = document.getElementById('bizChart').getContext('2d');
+      const ctx = document.getElementById("bizChart").getContext("2d");
 
       new Chart(ctx, {
-        type: 'line',
+        type: "line",
         plugins: [bandPlugin],
         data: {
           labels,
           datasets: [
             {
-              label: 'Sans employés',
+              label: "Sans employés",
               data: withoutEmp,
               borderColor: PALETTE.teal,
-              backgroundColor: 'rgba(0,107,94,0.08)',
+              backgroundColor: "rgba(0,107,94,0.08)",
               borderWidth: 3,
               pointRadius: 6,
               pointHoverRadius: 9,
@@ -144,10 +186,10 @@
               order: 1,
             },
             {
-              label: 'Avec employés',
+              label: "Avec employés",
               data: withEmp,
               borderColor: PALETTE.navy,
-              backgroundColor: 'rgba(0,51,102,0.06)',
+              backgroundColor: "rgba(0,51,102,0.06)",
               borderWidth: 3,
               pointRadius: 6,
               pointHoverRadius: 9,
@@ -162,7 +204,11 @@
         },
         options: {
           ...RESPONSIVE_OPTS,
-          interaction: { mode: 'index', intersect: false },
+          interaction: { mode: "index", intersect: false },
+          animation: {
+            duration: 3000,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -176,18 +222,21 @@
           },
           scales: {
             x: {
-              grid:   GRID_STYLE,
-              ticks:  { ...AXIS_TICK, font: { size: 13, family: FONT, weight: '600' } },
+              grid: GRID_STYLE,
+              ticks: {
+                ...AXIS_TICK,
+                font: { size: 13, family: FONT, weight: "600" },
+              },
               border: { color: PALETTE.border },
               title: {
                 display: true,
-                text:    'Année',
+                text: "Année",
                 ...AXIS_TITLE_STYLE,
               },
             },
             y: {
-              min:    900000,
-              grid:   GRID_STYLE,
+              min: 900000,
+              grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
                 callback: fmtNum,
@@ -196,7 +245,7 @@
               border: { color: PALETTE.border },
               title: {
                 display: true,
-                text:    "Nombre d'entreprises",
+                text: "Nombre d'entreprises",
                 ...AXIS_TITLE_STYLE,
               },
             },

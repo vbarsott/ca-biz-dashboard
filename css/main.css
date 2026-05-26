@@ -331,8 +331,8 @@ body.theme-dark h1 {
 /* Donut canvas (fixed square) */
 .donut-canvas-wrap {
   position: relative;
-  height: 400px;
-  width: 400px;
+  height: 440px;
+  width: 440px;
   flex-shrink: 0;
 }
 
@@ -423,13 +423,14 @@ body.theme-dark h1 {
 .chart-col {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 12px;
 }
 
 /* ── MAIN LAYOUT (donut + chips) ────────────────────────────────────────── */
 .main-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.75fr 1fr;
   gap: 20px;
   flex: 1;
   align-items: stretch;
@@ -439,6 +440,7 @@ body.theme-dark h1 {
 .layout-left {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .layout-left .chart-section {

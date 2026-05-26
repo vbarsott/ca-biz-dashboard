@@ -1,8 +1,10 @@
 /* ============================================================
    slideshow.css — Canadian Business Dashboard
-   Fullscreen 16:9 layout with two transition modes:
-     1. Crossfade  (EN → FR)  — opacity only
-     2. Horizontal slide (FR → EN) — transform only (inline JS)
+   Fullscreen 16:9 layout with a single, unified transition mode:
+     Crossfade (opacity only) for ALL slide transitions.
+     EN → FR : standard duration  (TRANSITION_MS in slideshow.js)
+     FR → EN : longer duration    (TRANSITION_LONG_MS in slideshow.js,
+               applied as an inline style override by slideshow.js)
 
    Architecture:
    - #slideshow-wrapper   fills the entire viewport (100vw × 100vh)
@@ -13,11 +15,11 @@
                           always stacked at the same position (inset:0).
                           Only one is ever visible at a time.
 
-   Crossfade transitions use CSS opacity (this file).
-   Horizontal transitions use inline transform styles set by JS.
+   All transitions use CSS opacity (this file).
+   The FR → EN longer-duration override is applied inline by slideshow.js.
 
-   IMPORTANT: TRANSITION_MS in slideshow.js (800 ms) must stay in
-   sync with the transition duration on .slide-frame below.
+   IMPORTANT: TRANSITION_MS in slideshow.js (2000 ms) must stay in
+   sync with the base transition duration on .slide-frame below.
    ============================================================ */
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -53,9 +55,8 @@ body {
 #slideshow-stage {
   position: relative;
   /*
-    overflow: hidden is critical — it clips frames that are
-    translating in/out during horizontal slide transitions so
-    they never appear beside the active slide.
+    overflow: hidden clips any frame that is mid-transition so
+    it never bleeds outside the stage boundary.
   */
   overflow: hidden;
 
@@ -87,15 +88,14 @@ body {
   z-index: 1;
 
   /*
-    Crossfade transition (EN → FR).
-    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (800 ms).
+    Base crossfade transition (EN → FR).
+    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (2000 ms).
 
-    NOTE: For horizontal slide transitions (FR → EN), slideshow.js
-    overrides this via element.style.transition so only `transform`
-    is animated and opacity stays at 1 for both frames. The inline
-    override is cleaned up after the transition completes.
+    For FR → EN (slower crossfade), slideshow.js injects an inline
+    style that overrides this duration. The inline override is cleaned
+    up after the transition completes, restoring this base value.
   */
-  transition: opacity 1.8s ease-in-out;
+  transition: opacity 2s ease-in-out;
 }
 
 /* ── Active slide — fully visible, sits on top ────────────── */

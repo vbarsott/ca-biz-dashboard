@@ -11,16 +11,16 @@
  * @param {number}      delay    - Start delay in ms (default 0)
  */
 function fadeIn(el, duration = 500, delay = 0) {
-  el.style.opacity   = '0';
-  el.style.transform = 'translateY(10px)';
+  el.style.opacity = "0";
+  el.style.transform = "translateY(10px)";
   el.style.transition = `opacity ${duration}ms ease-out ${delay}ms,
                           transform ${duration}ms ease-out ${delay}ms`;
 
   /* Trigger reflow so the transition fires */
   void el.offsetHeight;
 
-  el.style.opacity   = '1';
-  el.style.transform = 'translateY(0)';
+  el.style.opacity = "1";
+  el.style.transform = "translateY(0)";
 }
 
 /**
@@ -43,15 +43,15 @@ function staggerFadeIn(els, stagger = 100, duration = 400, startDelay = 0) {
  * @param {number}      delay    - Start delay in ms (default 0)
  */
 function slideInUp(el, duration = 500, delay = 0) {
-  el.style.opacity   = '0';
-  el.style.transform = 'translateY(24px)';
+  el.style.opacity = "0";
+  el.style.transform = "translateY(24px)";
   el.style.transition = `opacity ${duration}ms ease-out ${delay}ms,
                           transform ${duration}ms ease-out ${delay}ms`;
 
   void el.offsetHeight;
 
-  el.style.opacity   = '1';
-  el.style.transform = 'translateY(0)';
+  el.style.opacity = "1";
+  el.style.transform = "translateY(0)";
 }
 
 /**
@@ -62,12 +62,12 @@ function slideInUp(el, duration = 500, delay = 0) {
  * @param {string} selector  - CSS selector (default '.fade-in')
  * @param {number} stagger   - Stagger delay in ms (default 100)
  */
-function initSlideAnimations(selector = '.fade-in', stagger = 100) {
+function initSlideAnimations(selector = ".fade-in", stagger = 100) {
   const els = document.querySelectorAll(selector);
   if (!els.length) return;
   staggerFadeIn(els, stagger, 500, 80);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  initSlideAnimations('.fade-in');
+document.addEventListener("DOMContentLoaded", function () {
+  initSlideAnimations(".fade-in");
 });

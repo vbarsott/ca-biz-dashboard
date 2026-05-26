@@ -73,14 +73,14 @@
    * EN → FR crossfade duration (ms).
    * ⚠️  MUST match the CSS transition duration on .slide-frame in slideshow.css.
    */
-  const TRANSITION_MS = 2000;
+  const TRANSITION_MS = 1500;
 
   /**
    * FR → EN crossfade duration (ms).
-   * Same animation as EN → FR, but stretched ~0.7× for a slower, smoother feel.
+   * Same animation as EN → FR, but stretched ~0.5× for a slower, smoother feel.
    * Applied as an inline style override — CSS base stays at TRANSITION_MS.
    */
-  const TRANSITION_LONG_MS = 2700;
+  const TRANSITION_LONG_MS = 2000;
 
   /**
    * Maximum time to wait for an iframe to load before advancing anyway.

@@ -18,7 +18,7 @@
    All transitions use CSS opacity (this file).
    The FR → EN longer-duration override is applied inline by slideshow.js.
 
-   IMPORTANT: TRANSITION_MS in slideshow.js (2000 ms) must stay in
+   IMPORTANT: TRANSITION_MS in slideshow.js (1500 ms) must stay in
    sync with the base transition duration on .slide-frame below.
    ============================================================ */
 
@@ -89,13 +89,13 @@ body {
 
   /*
     Base crossfade transition (EN → FR).
-    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (2000 ms).
+    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (1500 ms).
 
     For FR → EN (slower crossfade), slideshow.js injects an inline
     style that overrides this duration. The inline override is cleaned
     up after the transition completes, restoring this base value.
   */
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
 }
 
 /* ── Active slide — fully visible, sits on top ────────────── */

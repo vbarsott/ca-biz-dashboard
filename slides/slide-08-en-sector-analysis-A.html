@@ -48,11 +48,11 @@
       <div class="legend">
         <div class="legend-item">
           <div class="legend-dot" style="background: #003366"></div>
-          With employees (employer businesses)
+          Employer Businesses
         </div>
         <div class="legend-item">
           <div class="legend-dot" style="background: #006b5e"></div>
-          Without employees (self-employed)
+          Self-employed
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@
           labels: sectorIdx.map((i) => sectorNamesM[i]),
           datasets: [
             {
-              label: "With employees",
+              label: "Employer Businesses",
               data: sectorIdx.map((i) => withSectorM[i] / 1000),
               backgroundColor: "rgba(0,51,102,0.75)",
               borderColor: "#003366",

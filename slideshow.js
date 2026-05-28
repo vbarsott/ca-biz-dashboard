@@ -62,12 +62,14 @@
     "slides/slide-06-fr-regional-C.html", // 11  FR
     "slides/slide-07-en-regional-D.html", // 12  EN
     "slides/slide-07-fr-regional-D.html", // 13  FR
+    "slides/slide-08-en-sector-analysis-A.html", // 14  EN
+    "slides/slide-08-fr-sector-analysis-A.html", // 15  FR
   ];
 
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 20000;
+  const SLIDE_DURATION_MS = 2000;
 
   /**
    * EN → FR crossfade duration (ms).

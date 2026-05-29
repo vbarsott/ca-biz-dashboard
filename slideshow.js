@@ -133,6 +133,11 @@
     return (idx + 1) % SLIDES.length;
   }
 
+  /** Return the previous slide index, wrapping around to the last after 0 */
+  function prevIdx(idx) {
+    return (idx - 1 + SLIDES.length) % SLIDES.length;
+  }
+
   /**
    * Returns true when the transition FROM fromIdx is FR → EN.
    * FR slides have ODD indices; EN slides have EVEN indices.
@@ -466,6 +471,36 @@
   }
 
   /* ============================================================
+     DEV-ONLY: retreat — moves to the previous slide.
+     Called by the left arrow button in index.html.
+     Cancels the pending auto-advance and resets the timer so the
+     current slide gets a full SLIDE_DURATION_MS after navigation.
+     ============================================================ */
+
+  function retreat() {
+    if (advanceTimer) clearTimeout(advanceTimer);
+
+    var prevSlide = prevIdx(currentIndex);
+    var prevLabel = otherFrame(activeFrame);
+    var prevIframe = frames[prevLabel];
+
+    // Use the standard crossfade duration for manual navigation
+    var duration = TRANSITION_MS;
+
+    var alreadyLoaded = prevIframe.dataset.loadedIndex === String(prevSlide);
+
+    function doTransition() {
+      crossfade(prevLabel, prevSlide, duration);
+    }
+
+    if (alreadyLoaded) {
+      doTransition();
+    } else {
+      loadFrame(prevLabel, prevSlide).then(doTransition);
+    }
+  }
+
+  /* ============================================================
      INITIALISATION
      ============================================================ */
 
@@ -495,6 +530,12 @@
 
       // Start the countdown to the first transition
       scheduleAdvance();
+
+      // Dev-only arrow listeners — wire up after init so advance/retreat exist
+      var btnPrev = document.getElementById("dev-arrow-prev");
+      var btnNext = document.getElementById("dev-arrow-next");
+      if (btnPrev) btnPrev.addEventListener("click", function () { retreat(); });
+      if (btnNext) btnNext.addEventListener("click", function () { advance(); });
     });
   }
 

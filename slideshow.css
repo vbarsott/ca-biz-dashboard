@@ -104,6 +104,49 @@ body {
   z-index: 2;
 }
 
+/* ── Dev-only navigation arrows ──────────────────────────── */
+/*
+  Arrows are invisible by default (opacity: 0, pointer-events: none).
+  They appear only when the mouse is over #slideshow-stage, making
+  them a developer-only affordance invisible to passive viewers.
+*/
+.dev-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10; /* above active frame (z-index: 2) */
+
+  /* Sizing */
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+
+  /* Hidden by default — only the stage-hover rule reveals them */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, background 0.2s ease;
+}
+
+.dev-arrow--prev { left: 1rem; }
+.dev-arrow--next { right: 1rem; }
+
+/* Reveal arrows when a mouse enters the stage */
+#slideshow-stage:hover .dev-arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Slight brighten on direct arrow hover */
+.dev-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
 /* ── Stage backdrop ───────────────────────────────────────── */
 /*
   Solid black layer behind both frames so there is never a flash

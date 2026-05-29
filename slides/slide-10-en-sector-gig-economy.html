@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Gig Economy Rocket — Transportation &amp; Couriers</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Government of Canada"></div>
+      <div class="slide-source">
+        Statistics Canada · Open Government Portal<br />
+        Canadian Business Counts · Table 33-10-0034-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>The Gig Economy Rocket — Transportation &amp; Couriers</h1>
+      <p class="subtitle">
+        App-driven platforms reshaped Canada's solo transport sector — couriers
+        quadrupled, rideshare doubled. Self-employed · Canada · 2015–2025.
+      </p>
+    </div>
+
+    <!-- ── FULL-WIDTH CHART ─────────────────────────────────────────────── -->
+    <div class="chart-section fade-in">
+      <div class="chart-header">
+        <span class="chart-title">
+          Self-employed (no-employee) transport businesses — Canada, 2015–2025
+        </span>
+      </div>
+      <div class="chart-canvas-wrap h-400">
+        <canvas
+          id="chart-ff-gig"
+          role="img"
+          aria-label="Line chart showing self-employed transport businesses in Canada 2015–2025. Couriers grew from ~12,000 to 43,000 (+260%). Taxi &amp; Rideshare from 26,700 to 67,300 (+152%). Truck transportation from 65,900 to 101,900 (+55%)."
+        ></canvas>
+      </div>
+    </div>
+
+    <!-- ── BOTTOM ROW: KPI stats (left) | Deep Dive chip (right) ─────────── -->
+    <div
+      class="insight-row fade-in"
+      role="region"
+      aria-label="Gig Economy insight"
+    >
+      <!-- Left: 2×2 KPI cards -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          align-content: start;
+        "
+      >
+        <div class="kpi-card accent-red">
+          <div class="kpi-label">Couriers &amp; Messengers growth</div>
+          <div class="kpi-value">+260%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+        <div class="kpi-card accent-red">
+          <div class="kpi-label">Taxi &amp; Rideshare growth</div>
+          <div class="kpi-value">+152%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Canadians in gig work</div>
+          <div class="kpi-value">2.4M</div>
+          <div class="kpi-sublabel">as of 2023</div>
+        </div>
+        <div class="kpi-card accent-green">
+          <div class="kpi-label">Total transport self-employed</div>
+          <div class="kpi-value">+100%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+      </div>
+
+      <!-- Right: Deep Dive insight chip -->
+      <div class="insight-chip accent-red">
+        <div class="chip-label">Deep Dive</div>
+        <div class="chip-stat">
+          The solo courier and messenger business count
+          <strong>nearly quadrupled</strong> from ~12,000 to 43,000 between 2015
+          and 2025 — a clear fingerprint of the rise of
+          <strong>DoorDash, Uber Eats, Amazon Flex, and Instacart</strong>.
+        </div>
+        <div class="chip-detail">
+          Meanwhile, Taxi &amp; Rideshare self-employed businesses went from
+          26,700 to 67,300 — <strong>2.5× more</strong>. The entry rate into
+          transportation self-employment rose <strong>over 70%</strong> since
+          2014, driven almost entirely by app-based platforms.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
+    <p class="source-line">
+      StatCan 75-004-m2024001 &nbsp;|&nbsp; Visa Economic Insights &nbsp;|&nbsp;
+      DemandSage Gig Economy Statistics 2026 &nbsp;|&nbsp; Self-employed
+      (no-employee) businesses · semi-annual snapshots, 2015–2025
+    </p>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
+    <script>
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: StatCan 75-004-m2024001
+         Self-employed (no-employee) transport businesses · Canada
+         Semi-annual snapshots: Dec-15 through Dec-25 (21 periods)
+      ────────────────────────────────────────────────────────────────────── */
+
+      const gigLbl = [
+        "Dec-15",
+        "Jun-16",
+        "Dec-16",
+        "Jun-17",
+        "Dec-17",
+        "Jun-18",
+        "Dec-18",
+        "Jun-19",
+        "Dec-19",
+        "Jun-20",
+        "Dec-20",
+        "Jun-21",
+        "Dec-21",
+        "Jun-22",
+        "Dec-22",
+        "Jun-23",
+        "Dec-23",
+        "Jun-24",
+        "Dec-24",
+        "Jun-25",
+        "Dec-25",
+      ];
+
+      const couriers = [
+        11969, 12001, 11764, 12166, 12033, 12504, 12590, 13045, 13560, 13966,
+        14789, 15552, 18775, 19735, 23188, 24920, 26252, 31021, 35491, 37165,
+        43151,
+      ];
+
+      const taxi = [
+        26702, 27848, 28427, 28628, 28435, 30597, 33800, 39271, 41431, 46620,
+        47507, 48818, 28256, 31535, 30355, 38591, 42867, 52125, 58009, 66545,
+        67309,
+      ];
+
+      const truck = [
+        65921, 66533, 66751, 69670, 69411, 72131, 72142, 74304, 72727, 74574,
+        75808, 78674, 77821, 81459, 83898, 90079, 92168, 97589, 98234, 101138,
+        101885,
+      ];
+
+      new Chart(document.getElementById("chart-ff-gig"), {
+        type: "line",
+        data: {
+          labels: gigLbl,
+          datasets: [
+            {
+              label: "Couriers & Messengers (incl. delivery apps)",
+              data: couriers,
+              borderColor: PALETTE.red,
+              backgroundColor: "rgba(204,0,0,0.08)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+            {
+              label: "Taxi & Rideshare (Uber, Lyft…)",
+              data: taxi,
+              borderColor: PALETTE.navy,
+              backgroundColor: "rgba(0,51,102,0.08)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+            {
+              label: "Truck Transportation",
+              data: truck,
+              borderColor: PALETTE.orange,
+              backgroundColor: "rgba(181,71,8,0.08)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          ...RESPONSIVE_OPTS,
+          interaction: { mode: "index", intersect: false },
+          animation: {
+            duration: 2000,
+            easing: "easeInOutCubic",
+          },
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                boxWidth: 14,
+                padding: 14,
+                color: PALETTE.ink,
+                font: { size: 14, family: FONT },
+              },
+            },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) =>
+                  "  " +
+                  ctx.dataset.label +
+                  ": " +
+                  ctx.raw.toLocaleString("en-CA") +
+                  " businesses",
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                callback: (_, i) => (i % 4 === 0 ? gigLbl[i] : ""),
+                maxRotation: 45,
+                color: PALETTE.mid,
+                font: { size: 14, family: FONT },
+              },
+              grid: GRID_SUBTLE,
+              border: { color: PALETTE.border },
+            },
+            y: {
+              ticks: {
+                callback: (v) => fmtNum(v),
+                color: PALETTE.mid,
+                font: { size: 14, family: FONT },
+              },
+              grid: GRID_SUBTLE,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

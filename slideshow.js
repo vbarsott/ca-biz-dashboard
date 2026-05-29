@@ -66,6 +66,8 @@
     "slides/slide-08-fr-sector-analysis-A.html", // 15  FR
     "slides/slide-09-en-sector-construction.html", // 16  EN
     "slides/slide-09-fr-sector-construction.html", // 17  FR
+    "slides/slide-10-en-sector-gig-economy.html", // 18  EN
+    "slides/slide-10-fr-sector-gig-economy.html", // 19  FR
   ];
 
   /**

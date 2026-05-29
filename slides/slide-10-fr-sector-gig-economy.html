@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L'essor de l'économie à la demande — Transport et coursiers</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="slide-source">
+        Statistique Canada · Portail du gouvernement ouvert<br />
+        Nombre d'entreprises canadiennes · Tableau 33-10-0034-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>L'essor de l'économie à la demande — Transport et coursiers</h1>
+      <p class="subtitle">
+        Les plateformes numériques ont transformé le secteur solo du transport —
+        les coursiers ont quadruplé, le covoiturage a doublé.
+        Travailleurs autonomes · Canada · 2015–2025.
+      </p>
+    </div>
+
+    <!-- ── FULL-WIDTH CHART ─────────────────────────────────────────────── -->
+    <div class="chart-section fade-in">
+      <div class="chart-header">
+        <span class="chart-title">
+          Entreprises de transport sans employés (travailleurs autonomes) — Canada, 2015–2025
+        </span>
+      </div>
+      <div class="chart-canvas-wrap h-400">
+        <canvas
+          id="chart-ff-gig"
+          role="img"
+          aria-label="Graphique linéaire montrant les entreprises de transport autonomes au Canada de 2015 à 2025. Les coursiers sont passés de ~12 000 à 43 000 (+260 %). Taxi et covoiturage de 26 700 à 67 300 (+152 %). Transport par camion de 65 900 à 101 900 (+55 %)."
+        ></canvas>
+      </div>
+    </div>
+
+    <!-- ── BOTTOM ROW: KPI stats (left) | Deep Dive chip (right) ─────────── -->
+    <div
+      class="insight-row fade-in"
+      role="region"
+      aria-label="Aperçu de l'économie à la demande"
+    >
+      <!-- Left: 2×2 KPI cards -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          align-content: start;
+        "
+      >
+        <div class="kpi-card accent-red">
+          <div class="kpi-label">Croissance — coursiers et messagers</div>
+          <div class="kpi-value">+260%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+        <div class="kpi-card accent-red">
+          <div class="kpi-label">Croissance — taxi et covoiturage</div>
+          <div class="kpi-value">+152%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Canadiens en travail à la demande</div>
+          <div class="kpi-value">2,4 M</div>
+          <div class="kpi-sublabel">en 2023</div>
+        </div>
+        <div class="kpi-card accent-green">
+          <div class="kpi-label">Total transport autonome</div>
+          <div class="kpi-value">+100%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+      </div>
+
+      <!-- Right: Deep Dive insight chip -->
+      <div class="insight-chip accent-red">
+        <div class="chip-label">Analyse approfondie</div>
+        <div class="chip-stat">
+          Le nombre d'entreprises solo de coursiers et messagers a
+          <strong>presque quadruplé</strong>, passant de ~12 000 à 43 000 entre
+          2015 et 2025 — une empreinte claire de la montée de
+          <strong>DoorDash, Uber Eats, Amazon Flex et Instacart</strong>.
+        </div>
+        <div class="chip-detail">
+          Le secteur taxi et covoiturage est passé de 26 700 à 67 300
+          travailleurs autonomes — <strong>2,5× plus</strong>. Le taux d'entrée
+          en transport autonome a augmenté de <strong>plus de 70 %</strong>
+          depuis 2014, porté presque entièrement par les plateformes numériques.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
+    <p class="source-line">
+      StatCan 75-004-m2024001 &nbsp;|&nbsp; Visa Economic Insights &nbsp;|&nbsp;
+      DemandSage Gig Economy Statistics 2026 &nbsp;|&nbsp; Entreprises sans
+      employés · données semestrielles, 2015–2025
+    </p>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
+    <script>
+      /* ── DONNÉES ────────────────────────────────────────────────────────────
+         Source : StatCan 75-004-m2024001
+         Entreprises de transport sans employés · Canada
+         Données semestrielles : déc. 2015 – déc. 2025 (21 périodes)
+      ────────────────────────────────────────────────────────────────────── */
+
+      const gigLbl = [
+        "Déc-15",
+        "Juin-16",
+        "Déc-16",
+        "Juin-17",
+        "Déc-17",
+        "Juin-18",
+        "Déc-18",
+        "Juin-19",
+        "Déc-19",
+        "Juin-20",
+        "Déc-20",
+        "Juin-21",
+        "Déc-21",
+        "Juin-22",
+        "Déc-22",
+        "Juin-23",
+        "Déc-23",
+        "Juin-24",
+        "Déc-24",
+        "Juin-25",
+        "Déc-25",
+      ];
+
+      const couriers = [
+        11969, 12001, 11764, 12166, 12033, 12504, 12590, 13045, 13560, 13966,
+        14789, 15552, 18775, 19735, 23188, 24920, 26252, 31021, 35491, 37165,
+        43151,
+      ];
+
+      const taxi = [
+        26702, 27848, 28427, 28628, 28435, 30597, 33800, 39271, 41431, 46620,
+        47507, 48818, 28256, 31535, 30355, 38591, 42867, 52125, 58009, 66545,
+        67309,
+      ];
+
+      const truck = [
+        65921, 66533, 66751, 69670, 69411, 72131, 72142, 74304, 72727, 74574,
+        75808, 78674, 77821, 81459, 83898, 90079, 92168, 97589, 98234, 101138,
+        101885,
+      ];
+
+      new Chart(document.getElementById("chart-ff-gig"), {
+        type: "line",
+        data: {
+          labels: gigLbl,
+          datasets: [
+            {
+              label: "Coursiers et messagers (incl. applis de livraison)",
+              data: couriers,
+              borderColor: PALETTE.red,
+              backgroundColor: "rgba(204,0,0,0.08)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+            {
+              label: "Taxi et covoiturage (Uber, Lyft…)",
+              data: taxi,
+              borderColor: PALETTE.navy,
+              backgroundColor: "rgba(0,51,102,0.08)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+            {
+              label: "Transport par camion",
+              data: truck,
+              borderColor: PALETTE.orange,
+              backgroundColor: "rgba(181,71,8,0.08)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          ...RESPONSIVE_OPTS,
+          interaction: { mode: "index", intersect: false },
+          animation: {
+            duration: 2000,
+            easing: "easeInOutCubic",
+          },
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                boxWidth: 14,
+                padding: 14,
+                color: PALETTE.ink,
+                font: { size: 14, family: FONT },
+              },
+            },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) =>
+                  "  " +
+                  ctx.dataset.label +
+                  ": " +
+                  ctx.raw.toLocaleString("fr-CA") +
+                  " entreprises",
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                callback: (_, i) => (i % 4 === 0 ? gigLbl[i] : ""),
+                maxRotation: 45,
+                color: PALETTE.mid,
+                font: { size: 14, family: FONT },
+              },
+              grid: GRID_SUBTLE,
+              border: { color: PALETTE.border },
+            },
+            y: {
+              ticks: {
+                callback: (v) => fmtNum(v),
+                color: PALETTE.mid,
+                font: { size: 14, family: FONT },
+              },
+              grid: GRID_SUBTLE,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Construction — Un pays de micro-entreprises</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="slide-source">
+        Statistique Canada · Portail du gouvernement ouvert<br />
+        Nombre d'entreprises canadiennes · Tableau 33-10-0034-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>Construction : un pays de micro-entreprises</h1>
+      <p class="subtitle">
+        Les petites équipes dominent — 9 entreprises sur 10 comptent
+        moins de 20 employés.
+      </p>
+    </div>
+
+    <!-- ── MAIN LAYOUT: Donut (left) · Stats + Insight (right) ──────────── -->
+    <div class="main-layout fade-in">
+      <!-- LEFT: Donut chart -->
+      <div class="layout-left">
+        <div class="chart-section">
+          <div class="chart-header">
+            <span class="chart-title">
+              Répartition par taille — entreprises avec employés, déc. 2025
+            </span>
+          </div>
+
+          <!-- Donut canvas centré -->
+          <div class="donut-outer">
+            <div class="donut-canvas-wrap">
+              <canvas
+                id="constSizeDonut"
+                role="img"
+                aria-label="Graphique en anneau montrant la taille des entreprises de construction. 61,8 % ont 1 à 4 employés, 29,3 % en ont 5 à 19, 5,9 % de 20 à 49, 2,7 % de 50 à 199, et 0,4 % en ont 200 ou plus."
+              ></canvas>
+            </div>
+          </div>
+
+          <!-- Légende — cercles de couleur avec pourcentages (5 catégories) -->
+          <div class="legend" role="list" aria-label="Légende des catégories de taille">
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #cc0000"></div>
+              1–4 employés <span class="legend-pct">61,8 %</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #e74c3c"></div>
+              5–19 employés <span class="legend-pct">29,3 %</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #e59866"></div>
+              20–49 employés <span class="legend-pct">5,9 %</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #fad7a0"></div>
+              50–199 employés <span class="legend-pct">2,7 %</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #aeb6bf"></div>
+              200+ employés <span class="legend-pct">0,4 %</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: 2×2 cartes statistiques + puce Analyse approfondie -->
+      <div class="layout-right">
+        <!-- Statistiques — grille 2×2 de cartes KPI -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+          "
+        >
+          <div class="kpi-card accent-red">
+            <div class="kpi-label">Part des micro-entreprises</div>
+            <div class="kpi-value">61,8 %</div>
+            <div class="kpi-sublabel">
+              des entreprises n'ont que 1 à 4 employés
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Entreprises avec employés</div>
+            <div class="kpi-value">160 648</div>
+            <div class="kpi-sublabel">
+              total dans la construction (déc. 2025)
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Travailleurs autonomes</div>
+            <div class="kpi-value">255 915</div>
+            <div class="kpi-sublabel">entreprises sans aucun employé</div>
+          </div>
+          <div class="kpi-card accent-green">
+            <div class="kpi-label">Croissance du secteur</div>
+            <div class="kpi-value">+13,7 %</div>
+            <div class="kpi-sublabel">hausse des entreprises depuis 2015</div>
+          </div>
+        </div>
+
+        <!-- Puce Analyse approfondie -->
+        <div class="insight-chip accent-red">
+          <div class="chip-label">Analyse approfondie</div>
+          <div class="chip-stat">
+            L'industrie de la construction au Canada représente environ
+            <strong>284 milliards USD</strong> — pourtant, près de 1 travailleur
+            sur 4 est un entrepreneur solo sans aucun employé.
+          </div>
+          <div class="chip-detail">
+            Cela représente plus de 255 000 entreprises individuelles. En
+            ajoutant celles de 1 à 4 employés, on dépasse
+            <strong>80 %</strong> de toutes les entreprises de construction
+            au Canada.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIGNE DE SOURCE ─────────────────────────────────────────────── -->
+    <p class="source-line">
+      Statistique Canada — Nombre d'entreprises canadiennes (Tableau 33-10-0034-01)
+      &nbsp;|&nbsp; Période de référence : déc. 2025 &nbsp;|&nbsp; Entreprises avec employés
+      seulement &nbsp;|&nbsp; Sources : StatCan Portail ouvert · ICBA Independent ·
+      GlobalData 2025
+    </p>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <!-- <script src="../js/transitions.js"></script> -->
+    <script>
+      /* ── DONNÉES ───────────────────────────────────────────────────────────
+         Source : Statistique Canada, Nombre d'entreprises canadiennes, déc. 2025.
+         Tableau 33-10-0034-01 — Secteur de la construction, entreprises par taille.
+         Regroupées en 5 catégories :
+           1–4 :     99 222                   → 61,8 %
+           5–19 :    31 013 + 16 015 = 47 028 → 29,3 %
+           20–49 :   9 507                    →  5,9 %
+           50–199 :  3 120 + 1 212  = 4 332   →  2,7 %
+           200+ :    459 + 100                →  0,4 %
+           Total :   160 648
+      ────────────────────────────────────────────────────────────────────── */
+
+      /* Plugin texte central — affiche le segment dominant au centre de l'anneau */
+      const constCentreText = {
+        id: "centreText",
+        afterDatasetDraw(chart) {
+          const {
+            ctx,
+            chartArea: { top, bottom, left, right },
+          } = chart;
+          const cx = (left + right) / 2;
+          const cy = (top + bottom) / 2;
+
+          ctx.save();
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          ctx.font = `800 2.2rem ${FONT}, system-ui, sans-serif`;
+          ctx.fillStyle = "#CC0000";
+          ctx.fillText("61,8 %", cx, cy - 12);
+
+          ctx.font = `600 0.75rem ${FONT}, system-ui, sans-serif`;
+          ctx.fillStyle = "#CC0000";
+          ctx.fillText("ont 1–4 employés", cx, cy + 18);
+
+          ctx.restore();
+        },
+      };
+
+      new Chart(document.getElementById("constSizeDonut"), {
+        type: "doughnut",
+        plugins: [constCentreText],
+        data: {
+          labels: [
+            "1–4 employés",
+            "5–19 employés",
+            "20–49 employés",
+            "50–199 employés",
+            "200+ employés",
+          ],
+          datasets: [
+            {
+              /* Effectifs regroupés déc. 2025 :
+                 1–4 : 99 222 | 5–19 : 31 013+16 015=47 028
+                 20–49 : 9 507 | 50–199 : 3 120+1 212=4 332 | 200+ : 459+100=559 */
+              data: [99222, 47028, 9507, 4332, 559],
+              backgroundColor: [
+                "#CC0000" /* 1–4   */,
+                "#E74C3C" /* 5–19  */,
+                "#E59866" /* 20–49 */,
+                "#FAD7A0" /* 50–199 */,
+                "#AEB6BF" /* 200+  */,
+              ],
+              borderWidth: 2,
+              borderColor: "#fff",
+              hoverOffset: 10,
+            },
+          ],
+        },
+        options: {
+          ...RESPONSIVE_OPTS,
+          cutout: "62%",
+          animation: {
+            duration: 2000,
+            easing: "easeInOutCubic",
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label(ctx) {
+                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                  const pct = ((ctx.raw / total) * 100).toFixed(1);
+                  return `  ${ctx.label} : ${fmtLocale(ctx.raw)} entreprises (${pct} %)`;
+                },
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

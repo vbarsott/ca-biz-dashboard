@@ -64,6 +64,8 @@
     "slides/slide-07-fr-regional-D.html", // 13  FR
     "slides/slide-08-en-sector-analysis-A.html", // 14  EN
     "slides/slide-08-fr-sector-analysis-A.html", // 15  FR
+    "slides/slide-09-en-sector-construction.html", // 16  EN
+    "slides/slide-09-fr-sector-construction.html", // 17  FR
   ];
 
   /**

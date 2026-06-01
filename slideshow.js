@@ -68,6 +68,8 @@
     "slides/slide-09-fr-sector-construction.html", // 17  FR
     "slides/slide-10-en-sector-gig-economy.html", // 18  EN
     "slides/slide-10-fr-sector-gig-economy.html", // 19  FR
+    "slides/slide-11-en-sector-health-care.html", // 20  EN
+    "slides/slide-11-fr-sector-health-care.html", // 21  FR
   ];
 
   /**

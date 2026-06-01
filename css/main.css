@@ -179,6 +179,26 @@ body.theme-dark h1 {
   padding-bottom: 32px;
 }
 
+/* ── SLIDE BODY ─────────────────────────────────────────────────────────────
+   Primary layout container for slide content below the hero zone.
+   Groups the KPI strip, chart row(s), and callout/insight components into
+   a single vertical column with consistent spacing between sections.
+   Suppresses the default chart-row bottom margin inside slide-body so the
+   deep-dive callout sits flush — spacing is owned by the parent gap instead.
+────────────────────────────────────────────────────────────────────────── */
+.slide-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* Remove chart-row's default margin-bottom inside slide-body —
+   the parent gap handles all vertical rhythm. */
+.slide-body .chart-row {
+  margin-bottom: 0;
+}
+
 /* ── KPI STRIP ──────────────────────────────────────────────────────────── */
 .kpi-strip {
   display: flex;

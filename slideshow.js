@@ -70,6 +70,8 @@
     "slides/slide-10-fr-sector-gig-economy.html", // 19  FR
     "slides/slide-11-en-sector-health-care.html", // 20  EN
     "slides/slide-11-fr-sector-health-care.html", // 21  FR
+    "slides/slide-12-en-rural-urban-landscape.html", // 22  EN
+    "slides/slide-12-fr-rural-urban-landscape.html", // 23  FR
   ];
 
   /**
@@ -536,8 +538,14 @@
       // Dev-only arrow listeners — wire up after init so advance/retreat exist
       var btnPrev = document.getElementById("dev-arrow-prev");
       var btnNext = document.getElementById("dev-arrow-next");
-      if (btnPrev) btnPrev.addEventListener("click", function () { retreat(); });
-      if (btnNext) btnNext.addEventListener("click", function () { advance(); });
+      if (btnPrev)
+        btnPrev.addEventListener("click", function () {
+          retreat();
+        });
+      if (btnNext)
+        btnNext.addEventListener("click", function () {
+          advance();
+        });
     });
   }
 

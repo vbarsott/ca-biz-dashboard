@@ -15,7 +15,8 @@
       <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
       <div class="slide-source">
         Statistique Canada · Portail du gouvernement ouvert<br />
-        Dénombrements des entreprises canadiennes · Tableau 33-10-0034-01
+        Dénombrements des entreprises canadiennes · Tableaux 33-10-0034-01 à
+        33-10-1096-01
       </div>
     </div>
 
@@ -34,84 +35,78 @@
     </div>
 
     <!-- ── FULL-WIDTH CHART ─────────────────────────────────────────────── -->
-    <div class="chart-section accent-orange fade-in">
-      <div class="chart-header">
-        <span class="chart-title"
-          >Alberta c. Ontario — entreprises employeuses, 2015–2025</span
-        >
-      </div>
-      <div class="chart-canvas-wrap h-400">
-        <canvas
-          id="chart-ab-on"
-          role="img"
-          aria-label="L'Alberta a culminé à 181 773 (2015), chuté à 170 266 (2021) et récupéré à peine à 181 254 en 2025. L'Ontario a progressé régulièrement de 449 541 à 515 484."
-        ></canvas>
-      </div>
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--orange)"></div>
-          Alberta (axe gauche)
+    <div class="chart-wrapper">
+      <div class="chart-section accent-orange fade-in">
+        <div class="chart-header">
+          <span class="chart-title"
+            >Alberta c. Ontario — entreprises employeuses, 2015–2025</span
+          >
         </div>
-        <div class="legend-item">
-          <div class="legend-dash"></div>
-          Ontario (axe droit)
+        <div class="chart-canvas-wrap h-400">
+          <canvas
+            id="chart-ab-on"
+            role="img"
+            aria-label="L'Alberta a culminé à 181 773 (2015), chuté à 170 266 (2021) et récupéré à peine à 181 254 en 2025. L'Ontario a progressé régulièrement de 449 541 à 515 484."
+          ></canvas>
         </div>
-      </div>
-    </div>
-
-    <!-- ── BOTTOM ROW: insight chip (left) | stats block (right) ────────── -->
-    <div
-      class="insight-row fade-in"
-      role="region"
-      aria-label="La décennie de l'Alberta"
-    >
-      <!-- Left: insight chip -->
-      <div class="insight-chip">
-        <div class="chip-label">La décennie de l'Alberta</div>
-        <div class="chip-stat">
-          Le dénombrement des entreprises employeuses de l'Alberta en déc. 2025
-          (181 254) était quasi identique à déc. 2015 (181 773).
-        </div>
-        <div class="chip-detail">
-          Une décennie entière marquée par l'effondrement du pétrole, une
-          pandémie et une lente reprise, se terminant par une perte nette de 519
-          entreprises. L'Ontario a progressé de +14,7 % sur la même période,
-          ajoutant près de 66 000 entreprises employeuses nettes.
-        </div>
-      </div>
-
-      <!-- Right: KPI stats block -->
-      <div class="stats-block">
-        <div class="panel-kpi-row">
-          <div class="panel-kpi">
-            <div class="panel-kpi-val">−519</div>
-            <div class="panel-kpi-label">
-              Variation nette des entreprises employeuses, 2015 → 2025<br />
-              (181 773 → 181 254)
-            </div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--orange)"></div>
+            Alberta (axe gauche)
           </div>
-          <div class="panel-kpi">
-            <div class="panel-kpi-val">+65 943</div>
-            <div class="panel-kpi-label">
-              Nouvelles entreprises employeuses nettes en Ontario sur la même
-              période<br />
-              (449 541 → 515 484)
-            </div>
+          <div class="legend-item">
+            <div class="legend-dash"></div>
+            Ontario (axe droit)
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
-    <p class="source-line">
-      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux
-      33-10-0034-01 à 33-10-1096-01) &nbsp;|&nbsp; Entreprises employeuses (avec
-      employés) · Instantanés de la période de référence de décembre, 2015–2025
-    </p>
+      <!-- ── BOTTOM ROW: insight chip (left) | stats block (right) ────────── -->
+      <div
+        class="insight-row fade-in"
+        role="region"
+        aria-label="La décennie de l'Alberta"
+      >
+        <!-- Left: insight chip -->
+        <div class="insight-chip">
+          <div class="chip-label">La décennie de l'Alberta</div>
+          <div class="chip-stat">
+            Le dénombrement des entreprises employeuses de l'Alberta en déc.
+            2025 (181 254) était quasi identique à déc. 2015 (181 773).
+          </div>
+          <div class="chip-detail">
+            Une décennie entière marquée par l'effondrement du pétrole, une
+            pandémie et une lente reprise, se terminant par une perte nette de
+            519 entreprises. L'Ontario a progressé de +14,7 % sur la même
+            période, ajoutant près de 66 000 entreprises employeuses nettes.
+          </div>
+        </div>
+
+        <!-- Right: KPI stats block -->
+        <div class="stats-block">
+          <div class="panel-kpi-row">
+            <div class="panel-kpi">
+              <div class="panel-kpi-val">−519</div>
+              <div class="panel-kpi-label">
+                Variation nette des entreprises employeuses, 2015 → 2025<br />
+                (181 773 → 181 254)
+              </div>
+            </div>
+            <div class="panel-kpi">
+              <div class="panel-kpi-val">+65 943</div>
+              <div class="panel-kpi-label">
+                Nouvelles entreprises employeuses nettes en Ontario sur la même
+                période<br />
+                (449 541 → 515 484)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DONNÉES ────────────────────────────────────────────────────────────
          Source : Statistique Canada, Dénombrements des entreprises canadiennes

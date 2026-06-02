@@ -25,7 +25,7 @@
     <div class="accent-bar" aria-hidden="true"></div>
 
     <!-- ── HERO ZONE: Title (left) + KPI strip (right) ──────────────────── -->
-    <div class="hero-zone has-kpi fade-in">
+    <div class="hero-zone fade-in">
       <!-- Title block -->
       <div class="title-block">
         <h1>Croissance des entreprises canadiennes par type d'emploi</h1>
@@ -33,6 +33,39 @@
           Le Canada a dépassé 5 millions d'entreprises en 2025, mais la
           croissance chez les entreprises employeuses demeure quasi nulle.
         </p>
+
+        <p class="subtitle">
+          Le travail autonome a créé 9 fois plus d'entreprises que les
+          entreprises employeuses depuis 2015.
+        </p>
+        <!-- <p class="subtitle">
+          Post-COVID (2022–2025) : 646 000 entreprises sans employés ajoutées
+          contre 35 800 entreprises employeuses.
+        </p> -->
+      </div>
+    </div>
+
+    <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
+    <div class="chart-wrapper">
+      <div class="chart-section fade-in">
+        <div class="chart-header">
+          <span class="chart-title"
+            >Nombre d'entreprises par type d'emploi, 2015–2025</span
+          >
+        </div>
+        <div class="chart-canvas-wrap h-420">
+          <canvas id="bizChart"></canvas>
+        </div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--teal)"></div>
+            Entreprises sans employés
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--navy)"></div>
+            Entreprises avec employés
+          </div>
+        </div>
       </div>
 
       <!-- KPI strip — 3 cards -->
@@ -72,58 +105,8 @@
       </div>
     </div>
 
-    <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
-    <div class="chart-section fade-in">
-      <div class="chart-header">
-        <span class="chart-title"
-          >Nombre d'entreprises par type d'emploi, 2015–2025</span
-        >
-      </div>
-      <div class="chart-canvas-wrap h-380">
-        <canvas id="bizChart"></canvas>
-      </div>
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--teal)"></div>
-          Entreprises sans employés
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--navy)"></div>
-          Entreprises avec employés
-        </div>
-      </div>
-    </div>
-
-    <!-- ── MICRO-INSIGHT CHIP ────────────────────────────────────────────── -->
-    <div
-      class="insight-row fade-in"
-      role="region"
-      aria-label="Constats analytiques clés"
-    >
-      <div class="insight-chip">
-        <div class="chip-label">Déséquilibre de croissance</div>
-        <div class="chip-stat">
-          Le travail autonome a créé 9 fois plus d'entreprises que les
-          entreprises employeuses depuis 2015.
-        </div>
-        <div class="chip-detail">
-          Post-COVID (2022–2025) : 646 000 entreprises sans employés ajoutées
-          contre 35 800 entreprises employeuses.
-        </div>
-      </div>
-    </div>
-
-    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
-    <p class="source-line">
-      Statistique Canada — Dénombrements des entreprises canadiennes (Tableaux
-      33-10-0034-01 à 33-10-1096-01) &nbsp;|&nbsp; Instantanés de la période de
-      référence de décembre, 2015–2025 &nbsp;|&nbsp; Pré-COVID : ≤ 2019 · COVID
-      : 2020–2021 · Post-COVID : 2022+
-    </p>
-
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DONNÉES ────────────────────────────────────────────────────────────
          Source : Statistique Canada, Dénombrements des entreprises canadiennes

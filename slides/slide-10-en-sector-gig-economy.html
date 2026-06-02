@@ -12,8 +12,8 @@
     <div class="slide-header">
       <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
-        Statistics Canada · Open Government Portal<br />
-        Canadian Business Counts · Table 33-10-0034-01
+        StatCan 75-004-m2024001 &nbsp;|&nbsp; Visa Economic Insights
+        &nbsp;|&nbsp; DemandSage Gig Economy Statistics 2026
       </div>
     </div>
 
@@ -30,86 +30,80 @@
     </div>
 
     <!-- ── FULL-WIDTH CHART ─────────────────────────────────────────────── -->
-    <div class="chart-section fade-in">
-      <div class="chart-header">
-        <span class="chart-title">
-          Self-employed (no-employee) transport businesses — Canada, 2015–2025
-        </span>
+    <div class="chart-wrapper">
+      <div class="chart-section fade-in">
+        <div class="chart-header">
+          <span class="chart-title">
+            Self-employed (no-employee) transport businesses — Canada, 2015–2025
+          </span>
+        </div>
+        <div class="chart-canvas-wrap h-400">
+          <canvas
+            id="chart-ff-gig"
+            role="img"
+            aria-label="Line chart showing self-employed transport businesses in Canada 2015–2025. Couriers grew from ~12,000 to 43,000 (+260%). Taxi &amp; Rideshare from 26,700 to 67,300 (+152%). Truck transportation from 65,900 to 101,900 (+55%)."
+          ></canvas>
+        </div>
       </div>
-      <div class="chart-canvas-wrap h-400">
-        <canvas
-          id="chart-ff-gig"
-          role="img"
-          aria-label="Line chart showing self-employed transport businesses in Canada 2015–2025. Couriers grew from ~12,000 to 43,000 (+260%). Taxi &amp; Rideshare from 26,700 to 67,300 (+152%). Truck transportation from 65,900 to 101,900 (+55%)."
-        ></canvas>
-      </div>
-    </div>
 
-    <!-- ── BOTTOM ROW: KPI stats (left) | Deep Dive chip (right) ─────────── -->
-    <div
-      class="insight-row fade-in"
-      role="region"
-      aria-label="Gig Economy insight"
-    >
-      <!-- Left: 2×2 KPI cards -->
+      <!-- ── BOTTOM ROW: KPI stats (left) | Deep Dive chip (right) ─────────── -->
       <div
-        style="
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-          align-content: start;
-        "
+        class="insight-row fade-in"
+        role="region"
+        aria-label="Gig Economy insight"
       >
-        <div class="kpi-card accent-red">
-          <div class="kpi-label">Couriers &amp; Messengers growth</div>
-          <div class="kpi-value">+260%</div>
-          <div class="kpi-sublabel">2015 → 2025</div>
+        <!-- Left: 2×2 KPI cards -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-content: start;
+          "
+        >
+          <div class="kpi-card accent-red">
+            <div class="kpi-label">Couriers &amp; Messengers growth</div>
+            <div class="kpi-value">+260%</div>
+            <div class="kpi-sublabel">2015 → 2025</div>
+          </div>
+          <div class="kpi-card accent-red">
+            <div class="kpi-label">Taxi &amp; Rideshare growth</div>
+            <div class="kpi-value">+152%</div>
+            <div class="kpi-sublabel">2015 → 2025</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Canadians in gig work</div>
+            <div class="kpi-value">2.4M</div>
+            <div class="kpi-sublabel">as of 2023</div>
+          </div>
+          <div class="kpi-card accent-green">
+            <div class="kpi-label">Total transport self-employed</div>
+            <div class="kpi-value">+100%</div>
+            <div class="kpi-sublabel">2015 → 2025</div>
+          </div>
         </div>
-        <div class="kpi-card accent-red">
-          <div class="kpi-label">Taxi &amp; Rideshare growth</div>
-          <div class="kpi-value">+152%</div>
-          <div class="kpi-sublabel">2015 → 2025</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Canadians in gig work</div>
-          <div class="kpi-value">2.4M</div>
-          <div class="kpi-sublabel">as of 2023</div>
-        </div>
-        <div class="kpi-card accent-green">
-          <div class="kpi-label">Total transport self-employed</div>
-          <div class="kpi-value">+100%</div>
-          <div class="kpi-sublabel">2015 → 2025</div>
-        </div>
-      </div>
 
-      <!-- Right: Deep Dive insight chip -->
-      <div class="insight-chip accent-red">
-        <div class="chip-label">Deep Dive</div>
-        <div class="chip-stat">
-          The solo courier and messenger business count
-          <strong>nearly quadrupled</strong> from ~12,000 to 43,000 between 2015
-          and 2025 — a clear fingerprint of the rise of
-          <strong>DoorDash, Uber Eats, Amazon Flex, and Instacart</strong>.
-        </div>
-        <div class="chip-detail">
-          Meanwhile, Taxi &amp; Rideshare self-employed businesses went from
-          26,700 to 67,300 — <strong>2.5× more</strong>. The entry rate into
-          transportation self-employment rose <strong>over 70%</strong> since
-          2014, driven almost entirely by app-based platforms.
+        <!-- Right: Deep Dive insight chip -->
+        <div class="insight-chip accent-red">
+          <div class="chip-label">Deep Dive</div>
+          <div class="chip-stat">
+            The solo courier and messenger business count
+            <strong>nearly quadrupled</strong> from ~12,000 to 43,000 between
+            2015 and 2025 — a clear fingerprint of the rise of
+            <strong>DoorDash, Uber Eats, Amazon Flex, and Instacart</strong>.
+          </div>
+          <div class="chip-detail">
+            Meanwhile, Taxi &amp; Rideshare self-employed businesses went from
+            26,700 to 67,300 — <strong>2.5× more</strong>. The entry rate into
+            transportation self-employment rose <strong>over 70%</strong> since
+            2014, driven almost entirely by app-based platforms.
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
-    <p class="source-line">
-      StatCan 75-004-m2024001 &nbsp;|&nbsp; Visa Economic Insights &nbsp;|&nbsp;
-      DemandSage Gig Economy Statistics 2026 &nbsp;|&nbsp; Self-employed
-      (no-employee) businesses · semi-annual snapshots, 2015–2025
-    </p>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DATA ──────────────────────────────────────────────────────────────
          Source: StatCan 75-004-m2024001

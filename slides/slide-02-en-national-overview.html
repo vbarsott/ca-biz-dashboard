@@ -23,7 +23,7 @@
     <div class="accent-bar" aria-hidden="true"></div>
 
     <!-- ── HERO ZONE: Title (left) + KPI strip (right) ──────────────────── -->
-    <div class="hero-zone has-kpi fade-in">
+    <div class="hero-zone fade-in">
       <!-- Title block -->
       <div class="title-block">
         <h1>Canadian Business Growth by Employment Type</h1>
@@ -31,6 +31,38 @@
           Canada surpassed 5 million businesses in 2025, but employer growth
           remains nearly flat.
         </p>
+        <p class="subtitle">
+          Self-employment created 9× more businesses than employer firms since
+          2015.
+        </p>
+        <!-- <p class="subtitle">
+          Post-COVID (2022–2025): 646K non-employer firms added vs. 35.8K
+          employer firms.
+        </p> -->
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
+      <div class="chart-section fade-in">
+        <div class="chart-header">
+          <span class="chart-title"
+            >Business counts by employment type, 2015–2025</span
+          >
+        </div>
+        <div class="chart-canvas-wrap h-420">
+          <canvas id="bizChart"></canvas>
+        </div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--teal)"></div>
+            Businesses without employees
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--navy)"></div>
+            Businesses with employees
+          </div>
+        </div>
       </div>
 
       <!-- KPI strip — 3 cards -->
@@ -68,58 +100,8 @@
       </div>
     </div>
 
-    <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
-    <div class="chart-section fade-in">
-      <div class="chart-header">
-        <span class="chart-title"
-          >Business counts by employment type, 2015–2025</span
-        >
-      </div>
-      <div class="chart-canvas-wrap h-380">
-        <canvas id="bizChart"></canvas>
-      </div>
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--teal)"></div>
-          Businesses without employees
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--navy)"></div>
-          Businesses with employees
-        </div>
-      </div>
-    </div>
-
-    <!-- ── MICRO-INSIGHT CHIP ────────────────────────────────────────────── -->
-    <div
-      class="insight-row fade-in"
-      role="region"
-      aria-label="Key analytical insights"
-    >
-      <div class="insight-chip">
-        <div class="chip-label">Growth Imbalance</div>
-        <div class="chip-stat">
-          Self-employment created 9× more businesses than employer firms since
-          2015.
-        </div>
-        <div class="chip-detail">
-          Post-COVID (2022–2025): 646K non-employer firms added vs. 35.8K
-          employer firms.
-        </div>
-      </div>
-    </div>
-
-    <!-- ── SOURCE LINE ──────────────────────────────────────────────────── -->
-    <p class="source-line">
-      Statistics Canada — Canadian Business Counts (Tables 33-10-0034-01 to
-      33-10-1096-01) &nbsp;|&nbsp; December reference period snapshots,
-      2015–2025 &nbsp;|&nbsp; Pre-COVID: ≤ 2019 · COVID: 2020–2021 · Post-COVID:
-      2022+
-    </p>
-
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
-    <!-- <script src="../js/transitions.js"></script> -->
     <script>
       /* ── DATA ──────────────────────────────────────────────────────────────
          Source: Statistics Canada, Canadian Business Counts

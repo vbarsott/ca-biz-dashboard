@@ -3,90 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regional A — Where Did Employer Business Growth Happen?</title>
+    <title>Regional Analysis — Business Employer Growth</title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
   </head>
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
       <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
-        Statistics Canada · Open Government Portal<br />
-        Canadian Business Counts · Tables 33-10-0034-01 to 33-10-1096-01
+        <div class="slide-source-item">
+          Statistics Canada | Open Government Portal<br />
+          Canadian Business Counts | Tables 33-10-0034-01 to 33-10-1096-01
+        </div>
+        <div class="slide-source-item">
+          Statistique Canada | Portail du gouvernement ouvert<br />
+          Dénombrements des entreprises canadiennes | Tableaux 33-10-0034-01 à
+          33-10-1096-01
+        </div>
       </div>
     </div>
 
     <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
     <div class="accent-bar" aria-hidden="true"></div>
 
-    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
-    <div class="hero-zone fade-in">
-      <h1>Where Did Employer Business Growth Happen?</h1>
-      <p class="subtitle">
-        The provincial picture is sharply divided. Several provinces, including
-        Newfoundland and NWT, ended the decade with fewer businesses than they
-        started with.
-      </p>
-    </div>
+    <main class="main-wrapper">
+      <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+      <div class="hero-zone">
+        <h1>
+          Business Employer Growth by Province | Croissance des entreprises par
+          province
+        </h1>
+        <p class="subtitle">
+          Newfoundland and the Northwest Territories are the only regions that
+          ended the decade with fewer employer businesses than they started —
+          down&nbsp;9.5% and 7.0% respectively.<br />
+          Ontario and BC, by contrast, captured most of the country's net
+          growth.
+        </p>
+      </div>
 
-    <!-- ── TWO-COLUMN LAYOUT: Chart (left) · Insight (right) ────────────── -->
-    <div class="chart-row ratio-55-45 fade-in">
-      <!-- LEFT: Provincial growth ranking bar chart -->
-      <div class="chart-col">
-        <div class="chart-section accent-navy">
-          <div class="chart-header">
-            <span class="chart-title">
-              Provincial growth ranking – Employer businesses % change,
-              2015→2025
-            </span>
+      <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
+      <div class="chart-section">
+        <div class="chart-header">
+          <span class="chart-title"
+            >Provincial growth ranking – Business Employer % change,
+            2015→2025</span
+          >
+        </div>
+
+        <div class="chart-canvas-wrap h-500">
+          <canvas
+            id="chart-prov-growth"
+            role="img"
+            aria-label="Vertical column chart. Ontario +14.7%, Newfoundland −9.5%."
+          ></canvas>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--green)"></div>
+            Growing
           </div>
-          <div class="chart-canvas-wrap h-420">
-            <canvas
-              id="chart-prov-growth"
-              role="img"
-              aria-label="Horizontal bar chart. Ontario +14.7%, Newfoundland −9.5%."
-            ></canvas>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--ghost)"></div>
+            Flat
           </div>
-          <div class="legend">
-            <div class="legend-item">
-              <div class="legend-dot" style="background: var(--green)"></div>
-              Growing
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot" style="background: var(--ghost)"></div>
-              Flat
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot" style="background: var(--red)"></div>
-              Declining
-            </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--red)"></div>
+            Declining
           </div>
         </div>
       </div>
-
-      <!-- RIGHT: Insight chip -->
-      <div class="chart-col">
-        <div class="insight-panel">
-          <div class="insight-chip">
-            <div class="chip-label">Growth Concentration</div>
-            <div class="chip-stat">
-              Ontario + BC captured roughly two-thirds of all net new employer
-              businesses since 2015.
-            </div>
-            <div class="chip-detail">
-              Ontario added ~66K businesses; BC added ~27K. The Prairie
-              provinces and Atlantic Canada combined added fewer new businesses
-              than Ontario alone.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
     <script>
+      Chart.register(ChartDataLabels);
+
       /* ── DATA ──────────────────────────────────────────────────────────────
          Source: Statistics Canada, Canadian Business Counts
          Employer businesses (with employees) · December snapshots
@@ -95,7 +91,7 @@
       const provs = [
         "Ontario",
         "British Columbia",
-        "PEI",
+        "Prince Edward Island",
         "Quebec",
         "Manitoba",
         "Nova Scotia",
@@ -104,8 +100,8 @@
         "Nunavut",
         "Saskatchewan",
         "New Brunswick",
-        "NWT",
-        "Newfoundland",
+        "Northwest Territories",
+        "Newfoundland and Labrador",
       ];
       const pcts = [
         14.7, 11.8, 8.9, 8.4, 7.6, 5.8, 5.2, -0.3, 0.0, -0.0, -0.1, -7.0, -9.5,
@@ -118,19 +114,22 @@
           datasets: [
             {
               data: pcts,
+              /* Rule: v > 0 → green; v < 0 → ghost; v === 0 → no bar */
               backgroundColor: pcts.map((v) =>
-                v > 1 ? PALETTE.green : v >= -1 ? PALETTE.ghost : PALETTE.red,
+                v === 0 ? "transparent" : v < 0 ? PALETTE.ghost : PALETTE.green,
               ),
               borderWidth: 0,
-              borderRadius: 3,
+              borderRadius: 5,
+              /* Option B: minimum visible bar height so near-zero values
+                 (AB, NU, SK, NB) are never invisible — data unchanged */
+              minBarLength: 12,
             },
           ],
         },
         options: {
-          indexAxis: "y",
           ...RESPONSIVE_OPTS,
           animation: {
-            duration: 2000,
+            duration: 1800,
             easing: "easeInOutCubic",
           },
           plugins: {
@@ -141,21 +140,48 @@
                 label: (ctx) => "  " + fmtPct(ctx.raw),
               },
             },
+            datalabels: {
+              color: PALETTE.ink,
+              font: { size: 14, family: FONT, weight: "600" },
+              formatter: (v) => (v > 0 ? "+" : "") + v + "%",
+              /* v > 0  → anchor at bar top,      align top    → label above bar
+                 v === 0 → anchor at baseline,     align bottom → label below baseline
+                 v < 0  → anchor at bar bottom,    align end    → label below bar */
+              anchor: (ctx) => {
+                const v = ctx.dataset.data[ctx.dataIndex];
+                /* For 0-value bars the minBarLength stub extends upward, so "end"
+                   would land above the baseline. Use "start" (= baseline) instead. */
+                return v === 0 ? "start" : "end";
+              },
+              align: (ctx) => {
+                const v = ctx.dataset.data[ctx.dataIndex];
+                if (v > 0) return "top";
+                if (v === 0) return "top";
+                return "end";
+              },
+              offset: 2,
+            },
           },
           scales: {
             x: {
               ticks: {
-                color: PALETTE.ghost,
-                font: { size: 10, family: FONT },
-                callback: (v) => (v > 0 ? "+" : "") + v + "%",
+                color: PALETTE.ink,
+                font: { size: 14, family: FONT, weight: "600" },
+                maxRotation: 45,
+                minRotation: 45,
               },
-              grid: GRID_SUBTLE,
-              min: -12,
-              max: 17,
+              grid: { display: false },
             },
             y: {
-              ticks: { color: PALETTE.ink, font: { size: 11, family: FONT } },
-              grid: { display: false },
+              ticks: {
+                display: false,
+                color: PALETTE.ink,
+                font: { size: 14, family: FONT, weight: "600" },
+                callback: (v) => (v > 0 ? "+" : "") + v + " %",
+              },
+              grid: GRID_SUBTLE,
+              min: -15,
+              max: 20,
             },
           },
         },

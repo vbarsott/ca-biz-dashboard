@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      National Overview — Canada's Business Boom: Who's Actually Hiring?
-    </title>
+    <title>National Overview | Aperçu national</title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
@@ -14,91 +12,70 @@
     <div class="slide-header">
       <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
-        Statistics Canada · Open Government Portal<br />
-        Canadian Business Counts · Tables 33-10-0034-01 to 33-10-1096-01
+        <div class="slide-source-item">
+          Statistics Canada | Open Government Portal<br />
+          Canadian Business Counts | Tables 33-10-0034-01 to 33-10-1096-01
+        </div>
+        <div class="slide-source-item">
+          Statistique Canada | Portail du gouvernement ouvert<br />
+          Dénombrements des entreprises canadiennes | Tableaux 33-10-0034-01 à
+          33-10-1096-01
+        </div>
       </div>
     </div>
 
     <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
     <div class="accent-bar" aria-hidden="true"></div>
 
-    <!-- ── HERO ZONE: Title (left) + KPI strip (right) ──────────────────── -->
-    <div class="hero-zone fade-in">
-      <!-- Title block -->
-      <div class="title-block">
-        <h1>Canadian Business Growth by Employment Type</h1>
-        <p class="subtitle">
-          Canada surpassed 5 million businesses in 2025, but employer growth
-          remains nearly flat.
-        </p>
-        <p class="subtitle">
-          Self-employment created 9× more businesses than employer firms since
-          2015.
-        </p>
-        <!-- <p class="subtitle">
-          Post-COVID (2022–2025): 646K non-employer firms added vs. 35.8K
-          employer firms.
-        </p> -->
-      </div>
-    </div>
-
-    <div class="chart-wrapper">
-      <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
-      <div class="chart-section fade-in">
-        <div class="chart-header">
-          <span class="chart-title"
-            >Business counts by employment type, 2015–2025</span
-          >
+    <main class="main-wrapper">
+      <!-- ── HERO ZONE ──────────────────── -->
+      <div class="hero-zone">
+        <!-- Title block -->
+        <div class="title-block">
+          <h1>
+            Business Employer vs. Self-employed Growth | Croissance : Entreprise
+            employeur vs Travailleur autonome
+          </h1>
+          <p class="subtitle">
+            Canada surpassed 5 million businesses in 2025, but employer growth
+            remains nearly flat.<br />Self-employment created 9× more businesses
+            than employer firms since 2015.
+          </p>
         </div>
-        <div class="chart-canvas-wrap h-420">
+      </div>
+
+      <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
+      <div class="chart-section">
+        <div class="chart-canvas-wrap h-500">
           <canvas id="bizChart"></canvas>
         </div>
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--teal)"></div>
-            Businesses without employees
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--navy)"></div>
-            Businesses with employees
-          </div>
-        </div>
       </div>
 
-      <!-- KPI strip — 3 cards -->
+      <!-- ── KPI SECTION ────────────────────────────────────────────────── -->
       <div
         class="kpi-strip"
         role="region"
         aria-label="Key performance indicators"
       >
-        <!-- Non-Employer Growth — PRIMARY story -->
+        <!-- Self-Employment Growth — PRIMARY story -->
         <div class="kpi-card accent-green primary">
-          <div class="kpi-label">Non-Employer Growth</div>
+          <div class="kpi-label">Self-Employment Growth</div>
           <div class="kpi-value">+40.3%</div>
           <div class="kpi-sublabel">
-            2015 → 2025 &nbsp;·&nbsp; 2.6M → 3.7M businesses
+            2015 → 2025 &nbsp;|&nbsp; 2.6M → 3.7M self-employed
           </div>
         </div>
 
-        <!-- Employer Growth — SECONDARY -->
-        <div class="kpi-card">
-          <div class="kpi-label">Employer Growth</div>
+        <!-- Business Employer Growth — SECONDARY -->
+        <div class="kpi-card accent-navy">
+          <div class="kpi-label">Business Employer Growth</div>
           <div class="kpi-value">+9.3%</div>
           <div class="kpi-sublabel">
-            2015 → 2025 &nbsp;·&nbsp; 1.25M → 1.37M businesses
-          </div>
-        </div>
-
-        <!-- Employer Firms per 1,000 — TERTIARY -->
-        <div class="kpi-card accent-orange">
-          <div class="kpi-label">Employer Firms per 1,000 Canadians</div>
-          <div class="kpi-value">~33</div>
-          <div class="kpi-sublabel">
-            ↓ from ~35 in 2015 &nbsp;·&nbsp; Shrinking per capita
+            2015 → 2025 &nbsp;|&nbsp; 1.25M → 1.37M businesses
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
@@ -184,7 +161,7 @@
           ...RESPONSIVE_OPTS,
           interaction: { mode: "index", intersect: false },
           animation: {
-            duration: 2000,
+            duration: 1800,
             easing: "easeInOutCubic",
           },
           plugins: {
@@ -203,11 +180,11 @@
               grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
-                font: { size: 13, family: FONT, weight: "600" },
+                font: { size: 14, family: FONT, weight: "600" },
               },
               border: { color: PALETTE.border },
               title: {
-                display: true,
+                display: false,
                 text: "Year",
                 ...AXIS_TITLE_STYLE,
               },
@@ -217,12 +194,13 @@
               grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
+                font: { size: 14, family: FONT, weight: "600" },
                 callback: fmtNum,
                 maxTicksLimit: 8,
               },
               border: { color: PALETTE.border },
               title: {
-                display: true,
+                display: false,
                 text: "Number of businesses",
                 ...AXIS_TITLE_STYLE,
               },

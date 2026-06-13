@@ -56,28 +56,28 @@
     "slides/slide-03-fr-business-size.html", //  5  FR
     "slides/slide-04-en-regional-A.html", //  6  EN
     "slides/slide-04-fr-regional-A.html", //  7  FR
-    "slides/slide-05-en-regional-B.html", //  8  EN
-    "slides/slide-05-fr-regional-B.html", //  9  FR
-    "slides/slide-06-en-regional-C.html", // 10  EN
-    "slides/slide-06-fr-regional-C.html", // 11  FR
-    "slides/slide-07-en-regional-D.html", // 12  EN
-    "slides/slide-07-fr-regional-D.html", // 13  FR
-    "slides/slide-08-en-sector-analysis-A.html", // 14  EN
-    "slides/slide-08-fr-sector-analysis-A.html", // 15  FR
-    "slides/slide-09-en-sector-construction.html", // 16  EN
-    "slides/slide-09-fr-sector-construction.html", // 17  FR
-    "slides/slide-10-en-sector-gig-economy.html", // 18  EN
-    "slides/slide-10-fr-sector-gig-economy.html", // 19  FR
-    "slides/slide-11-en-sector-health-care.html", // 20  EN
-    "slides/slide-11-fr-sector-health-care.html", // 21  FR
-    "slides/slide-12-en-rural-urban-landscape.html", // 22  EN
-    "slides/slide-12-fr-rural-urban-landscape.html", // 23  FR
+    // "slides/slide-05-en-regional-B.html", //  8  EN
+    // "slides/slide-05-fr-regional-B.html", //  9  FR
+    // "slides/slide-06-en-regional-C.html", // 10  EN
+    // "slides/slide-06-fr-regional-C.html", // 11  FR
+    // "slides/slide-07-en-regional-D.html", // 12  EN
+    // "slides/slide-07-fr-regional-D.html", // 13  FR
+    // "slides/slide-08-en-sector-analysis-A.html", // 14  EN
+    // "slides/slide-08-fr-sector-analysis-A.html", // 15  FR
+    // "slides/slide-09-en-sector-construction.html", // 16  EN
+    // "slides/slide-09-fr-sector-construction.html", // 17  FR
+    // "slides/slide-10-en-sector-gig-economy.html", // 18  EN
+    // "slides/slide-10-fr-sector-gig-economy.html", // 19  FR
+    // "slides/slide-11-en-sector-health-care.html", // 20  EN
+    // "slides/slide-11-fr-sector-health-care.html", // 21  FR
+    // "slides/slide-12-en-rural-urban-landscape.html", // 22  EN
+    // "slides/slide-12-fr-rural-urban-landscape.html", // 23  FR
   ];
 
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 2000;
+  const SLIDE_DURATION_MS = 20000;
 
   /**
    * EN → FR crossfade duration (ms).

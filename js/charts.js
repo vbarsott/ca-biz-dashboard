@@ -5,60 +5,60 @@
 
 /* ── PALETTE ────────────────────────────────────────────────────────────── */
 const PALETTE = {
-  navy:           '#003366',
-  navyMid:        '#1a4a7a',
-  navyPale:       '#eaf0f8',
-  red:            '#cc0000',
-  redDark:        '#990000',
-  green:          '#1d7a4f',
-  teal:           '#006b5e',
-  tealPale:       '#e5f3f1',
-  orange:         '#b54708',
-  ink:            '#1a1a1a',
-  mid:            '#555555',
-  ghost:          '#888888',
-  border:         '#cccccc',
-  paper:          '#f8f8f8',
-  white:          '#ffffff',
-  preCovidBlue:   '#b3c8e0',
-  projectionBlue: '#7aafd4',
-  accentRedBright:'#ff6b6b',
+  navy: "#003366",
+  navyMid: "#1a4a7a",
+  navyPale: "#eaf0f8",
+  red: "#cc0000",
+  redDark: "#990000",
+  green: "#1d7a4f",
+  teal: "#006b5e",
+  tealPale: "#e5f3f1",
+  orange: "#b54708",
+  ink: "#1a1a1a",
+  mid: "#555555",
+  ghost: "#888888",
+  border: "#cccccc",
+  paper: "#f8f8f8",
+  white: "#ffffff",
+  preCovidBlue: "#b3c8e0",
+  projectionBlue: "#7aafd4",
+  accentRedBright: "#ff6b6b",
 };
 
 /* ── FONT ───────────────────────────────────────────────────────────────── */
-const FONT = 'Lato';
+const FONT = "Lato";
 
 /* ── SHARED TOOLTIP CONFIG ──────────────────────────────────────────────── */
 const TOOLTIP_DEFAULTS = {
   backgroundColor: PALETTE.ink,
-  titleColor:      PALETTE.white,
-  bodyColor:       PALETTE.border,
-  padding:         13,
-  cornerRadius:    6,
+  titleColor: PALETTE.white,
+  bodyColor: PALETTE.border,
+  padding: 13,
+  cornerRadius: 6,
 };
 
 /* ── SHARED AXIS TICK CONFIG ────────────────────────────────────────────── */
 const AXIS_TICK = {
   color: PALETTE.mid,
-  font:  { size: 12, family: FONT, weight: '600' },
+  font: { size: 14, family: FONT, weight: "600" },
 };
 
 const AXIS_TITLE_STYLE = {
   color: PALETTE.mid,
-  font:  { size: 13, weight: '600', family: FONT },
+  font: { size: 14, family: FONT, weight: "600" },
 };
 
 /* ── SHARED GRID CONFIG ─────────────────────────────────────────────────── */
 const GRID_STYLE = {
-  color:     PALETTE.border,
+  color: PALETTE.border,
   lineWidth: 0.5,
 };
 
-const GRID_SUBTLE = { color: 'rgba(0,0,0,0.06)' };
+const GRID_SUBTLE = { color: "rgba(0,0,0,0.06)" };
 
 /* ── RESPONSIVE OPTIONS ─────────────────────────────────────────────────── */
 const RESPONSIVE_OPTS = {
-  responsive:          true,
+  responsive: true,
   maintainAspectRatio: false,
 };
 
@@ -67,8 +67,8 @@ const RESPONSIVE_OPTS = {
  * Format large numbers with M / K suffix (e.g. 1500000 → "1.5M")
  */
 function fmtNum(val) {
-  if (val >= 1_000_000) return (val / 1_000_000).toFixed(1) + 'M';
-  if (val >= 1_000)     return (val / 1_000).toFixed(0) + 'K';
+  if (val >= 1_000_000) return (val / 1_000_000).toFixed(1) + "M";
+  if (val >= 1_000) return (val / 1_000).toFixed(0) + "K";
   return String(val);
 }
 
@@ -76,14 +76,14 @@ function fmtNum(val) {
  * Format with Canadian locale (comma thousands)
  */
 function fmtLocale(val) {
-  return val.toLocaleString('en-CA');
+  return val.toLocaleString("en-CA");
 }
 
 /**
  * Format as percentage change with leading + for positive values
  */
 function fmtPct(val) {
-  return (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
+  return (val >= 0 ? "+" : "") + val.toFixed(1) + "%";
 }
 
 /* ── BAND PLUGIN ────────────────────────────────────────────────────────────
@@ -94,7 +94,7 @@ function fmtPct(val) {
      Post-COVID → 2022 onward (indices 7–10)
    ─────────────────────────────────────────────────────────────────────── */
 const bandPlugin = {
-  id: 'bandPlugin',
+  id: "bandPlugin",
   beforeDraw(chart) {
     const {
       ctx,
@@ -111,42 +111,20 @@ const bandPlugin = {
       ctx.restore();
     }
 
-    /* Pre-COVID band — indices 0–4 */
-    drawBand(0, 4, 'rgba(179, 200, 224, 0.22)');
-
     /* COVID band — indices 5–6 */
-    drawBand(5, 6, 'rgba(204, 0, 0, 0.07)');
-
-    /* Post-COVID band — indices 7–10 */
-    drawBand(7, 10, 'rgba(229, 243, 241, 0.75)');
+    drawBand(4, 6, "rgba(204, 0, 0, 0.07)");
 
     /* Band labels */
     ctx.save();
-    ctx.font = `600 11px ${FONT}, system-ui, sans-serif`;
-    ctx.textAlign = 'center';
-
-    ctx.fillStyle = '#6A90B0';
-    ctx.globalAlpha = 1;
-    ctx.fillText(
-      'Pre-COVID',
-      (x.getPixelForValue(0) + x.getPixelForValue(4)) / 2,
-      top + 15,
-    );
+    ctx.font = `600 14px ${FONT}, system-ui, sans-serif`;
+    ctx.textAlign = "center";
 
     ctx.fillStyle = PALETTE.red;
     ctx.globalAlpha = 0.6;
     ctx.fillText(
-      'COVID',
-      (x.getPixelForValue(5) + x.getPixelForValue(6)) / 2,
-      top + 15,
-    );
-
-    ctx.fillStyle = PALETTE.teal;
-    ctx.globalAlpha = 0.75;
-    ctx.fillText(
-      'Post-COVID',
-      (x.getPixelForValue(7) + x.getPixelForValue(10)) / 2,
-      top + 15,
+      "COVID",
+      (x.getPixelForValue(4) + x.getPixelForValue(6)) / 2,
+      top + 30,
     );
 
     ctx.restore();
@@ -159,7 +137,7 @@ const bandPlugin = {
    OR override the afterDatasetDraw method directly for a fixed label.
    ─────────────────────────────────────────────────────────────────────── */
 const centreTextPlugin = {
-  id: 'centreText',
+  id: "centreText",
   afterDatasetDraw(chart) {
     const opts = chart.options.plugins && chart.options.plugins.centreText;
     if (!opts) return;
@@ -172,16 +150,16 @@ const centreTextPlugin = {
     const cy = (top + bottom) / 2;
 
     ctx.save();
-    ctx.textAlign    = 'center';
-    ctx.textBaseline = 'middle';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
 
     /* Large headline value */
-    ctx.font      = `800 2.2rem ${FONT}, system-ui, sans-serif`;
+    ctx.font = `800 2.2rem ${FONT}, system-ui, sans-serif`;
     ctx.fillStyle = PALETTE.navy;
     ctx.fillText(opts.value, cx, cy - 12);
 
     /* Small sub-label */
-    ctx.font      = `600 0.75rem ${FONT}, system-ui, sans-serif`;
+    ctx.font = `600 0.75rem ${FONT}, system-ui, sans-serif`;
     ctx.fillStyle = PALETTE.mid;
     ctx.fillText(opts.label, cx, cy + 18);
 

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sld4 - Regional Business Ratio | Ratio régional d'entreprises</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Government of Canada"></div>
+      <div class="slide-source">
+        <div class="slide-source-item">
+          Statistics Canada | Open Government Portal<br />
+          Canadian Business Counts | Tables 33-10-0034-01 to 33-10-1096-01
+        </div>
+        <div class="slide-source-item">
+          Statistique Canada | Portail du gouvernement ouvert<br />
+          Dénombrements des entreprises canadiennes | Tableaux 33-10-0034-01 à
+          33-10-1096-01
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <main class="main-wrapper">
+      <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+      <div class="hero-zone">
+        <h1>
+          Business Employer to Self-Employed Ratio | Ratio des employeurs aux
+          travailleurs autonomes
+        </h1>
+        <p class="subtitle">
+          Nunavut is the only jurisdiction where employer businesses outnumber
+          the self-employed (0.87×) — a direct reflection of its
+          government-centred economy and limited private sector activity. At the
+          opposite end, Ontario (2.93×), British Columbia (2.77×), and Quebec
+          (2.67×) each meet or exceed the national average.
+        </p>
+      </div>
+
+      <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
+      <div class="chart-section">
+        <div class="chart-header">
+          <span class="chart-title"
+            >Self-employment ratio by province &amp; territory — Dec 2025</span
+          >
+        </div>
+
+        <div class="chart-canvas-wrap h-500">
+          <canvas
+            id="chart-selfemp-ratio"
+            role="img"
+            aria-label="Ontario 2.93×, BC 2.77×, Quebec 2.67×. Nunavut 0.87× — employer-dominant."
+          ></canvas>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--teal)"></div>
+            Above national avg (2.67×)
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-dot"
+              style="background: var(--projection-blue)"
+            ></div>
+            Below avg
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--orange)"></div>
+            Employer-dominant (&lt;1×)
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script>
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Ratio = self-employed businesses ÷ employer businesses, by province.
+         December 2025 snapshot · National average: 2.67×
+      ────────────────────────────────────────────────────────────────────── */
+      const provRatioLabels = [
+        "Ontario",
+        "British Columbia",
+        "Quebec",
+        "Saskatchewan",
+        "Alberta",
+        "Manitoba",
+        "Yukon",
+        "Nova Scotia",
+        "Prince Edward Island",
+        "New Brunswick",
+        "Newfoundland and Labrador",
+        "Northwest Territories",
+        "Nunavut",
+      ];
+      const provRatios = [
+        2.93, 2.77, 2.67, 2.66, 2.44, 2.27, 1.98, 1.92, 1.87, 1.46, 1.39, 1.31,
+        0.87,
+      ];
+      const nationalAvg = 2.67;
+
+      new Chart(document.getElementById("chart-selfemp-ratio"), {
+        type: "bar",
+        data: {
+          labels: provRatioLabels,
+          datasets: [
+            {
+              label: "Self-employment ratio",
+              data: provRatios,
+              backgroundColor: provRatios.map((v) =>
+                v >= nationalAvg
+                  ? PALETTE.teal
+                  : v < 1.0
+                    ? PALETTE.orange
+                    : PALETTE.projectionBlue,
+              ),
+              borderWidth: 0,
+              borderRadius: 5,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          ...RESPONSIVE_OPTS,
+          animation: {
+            duration: 1800,
+            easing: "easeInOutCubic",
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) =>
+                  "  " +
+                  ctx.raw.toFixed(2) +
+                  "× self-employed per employer business",
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: PALETTE.ink,
+                font: { size: 14, family: FONT, weight: "600" },
+                callback: (v) => v.toFixed(1) + "×",
+              },
+              grid: GRID_SUBTLE,
+              min: 0,
+              max: 3,
+            },
+            y: {
+              ticks: {
+                color: PALETTE.ink,
+                font: { size: 14, family: FONT, weight: "600" },
+              },
+              grid: { display: false },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

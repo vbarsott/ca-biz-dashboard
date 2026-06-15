@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr-CA">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Taille et structure des entreprises</title>
+    <title>Sld2 - Business Size | Taille des entreprises</title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
@@ -29,34 +29,25 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <!-- Title block -->
-        <div class="title-block">
-          <h1>
-            Size of Business Employers | Taille des entreprises employeurs
-          </h1>
-          <p class="subtitle">
-            Moins de 5 % des entreprises employeuses comptent 50 employés ou
-            plus.<br />
-            Sur 1,37 million d'entreprises employeuses, seulement ~67 000
-            franchissent le seuil de 50 employés — les grands employeurs sont
-            statistiquement rares dans l'économie canadienne.<br />
-            La base employeuse du Canada est très vulnérable aux chocs
-            économiques en raison de la très petite taille de la plupart des
-            entreprises.<br />
-            Les petites entreprises disposent de moins de capital, de moins de
-            redondances et d'une capacité limitée à absorber les perturbations —
-            ce qui rend la base nationale d'emploi sensible aux ralentissements
-            sectoriels.
-          </p>
-        </div>
+        <h1>Size of Business Employers | Taille des entreprises employeurs</h1>
+        <p class="subtitle">
+          Fewer than 5% of employer businesses have 50 or more employees.<br />Of
+          1.37 million employer businesses, only ~67,000 cross the 50-employee
+          threshold — making large employers statistically rare in Canada's
+          economy.<br />
+          Canada's employer base is highly exposed to economic shocks because
+          most firms are extremely small.<br />Small firms carry less capital,
+          fewer redundancies, and a narrower ability to absorb disruption —
+          making the national employment base sensitive to sector-specific
+          downturns.
+        </p>
       </div>
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
         <div class="chart-header">
           <span class="chart-title"
-            >Répartition des entreprises employeuses par taille — Déc.
-            2025</span
+            >Business Employer size breakdown – Dec 2025</span
           >
         </div>
 
@@ -70,25 +61,25 @@
     <script src="../js/charts.js"></script>
 
     <script>
-      /* ── DONNÉES ────────────────────────────────────────────────────────────
-         Source : Statistique Canada, Tableau 33-10-0034-01, décembre 2025.
-         Regroupement :
-           « 1–4 »    = tranche 1–4               → 775 662  → 56,5 %
-           « 5–19 »   = tranches 5–9 + 10–19      → 416 280  → 30,3 %
-           « 20–49 »  = tranche 20–49             → 113 364  →  8,3 %
-           « 50–499 » = tranches 50–99+100–199+200–499 → 63 284 → 4,6 %
-           « 500+ »   = tranche 500+              →   3 519  →  0,3 %
-           Total :                                  1 372 109
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Table 33-10-0034-01, December 2025.
+         Grouping:
+           "1–4"    = band 1–4               → 775,662  → 56.5%
+           "5–19"   = bands 5–9 + 10–19      → 416,280  → 30.3%
+           "20–49"  = band 20–49             → 113,364  →  8.3%
+           "50–499" = bands 50–99+100–199+200–499 → 63,284 → 4.6%
+           "500+"   = band 500+              →   3,519  →  0.3%
+           Total:                              1,372,109
       ────────────────────────────────────────────────────────────────────── */
       new Chart(document.getElementById("sizeBar").getContext("2d"), {
         type: "bar",
         data: {
           labels: [
-            "1–4 employés",
-            "5–19 employés",
-            "20–49 employés",
-            "50–499 employés",
-            "500+ employés",
+            "1–4 employees",
+            "5–19 employees",
+            "20–49 employees",
+            "50–499 employees",
+            "500+ employees",
           ],
           datasets: [
             {
@@ -101,7 +92,7 @@
                 PALETTE.orange /* 500+  */,
               ],
               borderWidth: 0,
-              borderRadius: 4,
+              borderRadius: 5,
             },
           ],
         },
@@ -116,7 +107,7 @@
               ...TOOLTIP_DEFAULTS,
               callbacks: {
                 label: (ctx) =>
-                  `  ${ctx.raw.toFixed(1)} % des entreprises employeuses`,
+                  `  ${ctx.raw.toFixed(1)}% of employer businesses`,
               },
             },
           },
@@ -127,7 +118,7 @@
               ticks: {
                 color: PALETTE.ink,
                 font: { size: 14, family: FONT, weight: "600" },
-                callback: (v) => v + " %",
+                callback: (v) => v + "%",
               },
               grid: { color: "rgba(0,0,0,0.06)" },
             },

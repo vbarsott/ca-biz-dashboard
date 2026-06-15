@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regional Analysis — Business Employer Growth</title>
+    <title>
+      Sld3 - Regional Growth Ranking | Classement de croissance régionale
+    </title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
@@ -15,12 +17,11 @@
       <div class="slide-source">
         <div class="slide-source-item">
           Statistics Canada | Open Government Portal<br />
-          Canadian Business Counts | Tables 33-10-0034-01 to 33-10-1096-01
+          Canadian Business Counts | Table 33-10-0034-01
         </div>
         <div class="slide-source-item">
           Statistique Canada | Portail du gouvernement ouvert<br />
-          Dénombrements des entreprises canadiennes | Tableaux 33-10-0034-01 à
-          33-10-1096-01
+          Dénombrements des entreprises canadiennes | Tableau 33-10-0034-01
         </div>
       </div>
     </div>
@@ -63,15 +64,11 @@
 
         <div class="legend">
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--green)"></div>
+            <div class="legend-dot" style="background: var(--navy)"></div>
             Growing
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--ghost)"></div>
-            Flat
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--red)"></div>
+            <div class="legend-dot" style="background: var(--orange)"></div>
             Declining
           </div>
         </div>
@@ -80,6 +77,7 @@
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
+
     <script>
       Chart.register(ChartDataLabels);
 
@@ -96,15 +94,15 @@
         "Manitoba",
         "Nova Scotia",
         "Yukon",
-        "Alberta",
         "Nunavut",
         "Saskatchewan",
+        "Alberta",
         "New Brunswick",
         "Northwest Territories",
         "Newfoundland and Labrador",
       ];
       const pcts = [
-        14.7, 11.8, 8.9, 8.4, 7.6, 5.8, 5.2, -0.3, 0.0, -0.0, -0.1, -7.0, -9.5,
+        14.7, 11.8, 8.9, 8.4, 7.6, 5.8, 5.2, 0.0, -0.0, -0.1, -0.3, -7.0, -9.5,
       ];
 
       new Chart(document.getElementById("chart-prov-growth"), {
@@ -116,13 +114,13 @@
               data: pcts,
               /* Rule: v > 0 → green; v < 0 → ghost; v === 0 → no bar */
               backgroundColor: pcts.map((v) =>
-                v === 0 ? "transparent" : v < 0 ? PALETTE.ghost : PALETTE.green,
+                v === 0 ? "transparent" : v < 0 ? PALETTE.orange : PALETTE.navy,
               ),
               borderWidth: 0,
               borderRadius: 5,
               /* Option B: minimum visible bar height so near-zero values
                  (AB, NU, SK, NB) are never invisible — data unchanged */
-              minBarLength: 12,
+              // minBarLength: 6,
             },
           ],
         },

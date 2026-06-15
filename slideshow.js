@@ -48,36 +48,26 @@
    * Order is non-negotiable per CLAUDE.md §8.
    */
   const SLIDES = [
-    "slides/slide-01-en-cover.html", //  0  EN
-    "slides/slide-01-fr-cover.html", //  1  FR
-    "slides/slide-02-en-national-overview.html", //  2  EN
-    "slides/slide-02-fr-national-overview.html", //  3  FR
-    "slides/slide-03-en-business-size.html", //  4  EN
-    "slides/slide-03-fr-business-size.html", //  5  FR
-    "slides/slide-04-en-regional-A.html", //  6  EN
-    "slides/slide-04-fr-regional-A.html", //  7  FR
-    // "slides/slide-05-en-regional-B.html", //  8  EN
-    // "slides/slide-05-fr-regional-B.html", //  9  FR
-    // "slides/slide-06-en-regional-C.html", // 10  EN
-    // "slides/slide-06-fr-regional-C.html", // 11  FR
-    // "slides/slide-07-en-regional-D.html", // 12  EN
-    // "slides/slide-07-fr-regional-D.html", // 13  FR
-    // "slides/slide-08-en-sector-analysis-A.html", // 14  EN
-    // "slides/slide-08-fr-sector-analysis-A.html", // 15  FR
-    // "slides/slide-09-en-sector-construction.html", // 16  EN
-    // "slides/slide-09-fr-sector-construction.html", // 17  FR
-    // "slides/slide-10-en-sector-gig-economy.html", // 18  EN
-    // "slides/slide-10-fr-sector-gig-economy.html", // 19  FR
-    // "slides/slide-11-en-sector-health-care.html", // 20  EN
-    // "slides/slide-11-fr-sector-health-care.html", // 21  FR
-    // "slides/slide-12-en-rural-urban-landscape.html", // 22  EN
-    // "slides/slide-12-fr-rural-urban-landscape.html", // 23  FR
+    "slides/dashboard-cover-en.html", //  0  EN
+    "slides/dashboard-cover-fr.html", //  1  FR
+    "slides/sld01-en-national-overview.html", //  2  EN
+    "slides/sld01-fr-national-overview.html", //  3  FR
+    "slides/sld02-en-business-size.html", //  4  EN
+    "slides/sld02-fr-business-size.html", //  5  FR
+    "slides/sld03-en-regional-growth-ranking.html", //  6  EN
+    "slides/sld03-fr-regional-growth-ranking.html", //  7  FR
+    "slides/sld04-en-regional-business-ratio.html", // 8  EN
+    "slides/sld04-fr-regional-business-ratio.html", // 9  FR
+    "slides/sld05-en-regional-business-per-capita.html", // 10  EN
+    "slides/sld05-fr-regional-business-per-capita.html", // 11  FR
+    "slides/sld06-en-sector-business-comparison.html", // 12  EN
+    "slides/sld06-fr-sector-business-comparison.html", // 13  FR
   ];
 
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 20000;
+  const SLIDE_DURATION_MS = 2000;
 
   /**
    * EN → FR crossfade duration (ms).

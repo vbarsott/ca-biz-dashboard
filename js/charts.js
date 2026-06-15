@@ -33,7 +33,7 @@ const TOOLTIP_DEFAULTS = {
   backgroundColor: PALETTE.ink,
   titleColor: PALETTE.white,
   bodyColor: PALETTE.border,
-  padding: 13,
+  padding: 14,
   cornerRadius: 6,
 };
 

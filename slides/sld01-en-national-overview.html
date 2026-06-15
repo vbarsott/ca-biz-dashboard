@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr-CA">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>National Overview | Aperçu national</title>
+    <title>Sld1 - National Overview | Aperçu national</title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
@@ -37,10 +37,9 @@
             employeur vs Travailleur autonome
           </h1>
           <p class="subtitle">
-            Le Canada a dépassé 5 millions d'entreprises en 2025, mais la
-            croissance chez les entreprises employeuses demeure quasi nulle.<br />
-            Le travail autonome a créé 9 fois plus d'entreprises que les
-            entreprises employeuses depuis 2015.
+            Canada surpassed 5 million businesses in 2025, but employer growth
+            remains nearly flat.<br />Self-employment created 9× more businesses
+            than employer firms since 2015.
           </p>
         </div>
       </div>
@@ -56,23 +55,23 @@
       <div
         class="kpi-strip"
         role="region"
-        aria-label="Indicateurs de performance clés"
+        aria-label="Key performance indicators"
       >
         <!-- Self-Employment Growth — PRIMARY story -->
         <div class="kpi-card accent-green primary">
-          <div class="kpi-label">Croissance des travailleurs autonomes</div>
-          <div class="kpi-value">+40,3&nbsp;%</div>
+          <div class="kpi-label">Self-Employment Growth</div>
+          <div class="kpi-value">+40.3%</div>
           <div class="kpi-sublabel">
-            2015 → 2025 &nbsp;|&nbsp; 2,6 M → 3,7 M entreprises
+            2015 → 2025 &nbsp;|&nbsp; 2.6M → 3.7M self-employed
           </div>
         </div>
 
         <!-- Business Employer Growth — SECONDARY -->
         <div class="kpi-card accent-navy">
-          <div class="kpi-label">Croissance des Entreprise Employeur</div>
-          <div class="kpi-value">+9,3&nbsp;%</div>
+          <div class="kpi-label">Business Employer Growth</div>
+          <div class="kpi-value">+9.3%</div>
           <div class="kpi-sublabel">
-            2015 → 2025 &nbsp;|&nbsp; 1,25 M → 1,37 M entreprises
+            2015 → 2025 &nbsp;|&nbsp; 1.25M → 1.37M businesses
           </div>
         </div>
       </div>
@@ -81,10 +80,10 @@
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
     <script>
-      /* ── DONNÉES ────────────────────────────────────────────────────────────
-         Source : Statistique Canada, Dénombrements des entreprises canadiennes
-         Période de référence : instantanés de décembre (CSV daté de janvier selon le cycle de StatCan)
-         Pré-COVID ≤ 2019 | COVID 2020–2021 | Post-COVID 2022+
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Reference period: December snapshots (January-dated CSV per StatCan cycle)
+         Pre-COVID ≤ 2019 | COVID 2020–2021 | Post-COVID 2022+
       ────────────────────────────────────────────────────────────────────── */
       const labels = [
         2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
@@ -95,7 +94,7 @@
         1265751,
         1270783,
         1283789,
-        1311397, // pré-COVID 2015–2019
+        1311397, // pre-COVID 2015–2019
         1302392,
         1300633, // COVID 2020–2021
         1336336,
@@ -109,7 +108,7 @@
         2631372,
         2777670,
         2859965,
-        2835732, // pré-COVID 2015–2019
+        2835732, // pre-COVID 2015–2019
         2860194,
         2850191, // COVID 2020–2021
         3021567,
@@ -127,7 +126,7 @@
           labels,
           datasets: [
             {
-              label: "Sans employés",
+              label: "Without employees",
               data: withoutEmp,
               borderColor: PALETTE.teal,
               backgroundColor: "rgba(0,107,94,0.08)",
@@ -142,7 +141,7 @@
               order: 1,
             },
             {
-              label: "Avec employés",
+              label: "With employees",
               data: withEmp,
               borderColor: PALETTE.navy,
               backgroundColor: "rgba(0,51,102,0.06)",
@@ -186,7 +185,7 @@
               border: { color: PALETTE.border },
               title: {
                 display: false,
-                text: "Année",
+                text: "Year",
                 ...AXIS_TITLE_STYLE,
               },
             },
@@ -202,7 +201,7 @@
               border: { color: PALETTE.border },
               title: {
                 display: false,
-                text: "Nombre d'entreprises",
+                text: "Number of businesses",
                 ...AXIS_TITLE_STYLE,
               },
             },

@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Analyse régionale — Croissance des employeurs</title>
+    <title>Sld4 - Regional Business Ratio | Ratio régional d'entreprises</title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
   </head>
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
@@ -32,15 +31,15 @@
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
         <h1>
-          Business Employer Growth by Province | Croissance des entreprises par
-          province
+          Business Employer to Self-Employed Ratio | Ratio des employeurs aux
+          travailleurs autonomes
         </h1>
         <p class="subtitle">
-          Terre-Neuve-et-Labrador et les Territoires du Nord-Ouest sont les
-          seules régions ayant terminé la décennie avec moins d'entreprises
-          employeuses qu'au départ — en recul de&nbsp;9,5 % et 7,0 %
-          respectivement.<br />L'Ontario et la Colombie-Britannique, à
-          l'inverse, ont capté la majeure partie de la croissance nette du pays.
+          Le Nunavut est le seul territoire où les entreprises employeuses
+          surpassent les travailleurs autonomes (0,87×) — reflet d'une économie
+          centrée sur l'État et d'une activité du secteur privé limitée. À
+          l'opposé, l'Ontario (2,93×), la Colombie-Britannique (2,77×) et le
+          Québec (2,67×) égalent ou dépassent chacun la moyenne nationale.
         </p>
       </div>
 
@@ -48,31 +47,34 @@
       <div class="chart-section">
         <div class="chart-header">
           <span class="chart-title"
-            >Classement provincial — Variation en % des entreprises employeuses,
-            2015→2025</span
+            >Ratio de travail autonome par province et territoire — Déc.
+            2025</span
           >
         </div>
 
         <div class="chart-canvas-wrap h-500">
           <canvas
-            id="chart-prov-growth"
-            role="img"
-            aria-label="Graphique à colonnes verticales. Ontario +14,7 %, Terre-Neuve −9,5 %."
+            id="chart-selfemp-ratio"
+            ole="img"
+            aria-label="Ontario 2,93×, C.-B. 2,77×, Québec 2,67×. Nunavut 0,87× — à prédominance d'employeurs."
           ></canvas>
         </div>
 
         <div class="legend">
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--green)"></div>
-            En croissance
+            <div class="legend-dot" style="background: var(--teal)"></div>
+            Au-dessus de la moyenne nationale (2,67×)
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--ghost)"></div>
-            Stable
+            <div
+              class="legend-dot"
+              style="background: var(--projection-blue)"
+            ></div>
+            Sous la moyenne
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--red)"></div>
-            En déclin
+            <div class="legend-dot" style="background: var(--orange)"></div>
+            Prédominance d'employeurs (&lt;1×)
           </div>
         </div>
       </div>
@@ -82,52 +84,54 @@
     <script src="../js/charts.js"></script>
 
     <script>
-      Chart.register(ChartDataLabels);
-
       /* ── DONNÉES ────────────────────────────────────────────────────────────
          Source : Statistique Canada, Dénombrements des entreprises canadiennes
-         Entreprises employeuses (avec employés) · Instantanés de décembre
-         Variation en % : dénombrements de déc. 2015 à déc. 2025, triés par ordre décroissant.
+         Ratio = entreprises sans employés ÷ entreprises employeuses, par province.
+         Instantané de décembre 2025 · Moyenne nationale : 2,67×
       ────────────────────────────────────────────────────────────────────── */
-      const provs = [
+      const provRatioLabels = [
         "Ontario",
         "Colombie-Britannique",
-        "Île-du-Prince-Édouard",
         "Québec",
-        "Manitoba",
-        "Nouvelle-Écosse",
-        "Yukon",
-        "Alberta",
-        "Nunavut",
         "Saskatchewan",
+        "Alberta",
+        "Manitoba",
+        "Yukon",
+        "Nouvelle-Écosse",
+        "Île-du-Prince-Édouard",
         "Nouveau-Brunswick",
-        "Territoires du Nord-Ouest",
         "Terre-Neuve-et-Labrador",
+        "Territoires du Nord-Ouest",
+        "Nunavut",
       ];
-      const pcts = [
-        14.7, 11.8, 8.9, 8.4, 7.6, 5.8, 5.2, -0.3, 0.0, -0.0, -0.1, -7.0, -9.5,
+      const provRatios = [
+        2.93, 2.77, 2.67, 2.66, 2.44, 2.27, 1.98, 1.92, 1.87, 1.46, 1.39, 1.31,
+        0.87,
       ];
+      const nationalAvg = 2.67;
 
-      new Chart(document.getElementById("chart-prov-growth"), {
+      new Chart(document.getElementById("chart-selfemp-ratio"), {
         type: "bar",
         data: {
-          labels: provs,
+          labels: provRatioLabels,
           datasets: [
             {
-              data: pcts,
-              /* Rule: v > 0 → green; v < 0 → ghost; v === 0 → no bar */
-              backgroundColor: pcts.map((v) =>
-                v === 0 ? "transparent" : v < 0 ? PALETTE.ghost : PALETTE.green,
+              label: "Ratio de travail autonome",
+              data: provRatios,
+              backgroundColor: provRatios.map((v) =>
+                v >= nationalAvg
+                  ? PALETTE.teal
+                  : v < 1.0
+                    ? PALETTE.orange
+                    : PALETTE.projectionBlue,
               ),
               borderWidth: 0,
               borderRadius: 5,
-              /* Option B: minimum visible bar height so near-zero values
-                 (AB, NU, SK, NB) are never invisible — data unchanged */
-              minBarLength: 12,
             },
           ],
         },
         options: {
+          indexAxis: "y",
           ...RESPONSIVE_OPTS,
           animation: {
             duration: 1800,
@@ -138,29 +142,11 @@
             tooltip: {
               ...TOOLTIP_DEFAULTS,
               callbacks: {
-                label: (ctx) => "  " + fmtPct(ctx.raw),
+                label: (ctx) =>
+                  "  " +
+                  ctx.raw.toFixed(2) +
+                  "× travailleurs autonomes par entreprise employeuse",
               },
-            },
-            datalabels: {
-              color: PALETTE.ink,
-              font: { size: 14, family: FONT, weight: "600" },
-              formatter: (v) => (v > 0 ? "+" : "") + v + " %",
-              /* v > 0  → anchor at bar top,      align top    → label above bar
-                 v === 0 → anchor at baseline,     align bottom → label below baseline
-                 v < 0  → anchor at bar bottom,    align end    → label below bar */
-              anchor: (ctx) => {
-                const v = ctx.dataset.data[ctx.dataIndex];
-                /* For 0-value bars the minBarLength stub extends upward, so "end"
-                   would land above the baseline. Use "start" (= baseline) instead. */
-                return v === 0 ? "start" : "end";
-              },
-              align: (ctx) => {
-                const v = ctx.dataset.data[ctx.dataIndex];
-                if (v > 0) return "top";
-                if (v === 0) return "top";
-                return "end";
-              },
-              offset: 2,
             },
           },
           scales: {
@@ -168,21 +154,18 @@
               ticks: {
                 color: PALETTE.ink,
                 font: { size: 14, family: FONT, weight: "600" },
-                maxRotation: 45,
-                minRotation: 45,
+                callback: (v) => v.toFixed(1) + "×",
               },
-              grid: { display: false },
+              grid: GRID_SUBTLE,
+              min: 0,
+              max: 3,
             },
             y: {
               ticks: {
-                display: false,
                 color: PALETTE.ink,
                 font: { size: 14, family: FONT, weight: "600" },
-                callback: (v) => (v > 0 ? "+" : "") + v + " %",
               },
-              grid: GRID_SUBTLE,
-              min: -15,
-              max: 20,
+              grid: { display: false },
             },
           },
         },

@@ -67,7 +67,7 @@
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 2000;
+  const SLIDE_DURATION_MS = 10000;
 
   /**
    * EN → FR crossfade duration (ms).

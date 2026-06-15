@@ -6,7 +6,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 
-/* ── DESIGN TOKENS ──────────────────────────────────────────────────────── */
+/* ── DESIGN TOKENS ── */
+/* ─────────────────── */
 :root {
   /* PRIMARY BRAND */
   --navy: #003366;
@@ -54,7 +55,8 @@
   --font-family: "Lato", "Segoe UI", system-ui, sans-serif;
 }
 
-/* ── RESET ──────────────────────────────────────────────────────────────── */
+/* ── RESET ── */
+/* ─────────── */
 *,
 *::before,
 *::after {
@@ -63,7 +65,8 @@
   padding: 0;
 }
 
-/* ── BODY — LIGHT THEME DEFAULT ─────────────────────────────────────────── */
+/* ── BODY — LIGHT THEME DEFAULT ── */
+/* ──────────────────────────────── */
 body {
   background: var(--paper);
   font-family: var(--font-family);
@@ -71,7 +74,8 @@ body {
   padding: 28px 40px 24px;
 }
 
-/* ── HEADER ─────────────────────────────────────────────────────────────── */
+/* ── HEADER ── */
+/* ──────────── */
 .slide-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -103,7 +107,8 @@ body {
   line-height: 1.55;
 }
 
-/* ── RED ACCENT BAR ─────────────────────────────────────────────────────── */
+/* ── RED ACCENT BAR ── */
+/* ──────────────────── */
 .accent-bar {
   width: 100%;
   height: 4px;
@@ -111,7 +116,8 @@ body {
   margin-bottom: 28px; /* standardised from 22px / 28px / 32px variants */
 }
 
-/* ── MAIN CONTENT WRAPPER ─────────────────────────────────────────────────────── */
+/* ── MAIN CONTENT WRAPPER ── */
+/* ────────────────────────── */
 .main-wrapper {
   display: grid;
   grid-template-rows: auto;
@@ -121,7 +127,8 @@ body {
   min-height: 60vh;
 }
 
-/* ── HERO ZONE ──────────────────────────────── */
+/* ── HERO ZONE ── */
+/* ─────────────── */
 .hero-zone {
   display: flex;
   flex-direction: column;
@@ -142,7 +149,8 @@ h1 {
   max-width: 800px;
 }
 
-/* ── CHART SECTION (shared white card) ─────────────────────────────────── */
+/* ── CHART SECTION ── */
+/* ─────────────────── */
 .chart-section {
   background: var(--white);
   border: 1px solid var(--border);
@@ -153,23 +161,6 @@ h1 {
   justify-content: center;
   gap: 32px;
 }
-
-/* Accent top-border variants */
-.chart-section.accent-navy {
-  border-top: 4px solid var(--navy);
-}
-.chart-section.accent-teal {
-  border-top: 4px solid var(--teal);
-}
-.chart-section.accent-orange {
-  border-top: 4px solid var(--orange);
-}
-
-/* Within chart-row layout, don't add bottom margin */
-/* .chart-col > .chart-section {
-  margin-bottom: 0;
-} */
-
 .chart-header {
   display: flex;
   justify-content: space-between;
@@ -183,69 +174,15 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.07em;
 }
-.chart-note {
-  font-size: 0.63rem;
-  color: var(--ghost);
-  font-style: italic;
-}
-.chart-period-note {
-  font-size: 0.63rem;
-  color: var(--mid);
-}
 
-/* ── CANVAS WRAPPER — height utilities ──────────────────────────────────── */
-/* .chart-canvas-wrap {
-  position: relative;
-  min-height: 0;
-} */
-.chart-canvas-wrap.h-340 {
-  height: 340px;
-}
-.chart-canvas-wrap.h-350 {
-  height: 350px;
-}
-.chart-canvas-wrap.h-360 {
-  height: 360px;
-}
-.chart-canvas-wrap.h-380 {
-  height: 380px;
-}
-.chart-canvas-wrap.h-400 {
-  height: 400px;
-}
-.chart-canvas-wrap.h-420 {
-  height: 420px;
-}
-.chart-canvas-wrap.h-440 {
-  height: 440px;
-}
-.chart-canvas-wrap.h-460 {
-  height: 460px;
-}
-.chart-canvas-wrap.h-480 {
-  height: 480px;
-}
+/* ── CANVAS WRAPPER ── */
+/* ─────────────────────────────────────── */
 .chart-canvas-wrap.h-500 {
   height: 500px;
 }
-.chart-canvas-wrap.h-600 {
-  height: 600px;
-}
 
-/* Donut canvas (fixed square) */
-.donut-canvas-wrap {
-  position: relative;
-  height: 440px;
-  width: 440px;
-  flex-shrink: 0;
-}
-.donut-outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ── CHART LEGEND ───────────────────────────────────────────────────────── */
+/* ── CHART LEGEND ── */
+/* ────────────────── */
 .legend {
   display: flex;
   align-items: center;
@@ -261,7 +198,6 @@ h1 {
   font-weight: 600;
   color: var(--ink);
 }
-
 /* Line-chart legend swatch (rectangular bar) */
 .legend-dot {
   width: 20px;
@@ -270,42 +206,12 @@ h1 {
   flex-shrink: 0;
 }
 
-/* Donut / bar chart legend swatch (circle) */
-.legend-dot.circle {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Dashed line swatch (for Ontario in dual-axis chart) */
-.legend-dash {
-  width: 20px;
-  height: 0;
-  border-top: 3px dashed var(--navy);
-  flex-shrink: 0;
-}
-
-.legend-pct {
-  font-size: 0.98rem;
-  color: var(--mid);
-  font-weight: 700;
-  margin-left: 2px;
-}
-
-.legend-footnote {
-  font-size: 0.85rem;
-  color: var(--mid);
-  font-style: italic;
-  margin-left: auto;
-}
-
-/* ── TWO-COLUMN CHART ROW ───────────────────────────────────────────────── */
-/* Base: chart (left) + insight panel (right) */
+/* ── TWO-COLUMN CHART ROW ── */
+/* ────────────────────────── */
+/* Base: chart (left) + table (right) */
 .chart-row {
   display: grid;
   gap: 14px;
-  flex: 1;
   min-height: 0;
   grid-template-columns: 1.55fr 1fr; /* default ratio — override with modifier */
 }
@@ -321,38 +227,11 @@ h1 {
 .chart-col {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* ── MAIN LAYOUT (donut + chips) ────────────────────────────────────────── */
-.main-layout {
-  display: grid;
-  grid-template-columns: 1.75fr 1fr;
-  gap: 20px;
-  flex: 1;
-  align-items: stretch;
-}
-
-.layout-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.layout-left .chart-section {
-  /* flex: 1; */
-  margin-bottom: 0;
-}
-
-.layout-right {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
-}
-
-/* ── KPI STRIP ──────────────────────────────────────────────────────────── */
+/* ── KPI STRIP ── */
+/* ─────────────── */
 .kpi-strip {
   display: flex;
   justify-content: center;
@@ -421,122 +300,23 @@ h1 {
   margin-top: auto;
 }
 
-/* ── INSIGHT CHIP ───────────────────────────────────────────────────────── */
-.insight-chip {
+/* ── CHOROPLETH MAP ── */
+/* ───────────────────────────────── */
+.map-chart-section {
   background: var(--white);
   border: 1px solid var(--border);
-  border-left: 5px solid var(--navy);
-  border-radius: 0 8px 8px 0;
-  padding: 18px 20px; /* standardised */
-}
-.insight-chip.accent-teal {
-  border-left-color: var(--teal);
-}
-.insight-chip.accent-orange {
-  border-left-color: var(--orange);
-}
-.insight-chip.accent-red {
-  border-left-color: var(--red);
-}
-.chip-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--navy-mid);
-  margin-bottom: 10px;
-}
-.insight-chip.accent-teal .chip-label {
-  color: var(--teal);
-}
-.insight-chip.accent-orange .chip-label {
-  color: var(--orange);
-}
-.insight-chip.accent-red .chip-label {
-  color: var(--red);
-}
-.chip-stat {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.35;
-  margin-bottom: 5px;
-}
-.chip-detail {
-  font-size: 1.05rem;
-  color: var(--mid);
-  line-height: 1.5;
-}
-
-/* ── INSIGHT ROW (2-column chip grid) ──────────────────────────────────── */
-.insight-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-/* Insight panel — fills column height, centres content vertically */
-.insight-panel {
+  border-radius: 12px;
+  padding: 24px 32px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
-  height: 100%;
+  gap: 16px;
 }
 
-/* ── STATS BLOCK (Alberta/Ontario slide) ────────────────────────────────── */
-.stats-block {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.panel-kpi-row {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 24px;
-  margin-top: 4px;
-}
-
-.panel-kpi {
-  flex: 1;
-  border-left: 4px solid var(--navy);
-  padding-left: 14px;
-}
-
-.panel-kpi-val {
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--navy);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.panel-kpi-label {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: var(--mid);
-  margin-top: 3px;
-  line-height: 1.45;
-}
-
-.panel-rule {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 0;
-}
-
-/* ── CHOROPLETH MAP (regional-D) ────────────────────────────────────────── */
 #canada-map {
   width: 100%;
   min-height: 260px;
 }
-
 .map-legend-bar-wrap {
   display: flex;
   align-items: center;
@@ -546,32 +326,73 @@ h1 {
   color: var(--mid);
   font-weight: 600;
 }
-
 .map-legend-bar {
   flex: 1;
   height: 12px;
   border-radius: 4px;
   background: linear-gradient(
     to right,
-    #fffde7,
     #ffab40,
     #ef6c00,
     #c62828,
-    #003366
+    #b54708,
+    #990000
   );
 }
+/* Table section */
+.table-chart-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 32px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+.table-note {
+  font-size: 0.83rem;
+  font-weight: 400;
+  color: var(--ghost);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.table-col-legend {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+}
+.table-legend {
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 700;
+}
 
-/* ── RANKED TABLE (regional-D) ──────────────────────────────────────────── */
+/* Legend colours variants */
+.table-legend.legend-navy-mid {
+  background: rgba(0, 51, 102, 0.14);
+  color: var(--navy-mid);
+}
+.table-legend.legend-teal {
+  background: rgba(0, 107, 94, 0.13);
+  color: var(--teal);
+}
+.table-legend.legend-orange {
+  background: rgba(181, 71, 8, 0.13);
+  color: var(--orange);
+}
+
+/* Ranked table */
 .ranked-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.82rem;
 }
-
 .ranked-table thead tr {
   border-bottom: 2px solid var(--border);
 }
-
 .ranked-table th {
   font-size: 0.75rem;
   font-weight: 700;
@@ -581,18 +402,15 @@ h1 {
   padding: 4px 5px 8px;
   text-align: right;
 }
-
 .ranked-table th.col-rank,
 .ranked-table th.col-prov {
   text-align: left;
 }
-
 .ranked-table td {
   padding: 5px 5px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
-
 td.td-rank {
   text-align: left;
   font-weight: 700;
@@ -600,7 +418,6 @@ td.td-rank {
   font-size: 0.78rem;
   width: 18px;
 }
-
 td.td-prov {
   text-align: left;
   font-weight: 900;
@@ -608,17 +425,17 @@ td.td-prov {
   font-size: 0.83rem;
   padding-right: 6px;
 }
-
 .row-avg-sep td {
-  font-size: 0.9rem;
-  color: var(--mid);
+  font-size: 1rem;
+  color: var(--ink);
   text-align: center;
   padding: 4px 0;
   font-style: italic;
   border-bottom: none;
 }
 
-/* ── COVER SLIDE ELEMENTS ───────────────────────────────────────────────── */
+/* ── COVER SLIDE ELEMENTS ─── */
+/* ─────────────────────────── */
 /* Hero title block on dark background */
 .hero .accent-title {
   font-size: 4rem;
@@ -672,7 +489,55 @@ td.td-prov {
   line-height: 1.3;
 }
 
-/* ── BODY — DARK THEME (cover slide) ───────────────────────────────────── */
+/* ── DONUT CHARTS ─── */
+/* ─────────────────────────── */
+/* Donut canvas (fixed square) */
+.donut-canvas-wrap {
+  position: relative;
+  height: 440px;
+  width: 440px;
+  flex-shrink: 0;
+}
+.donut-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Donut / bar chart legend swatch (circle) */
+.legend-dot.circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ── MAIN LAYOUT (donut + chips) ── */
+/* ───────────────────────────────── */
+.main-layout {
+  display: grid;
+  grid-template-columns: 1.75fr 1fr;
+  gap: 20px;
+  flex: 1;
+  align-items: stretch;
+}
+.layout-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.layout-left .chart-section {
+  /* flex: 1; */
+  margin-bottom: 0;
+}
+.layout-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* ── BODY — DARK THEME (cover slide) ── */
+/* ───────────────────────────────────── */
 body.theme-dark {
   background: var(--dark-bg);
   color: var(--dark-text-primary);
@@ -697,6 +562,7 @@ body.theme-dark h1 {
   line-height: 1.1;
   margin-bottom: 32px;
 }
+
 /* ── SLIDE BODY ─────────────────────────────────────────────────────────────
    Primary layout container for slide content below the hero zone.
    Groups the KPI strip, chart row(s), and callout/insight components into
@@ -715,4 +581,195 @@ body.theme-dark h1 {
    the parent gap handles all vertical rhythm. */
 /* .slide-body .chart-row {
   margin-bottom: 0;
+} */
+
+/* .chart-note {
+  font-size: 0.63rem;
+  color: var(--ghost);
+  font-style: italic;
+}
+  
+.chart-period-note {
+  font-size: 0.63rem;
+  color: var(--mid);
+} */
+
+/* .chart-canvas-wrap.h-340 {
+  height: 340px;
+}
+.chart-canvas-wrap.h-350 {
+  height: 350px;
+}
+.chart-canvas-wrap.h-360 {
+  height: 360px;
+}
+.chart-canvas-wrap.h-380 {
+  height: 380px;
+}
+.chart-canvas-wrap.h-400 {
+  height: 400px;
+}
+.chart-canvas-wrap.h-420 {
+  height: 420px;
+}
+.chart-canvas-wrap.h-440 {
+  height: 440px;
+}
+.chart-canvas-wrap.h-460 {
+  height: 460px;
+}
+.chart-canvas-wrap.h-480 {
+  height: 480px;
+}
+.chart-canvas-wrap.h-600 {
+  height: 600px;
+} */
+
+/* Accent top-border variants */
+/* .chart-section.accent-navy {
+  border-top: 4px solid var(--navy);
+}
+.chart-section.accent-teal {
+  border-top: 4px solid var(--teal);
+}
+.chart-section.accent-orange {
+  border-top: 4px solid var(--orange);
+} */
+
+/* Within chart-row layout, don't add bottom margin */
+/* .chart-col > .chart-section {
+  margin-bottom: 0;
+} */
+
+/* .chart-canvas-wrap {
+  position: relative;
+  min-height: 0;
+} */
+
+/* Dashed line swatch (for Ontario in dual-axis chart) */
+/* .legend-dash {
+  width: 20px;
+  height: 0;
+  border-top: 3px dashed var(--navy);
+  flex-shrink: 0;
+}
+.legend-pct {
+  font-size: 0.98rem;
+  color: var(--mid);
+  font-weight: 700;
+  margin-left: 2px;
+}
+.legend-footnote {
+  font-size: 0.85rem;
+  color: var(--mid);
+  font-style: italic;
+  margin-left: auto;
+} */
+
+/* ── STATS BLOCK (Alberta/Ontario slide) ── */
+/* ───────────────────────────────────────── */
+/* .stats-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.panel-kpi-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 4px;
+}
+.panel-kpi {
+  flex: 1;
+  border-left: 4px solid var(--navy);
+  padding-left: 14px;
+}
+.panel-kpi-val {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.panel-kpi-label {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--mid);
+  margin-top: 3px;
+  line-height: 1.45;
+}
+.panel-rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+} */
+
+/* ── INSIGHT CHIP ── */
+/* ────────────────── */
+/* .insight-chip {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--navy);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 20px;  */
+/* standardised */
+/* } */
+/* .insight-chip.accent-teal {
+  border-left-color: var(--teal);
+}
+.insight-chip.accent-orange {
+  border-left-color: var(--orange);
+}
+.insight-chip.accent-red {
+  border-left-color: var(--red);
+}
+.chip-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--navy-mid);
+  margin-bottom: 10px;
+}
+.insight-chip.accent-teal .chip-label {
+  color: var(--teal);
+}
+.insight-chip.accent-orange .chip-label {
+  color: var(--orange);
+}
+.insight-chip.accent-red .chip-label {
+  color: var(--red);
+}
+.chip-stat {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: 5px;
+}
+.chip-detail {
+  font-size: 1.05rem;
+  color: var(--mid);
+  line-height: 1.5;
+} */
+/* ── INSIGHT ROW (2-column chip grid) ── */
+/* ────────────────────────────────────── */
+/* .insight-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+} */
+
+/* Insight panel — fills column height, centres content vertically */
+/* .insight-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
 } */

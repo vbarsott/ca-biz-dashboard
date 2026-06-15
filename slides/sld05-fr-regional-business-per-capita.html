@@ -4,833 +4,805 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Sl5 - Régional D — Le portrait per capita : la British Columbia en tête, le
-      Canada atlantique à la traîne
+      Sld5 - Regional Business Per-Capita | Nombre d'entreprises par habitant
     </title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
-      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
-        Statistique Canada · Portail du gouvernement ouvert<br />
-        Dénombrements des entreprises canadiennes · Tableaux 33-10-0034-01 à
-        33-10-1096-01 &nbsp;|&nbsp; Population : Tableau 17-10-0009-01 de
-        Statistique Canada, estimations du T4 2025
+        <div class="slide-source-item">
+          Statistics Canada | Open Government Portal<br />
+          Canadian Business Counts | Tables 33-10-0034-01 to 33-10-1096-01<br />Population:
+          StatCan Table 17-10-0009-01, Q4 2025 estimates
+        </div>
+        <div class="slide-source-item">
+          Statistique Canada | Portail du gouvernement ouvert<br />
+          Dénombrements des entreprises canadiennes | Tableaux 33-10-0034-01 à
+          33-10-1096-01<br />Population : Tableau 17-10-0009-01 de Statistique
+          Canada, estimations du T4 2025
+        </div>
       </div>
     </div>
 
     <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
     <div class="accent-bar" aria-hidden="true"></div>
 
-    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
-    <div class="hero-zone fade-in">
-      <h1>
-        Le portrait per capita : la British Columbia en tête, le Canada
-        atlantique à la traîne
-      </h1>
-      <p class="subtitle">
-        L'Ontario détient le plus grand nombre d'entreprises au Canada en termes
-        absolus — mais sa densité per capita se classe au 3e rang. Avec plus de
-        16 millions d'habitants, ses ~2 millions d'entreprises desservent une
-        population bien plus grande, ramenant le taux à 125 pour 1 000
-        personnes.
-      </p>
-    </div>
+    <main class="main-wrapper">
+      <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+      <div class="hero-zone">
+        <h1>The Per-Capita Picture | Le portrait per capita</h1>
+        <p class="subtitle">
+          L'Ontario détient le plus grand nombre d'entreprises au Canada en
+          termes absolus — mais sa densité per capita se classe au 3e rang. Avec
+          plus de 16 millions d'habitants, ses ~2 millions d'entreprises
+          desservent une population bien plus grande, ramenant le taux à 125
+          pour 1 000 personnes.
+        </p>
+      </div>
 
-    <!-- ── TWO-COLUMN LAYOUT: Map (left 65%) · Ranked table (right 35%) ─── -->
-    <div class="chart-row ratio-65-35 fade-in">
-      <!-- LEFT: Choropleth map -->
-      <div class="chart-col">
-        <div class="chart-section accent-navy">
-          <div class="chart-header">
-            <span class="chart-title">
-              Total des entreprises pour 1 000 personnes — par province et
-              territoire, Déc. 2025
-            </span>
+      <!-- ── CHART SECTION - TWO-COLUMN LAYOUT: Map (left 65%) · Ranked table (right 35%) ─── -->
+      <div class="chart-row ratio-65-35">
+        <!-- LEFT: Choropleth map -->
+        <div class="chart-col">
+          <div class="map-chart-section">
+            <div class="chart-header">
+              <span class="chart-title">
+                Total des entreprises pour 1 000 personnes — par province et
+                territoire, Déc. 2025
+              </span>
+            </div>
+
+            <div id="canada-map"></div>
+
+            <!-- Warm sequential palette legend -->
+            <div class="map-legend-bar-wrap">
+              <span>35 (faible)</span>
+              <div class="map-legend-bar"></div>
+              <span>145 (élevé)</span>
+            </div>
           </div>
+        </div>
 
-          <div id="canada-map"></div>
+        <!-- RIGHT: Ranked visual table -->
+        <div class="chart-col">
+          <div class="table-chart-section">
+            <div class="chart-header">
+              <span class="chart-title">Classé par densité</span>
+              <span class="table-note">pour 1 000 habitants</span>
+            </div>
 
-          <!-- Warm sequential palette legend -->
-          <div class="map-legend-bar-wrap">
-            <span>35 (faible)</span>
-            <div class="map-legend-bar"></div>
-            <span>145 (élevé)</span>
+            <!-- Column legend -->
+            <div class="table-col-legend">
+              <span class="table-legend legend-navy-mid">Total</span>
+              <span class="table-legend legend-teal">Employeur</span>
+              <span class="table-legend legend-orange">Autonome</span>
+            </div>
+
+            <!-- ── Ranked visual table — all provinces + territories ──────────
+               Bars use gradient-behind-text: background fills from left
+               proportional to (value / column_max):
+               Total max = 145.2 | Employer max = 41.0 | Solo max = 106.7
+          ──────────────────────────────────────────────────────────────── -->
+            <table
+              class="ranked-table"
+              aria-label="Tableau classé de la densité d'entreprises par province et territoire"
+            >
+              <thead>
+                <tr>
+                  <th class="col-rank">#</th>
+                  <th class="col-prov">Province</th>
+                  <th class="col-total">Total /1k</th>
+                  <th class="col-emp">Employeur /1k</th>
+                  <th class="col-solo">Autonome /1k</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 1. BC — total 145.2 (100%) | emp 38.5 (94%) | solo 106.7 (100%) -->
+                <tr>
+                  <td class="td-rank">1</td>
+                  <td class="td-prov">BC</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 100%,
+                        transparent 100%
+                      );
+                      text-align: right;
+                      font-weight: 900;
+                      font-size: 0.83rem;
+                      padding: 5px 5px;
+                      color: var(--navy);
+                    "
+                  >
+                    145.2
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 94%,
+                        transparent 94%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    38.5
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 100%,
+                        transparent 100%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    106.7
+                  </td>
+                </tr>
+
+                <!-- 2. SK — total 125.4 (86%) | emp 34.3 (84%) | solo 91.1 (85%) -->
+                <tr>
+                  <td class="td-rank">2</td>
+                  <td class="td-prov">SK</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 86%,
+                        transparent 86%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    125.4
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 84%,
+                        transparent 84%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    34.3
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 85%,
+                        transparent 85%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    91.1
+                  </td>
+                </tr>
+
+                <!-- 3. ON — total 125.1 (86%) | emp 31.8 (78%) | solo 93.3 (87%) -->
+                <tr>
+                  <td class="td-rank">3</td>
+                  <td class="td-prov">ON</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 86%,
+                        transparent 86%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    125.1
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 78%,
+                        transparent 78%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    31.8
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 87%,
+                        transparent 87%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    93.3
+                  </td>
+                </tr>
+
+                <!-- 4. AB — total 123.7 (85%) | emp 35.9 (88%) | solo 87.7 (82%) -->
+                <tr>
+                  <td class="td-rank">4</td>
+                  <td class="td-prov">AB</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 85%,
+                        transparent 85%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    123.7
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 88%,
+                        transparent 88%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    35.9
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 82%,
+                        transparent 82%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    87.7
+                  </td>
+                </tr>
+
+                <!-- 5. YT — total 121.3 (84%) | emp 41.0 (100%) | solo 80.3 (75%) -->
+                <tr>
+                  <td class="td-rank">5</td>
+                  <td class="td-prov">YT</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 84%,
+                        transparent 84%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    121.3
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 100%,
+                        transparent 100%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    41.0
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 75%,
+                        transparent 75%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    80.3
+                  </td>
+                </tr>
+
+                <!-- ── Ligne de référence moyenne nationale ── -->
+                <tr class="row-avg-sep">
+                  <td colspan="5">
+                    ─── Moy. Canada &nbsp;121,2 &nbsp;/&nbsp; 33,0 &nbsp;/&nbsp;
+                    88,2 ───
+                  </td>
+                </tr>
+
+                <!-- 6. QC — total 112.9 (78%) | emp 30.8 (75%) | solo 82.1 (77%) -->
+                <tr>
+                  <td class="td-rank">6</td>
+                  <td class="td-prov">QC</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 78%,
+                        transparent 78%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    112.9
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 75%,
+                        transparent 75%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    30.8
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 77%,
+                        transparent 77%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    82.1
+                  </td>
+                </tr>
+
+                <!-- 7. PE — total 109.1 (75%) | emp 38.0 (93%) | solo 71.1 (67%) -->
+                <tr>
+                  <td class="td-rank">7</td>
+                  <td class="td-prov">PE</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 75%,
+                        transparent 75%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    109.1
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 93%,
+                        transparent 93%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    38.0
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 67%,
+                        transparent 67%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    71.1
+                  </td>
+                </tr>
+
+                <!-- 8. MB — total 95.7 (66%) | emp 29.3 (71%) | solo 66.4 (62%) -->
+                <tr>
+                  <td class="td-rank">8</td>
+                  <td class="td-prov">MB</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 66%,
+                        transparent 66%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    95.7
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 71%,
+                        transparent 71%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    29.3
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 62%,
+                        transparent 62%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    66.4
+                  </td>
+                </tr>
+
+                <!-- 9. NS — total 88.5 (61%) | emp 30.3 (74%) | solo 58.2 (55%) -->
+                <tr>
+                  <td class="td-rank">9</td>
+                  <td class="td-prov">NS</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 61%,
+                        transparent 61%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    88.5
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 74%,
+                        transparent 74%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    30.3
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 55%,
+                        transparent 55%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    58.2
+                  </td>
+                </tr>
+
+                <!-- 10. NL — total 82.7 (57%) | emp 34.6 (84%) | solo 48.1 (45%) -->
+                <tr>
+                  <td class="td-rank">10</td>
+                  <td class="td-prov">NL</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 57%,
+                        transparent 57%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    82.7
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 84%,
+                        transparent 84%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    34.6
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 45%,
+                        transparent 45%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    48.1
+                  </td>
+                </tr>
+
+                <!-- 11. NT — total 78.7 (54%) | emp 35.3 (86%) | solo 43.4 (41%) -->
+                <tr>
+                  <td class="td-rank">11</td>
+                  <td class="td-prov">NT</td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 54%,
+                        transparent 54%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                    "
+                  >
+                    78.7
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 86%,
+                        transparent 86%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    35.3
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 41%,
+                        transparent 41%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    43.4
+                  </td>
+                </tr>
+
+                <!-- 12. NB — total 75.7 (52%) | emp 30.8 (75%) | solo 44.9 (42%) -->
+                <tr>
+                  <td class="td-rank">12</td>
+                  <td
+                    class="td-prov"
+                    style="color: var(--red-dark); font-weight: 900"
+                  >
+                    NB
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 52%,
+                        transparent 52%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--red-dark);
+                    "
+                  >
+                    75.7
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 75%,
+                        transparent 75%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                    "
+                  >
+                    30.8
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 42%,
+                        transparent 42%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                    "
+                  >
+                    44.9
+                  </td>
+                </tr>
+
+                <!-- 13. NU — total 34.9 (24%) | emp 18.4 (45%) | solo 16.5 (15%) -->
+                <tr style="border-bottom: none">
+                  <td class="td-rank" style="border-bottom: none">13</td>
+                  <td
+                    class="td-prov"
+                    style="color: var(--red-dark); border-bottom: none"
+                  >
+                    NU
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 24%,
+                        transparent 24%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--red-dark);
+                      border-bottom: none;
+                    "
+                  >
+                    34.9
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 45%,
+                        transparent 45%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--teal);
+                      border-bottom: none;
+                    "
+                  >
+                    18.4
+                  </td>
+                  <td
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 15%,
+                        transparent 15%
+                      );
+                      text-align: right;
+                      font-weight: 700;
+                      padding: 5px 5px;
+                      color: var(--orange);
+                      border-bottom: none;
+                    "
+                  >
+                    16.5
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-
-      <!-- RIGHT: Ranked visual table -->
-      <div class="chart-col">
-        <div class="chart-section" style="padding-bottom: 16px">
-          <div class="chart-header">
-            <span class="chart-title">Classé par densité</span>
-            <span class="chart-note">pour 1 000 habitants</span>
-          </div>
-
-          <!-- Column legend -->
-          <div
-            style="
-              display: flex;
-              gap: 10px;
-              margin-bottom: 8px;
-              font-size: 0.8rem;
-            "
-          >
-            <span
-              style="
-                background: rgba(0, 51, 102, 0.14);
-                padding: 2px 7px;
-                border-radius: 3px;
-                font-weight: 700;
-                color: var(--navy-mid);
-              "
-              >Total</span
-            >
-            <span
-              style="
-                background: rgba(0, 107, 94, 0.13);
-                padding: 2px 7px;
-                border-radius: 3px;
-                font-weight: 700;
-                color: var(--teal);
-              "
-              >Employeur</span
-            >
-            <span
-              style="
-                background: rgba(181, 71, 8, 0.13);
-                padding: 2px 7px;
-                border-radius: 3px;
-                font-weight: 700;
-                color: var(--orange);
-              "
-              >Autonome</span
-            >
-          </div>
-
-          <!-- ── Tableau visuel classé — toutes provinces + territoires ──────────
-               Les barres utilisent un dégradé en fond : remplissage de gauche
-               proportionnel à (valeur / max_colonne) :
-               Max Total = 145,2 | Max Employeur = 41,0 | Max Autonome = 106,7
-          ──────────────────────────────────────────────────────────────────── -->
-          <table
-            class="ranked-table"
-            aria-label="Tableau classé de la densité d'entreprises par province et territoire"
-          >
-            <thead>
-              <tr>
-                <th class="col-rank">#</th>
-                <th class="col-prov">Prov</th>
-                <th class="col-total">Total /1k</th>
-                <th class="col-emp">Empl /1k</th>
-                <th class="col-solo">Auto. /1k</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 1. BC — total 145.2 (100%) | emp 38.5 (94%) | solo 106.7 (100%) -->
-              <tr>
-                <td class="td-rank">1</td>
-                <td class="td-prov" style="color: var(--teal)">BC</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 100%,
-                      transparent 100%
-                    );
-                    text-align: right;
-                    font-weight: 900;
-                    font-size: 0.83rem;
-                    padding: 5px 5px;
-                    color: var(--navy);
-                  "
-                >
-                  145.2
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 94%,
-                      transparent 94%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  38.5
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 100%,
-                      transparent 100%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  106.7
-                </td>
-              </tr>
-
-              <!-- 2. SK — total 125.4 (86%) | emp 34.3 (84%) | solo 91.1 (85%) -->
-              <tr>
-                <td class="td-rank">2</td>
-                <td class="td-prov">SK</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 86%,
-                      transparent 86%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  125.4
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 84%,
-                      transparent 84%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  34.3
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 85%,
-                      transparent 85%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  91.1
-                </td>
-              </tr>
-
-              <!-- 3. ON — total 125.1 (86%) | emp 31.8 (78%) | solo 93.3 (87%) -->
-              <tr>
-                <td class="td-rank">3</td>
-                <td class="td-prov">ON</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 86%,
-                      transparent 86%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  125.1
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 78%,
-                      transparent 78%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  31.8
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 87%,
-                      transparent 87%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  93.3
-                </td>
-              </tr>
-
-              <!-- 4. AB — total 123.7 (85%) | emp 35.9 (88%) | solo 87.7 (82%) -->
-              <tr>
-                <td class="td-rank">4</td>
-                <td class="td-prov">AB</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 85%,
-                      transparent 85%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  123.7
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 88%,
-                      transparent 88%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  35.9
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 82%,
-                      transparent 82%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  87.7
-                </td>
-              </tr>
-
-              <!-- 5. YT — total 121.3 (84%) | emp 41.0 (100%) | solo 80.3 (75%) -->
-              <tr>
-                <td class="td-rank">5</td>
-                <td class="td-prov">YT</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 84%,
-                      transparent 84%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  121.3
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 100%,
-                      transparent 100%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  41.0
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 75%,
-                      transparent 75%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  80.3
-                </td>
-              </tr>
-
-              <!-- ── Ligne de référence moyenne nationale ── -->
-              <tr class="row-avg-sep">
-                <td colspan="5">
-                  ─── Moy. Canada &nbsp;121,2 &nbsp;/&nbsp; 33,0 &nbsp;/&nbsp;
-                  88,2 ───
-                </td>
-              </tr>
-
-              <!-- 6. QC — total 112.9 (78%) | emp 30.8 (75%) | solo 82.1 (77%) -->
-              <tr>
-                <td class="td-rank">6</td>
-                <td class="td-prov">QC</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 78%,
-                      transparent 78%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  112.9
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 75%,
-                      transparent 75%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  30.8
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 77%,
-                      transparent 77%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  82.1
-                </td>
-              </tr>
-
-              <!-- 7. PE — total 109.1 (75%) | emp 38.0 (93%) | solo 71.1 (67%) -->
-              <tr>
-                <td class="td-rank">7</td>
-                <td class="td-prov">PE</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 75%,
-                      transparent 75%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  109.1
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 93%,
-                      transparent 93%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  38.0
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 67%,
-                      transparent 67%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  71.1
-                </td>
-              </tr>
-
-              <!-- 8. MB — total 95.7 (66%) | emp 29.3 (71%) | solo 66.4 (62%) -->
-              <tr>
-                <td class="td-rank">8</td>
-                <td class="td-prov">MB</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 66%,
-                      transparent 66%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  95.7
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 71%,
-                      transparent 71%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  29.3
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 62%,
-                      transparent 62%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  66.4
-                </td>
-              </tr>
-
-              <!-- 9. NS — total 88.5 (61%) | emp 30.3 (74%) | solo 58.2 (55%) -->
-              <tr>
-                <td class="td-rank">9</td>
-                <td class="td-prov">NS</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 61%,
-                      transparent 61%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  88.5
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 74%,
-                      transparent 74%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  30.3
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 55%,
-                      transparent 55%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  58.2
-                </td>
-              </tr>
-
-              <!-- 10. NL — total 82.7 (57%) | emp 34.6 (84%) | solo 48.1 (45%) -->
-              <tr>
-                <td class="td-rank">10</td>
-                <td class="td-prov">NL</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 57%,
-                      transparent 57%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  82.7
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 84%,
-                      transparent 84%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  34.6
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 45%,
-                      transparent 45%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  48.1
-                </td>
-              </tr>
-
-              <!-- 11. NT — total 78.7 (54%) | emp 35.3 (86%) | solo 43.4 (41%) -->
-              <tr>
-                <td class="td-rank">11</td>
-                <td class="td-prov">NT</td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 54%,
-                      transparent 54%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                  "
-                >
-                  78.7
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 86%,
-                      transparent 86%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  35.3
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 41%,
-                      transparent 41%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  43.4
-                </td>
-              </tr>
-
-              <!-- 12. NB — total 75.7 (52%) | emp 30.8 (75%) | solo 44.9 (42%) -->
-              <tr>
-                <td class="td-rank">12</td>
-                <td
-                  class="td-prov"
-                  style="color: var(--red-dark); font-weight: 900"
-                >
-                  NB
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 52%,
-                      transparent 52%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--red-dark);
-                  "
-                >
-                  75.7
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 75%,
-                      transparent 75%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                  "
-                >
-                  30.8
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 42%,
-                      transparent 42%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                  "
-                >
-                  44.9
-                </td>
-              </tr>
-
-              <!-- 13. NU — total 34.9 (24%) | emp 18.4 (45%) | solo 16.5 (15%) -->
-              <tr style="border-bottom: none">
-                <td class="td-rank" style="border-bottom: none">13</td>
-                <td
-                  class="td-prov"
-                  style="color: var(--red-dark); border-bottom: none"
-                >
-                  NU
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 51, 102, 0.18) 24%,
-                      transparent 24%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--red-dark);
-                    border-bottom: none;
-                  "
-                >
-                  34.9
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(0, 107, 94, 0.15) 45%,
-                      transparent 45%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--teal);
-                    border-bottom: none;
-                  "
-                >
-                  18.4
-                </td>
-                <td
-                  style="
-                    background: linear-gradient(
-                      to right,
-                      rgba(181, 71, 8, 0.15) 15%,
-                      transparent 15%
-                    );
-                    text-align: right;
-                    font-weight: 700;
-                    padding: 5px 5px;
-                    color: var(--orange);
-                    border-bottom: none;
-                  "
-                >
-                  16.5
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    </main>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
+
     <script>
-      /* ── CARTE CHOROPLÈTHE ───────────────────────────────────────────────────
-         Carte statique — pas d'interactivité — conçue pour affichage télévisuel.
-         Palette : séquentielle chaude (crème-jaune → orange → orange-rouge →
-                   rouge foncé → bleu marine).
-         Étiquettes : abréviation de la province + valeur de densité.
-         Î.-P.-É. : étiquette décalée au-dessus de l'île avec ligne repère + point.
-         Données : total des entreprises pour 1 000 personnes, déc. 2025.
-         Source : Tableau 33-10-0034-01 + Tableau 17-10-0009-01 T4 2025.
-         NOTE : les clés de l'objet density utilisent les noms anglais des provinces
-                car ils doivent correspondre aux propriétés du fichier TopoJSON.
+      /* ── CHOROPLETH MAP ──────────────────────────────────────────────────────
+         Static map — no hover interactivity — designed for TV display.
+         Palette: warm sequential (cream-yellow → orange → red-orange →
+                  deep red → dark navy), one scale, one meaning.
+         Labels: province abbreviation + density value, larger + bolder text,
+                 drop-shadow filter for contrast on all background colours.
+         PEI: label offset above the island with leader line + dot.
+         Data: total businesses per 1,000 people, Dec 2025.
+         Source: StatCan Table 33-10-0034-01 + Table 17-10-0009-01 Q4 2025.
       ────────────────────────────────────────────────────────────────────── */
       (function () {
         const mapContainer = document.getElementById("canada-map");
         if (!mapContainer) return;
 
-        /* ── Entreprises totales pour 1 000 personnes — toutes provinces et territoires ── */
+        /* ── Total businesses per 1,000 people — all provinces and territories ── */
         const density = {
           "British Columbia": 145.2,
           Saskatchewan: 125.4,
@@ -838,7 +810,7 @@
           Alberta: 123.7,
           Yukon: 121.3,
           Québec: 112.9,
-          Quebec: 112.9, // variante orthographique de secours
+          Quebec: 112.9, // fallback spelling
           "Prince Edward Island": 109.1,
           Manitoba: 95.7,
           "Nova Scotia": 88.5,
@@ -848,7 +820,7 @@
           Nunavut: 34.9,
         };
 
-        /* ── Abréviations des provinces ── */
+        /* ── Province abbreviations ── */
         const abbrev = {
           "British Columbia": "BC",
           Alberta: "AB",
@@ -866,31 +838,32 @@
           Nunavut: "NU",
         };
 
-        /* ── Échelle de couleurs séquentielle chaude ──
-           domaine : [30, 76, 90, 115, 145]
-           plage :  crème-jaune → ambre → orange foncé → rouge foncé → bleu marine
+        /* ── Warm sequential colour scale ──
+           domain: [30, 76, 90, 115, 145]
+           range:  amber → deep orange → deep red → orange → red dark
         ── */
         const colorScale = d3
           .scaleLinear()
           .domain([30, 76, 90, 115, 145])
-          .range(["#FFFDE7", "#FFAB40", "#EF6C00", "#C62828", "#003366"])
+          .range(["#FFAB40", "#EF6C00", "#C62828", "#B54708", "#990000"])
           .clamp(true);
 
-        /* Texte blanc sur couleurs foncées; texte sombre sur couleurs claires */
+        /* White text on dark/deep colours; dark text on light colours */
         const textFill = (val) =>
-          val != null && val >= 108 ? "#ffffff" : "#1a1a1a";
+          val != null && val >= 30 ? "#ffffff" : "#1a1a1a";
 
-        /* ── Décalages de centroïde personnalisés [dx, dy] pour les provinces délicates ──
-           dy positif = descendre; dy négatif = monter.
+        /* ── Custom centroid offsets [dx, dy] for tricky provinces ──
+           Positive dy = move down; negative dy = move up.
         ── */
         const offsets = {
-          "Prince Edward Island": [12, -30], // au-dessus de l'île, dans l'espace atlantique vide
-          "Newfoundland and Labrador": [18, 4],
-          "Nova Scotia": [10, 2],
-          "New Brunswick": [-4, -2],
-          Ontario: [0, -10], // le centroïde se situe trop au nord
+          "Prince Edward Island": [12, -30], // above island, in blank Atlantic space
+          "Newfoundland and Labrador": [20, -10],
+          "Nova Scotia": [0, 2],
+          "New Brunswick": [-2, -2],
+          Ontario: [0, -10], // centroid lands too far north
           Québec: [0, 12],
           Quebec: [0, 12],
+          Nunavut: [-5, 42],
         };
 
         const topoUrl =
@@ -912,7 +885,7 @@
               .attr("width", "100%")
               .style("display", "block");
 
-            /* ── Filtre SVG ombre portée pour les étiquettes de texte ── */
+            /* ── SVG drop-shadow filter for text labels ── */
             const defs = svg.append("defs");
             const filter = defs
               .append("filter")
@@ -944,7 +917,7 @@
 
             const path = d3.geoPath().projection(projection);
 
-            /* ── Dessiner les remplissages de province/territoire ── */
+            /* ── Draw province/territory fills ── */
             svg
               .selectAll("path.province")
               .data(features)
@@ -959,13 +932,13 @@
               })
               .attr("stroke", "#ffffff")
               .attr("stroke-width", 0.9);
-            /* Pas de survol de souris — affichage télévisuel statique */
+            /* No mouseover / mouseout — static TV display */
 
-            /* ── Dessiner les étiquettes pour toutes les provinces + territoires ── */
+            /* ── Draw text labels for all provinces + territories ── */
             features.forEach((d) => {
               const name = d.properties && d.properties.name;
               const ab = abbrev[name];
-              if (!ab) return; // ignorer les géométries sans nom
+              if (!ab) return; // skip unnamed geometries
 
               const c = path.centroid(d);
               if (!c || isNaN(c[0]) || isNaN(c[1])) return;
@@ -976,9 +949,9 @@
               const val = density[name];
               const fill = textFill(val);
 
-              /* ── Ligne repère pour l'Î.-P.-É. — relie l'étiquette décalée au centroïde de l'île ──
-                 Dessine une ligne fine + petit point de l'étiquette vers l'île.
-                 Dessiné avant le groupe de texte pour être sous l'étiquette.
+              /* ── Leader line for PEI — connects offset label to island centroid ──
+                 Draws a thin line + small dot from the label down to the island.
+                 Drawn before the text group so it sits below the label.
               ── */
               if (name === "Prince Edward Island") {
                 svg
@@ -1007,30 +980,30 @@
                 .attr("transform", `translate(${x},${y})`)
                 .style("pointer-events", "none");
 
-              /* Abréviation de province — plus grande, plus grasse */
-              /* L'étiquette de l'Î.-P.-É. flotte dans l'espace atlantique clair → encre foncée. */
+              /* Province abbreviation — larger, bolder */
+              /* The PEI label floats in the clear Atlantic space → dark ink. */
               const abFill = name === "Prince Edward Island" ? "#1a1a1a" : fill;
               g.append("text")
                 .attr("text-anchor", "middle")
                 .attr("dy", "-0.25em")
-                .style("font-size", "13px")
+                .style("font-size", "14px")
                 .style("font-family", FONT)
                 .style("font-weight", "900")
                 .style("fill", abFill)
                 .style("filter", "url(#txt-shadow)")
                 .text(ab);
 
-              /* Valeur de densité numérique */
+              /* Numerical density value */
               if (val != null) {
-                /* La couleur de province de l'Î.-P.-É. est rouge moyen-foncé (109,1 ≥ 108 → blanc),
-                   mais l'étiquette se trouve en dehors de la province dans l'espace atlantique clair,
-                   donc on la surcharge en encre foncée pour la lisibilité. */
+                /* The province color of PEI is medium-dark red (109.1 ≥ 108 → white),
+                   but the label is located outside the province in the clear Atlantic space,
+                   so we override it with dark ink for readability. */
                 const valFill =
                   name === "Prince Edward Island" ? "#1a1a1a" : fill;
                 g.append("text")
                   .attr("text-anchor", "middle")
                   .attr("dy", "1.05em")
-                  .style("font-size", "11px")
+                  .style("font-size", "12px")
                   .style("font-family", FONT)
                   .style("font-weight", "700")
                   .style("fill", valFill)
@@ -1040,7 +1013,7 @@
             });
           })
           .catch(() => {
-            /* Repli gracieux si la topologie ne peut pas être récupérée */
+            /* Graceful fallback if topology cannot be fetched */
             mapContainer.innerHTML =
               '<div style="padding:32px;text-align:center;color:#555;font-size:14px;font-weight:700;">' +
               "Carte non disponible — consultez le tableau de densité pour les valeurs provinciales." +

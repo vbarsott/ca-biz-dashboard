@@ -69,7 +69,7 @@
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 2000;
+  const SLIDE_DURATION_MS = 3000;
 
   /**
    * EN → FR crossfade duration (ms).
@@ -254,7 +254,17 @@
        - Cross-origin restrictions apply (all same origin — shouldn't happen)
      ============================================================ */
 
-  function reanimateCharts(frameLabel) {
+  /**
+   * Re-animates charts in the given frame, but ONLY for English slides.
+   * FR slides (odd index) must remain static — no reset(), no update().
+   *
+   * @param {string} frameLabel   'a' | 'b'
+   * @param {number} slideIndex   index into SLIDES array (even = EN, odd = FR)
+   */
+  function reanimateCharts(frameLabel, slideIndex) {
+    // FR slides (odd index) are always static — skip chart animation entirely.
+    if (slideIndex % 2 === 1) return;
+
     try {
       var cw = frames[frameLabel].contentWindow;
       if (!cw || !cw.Chart) return;
@@ -417,7 +427,8 @@
           // The slide is now fully visible (opacity:1). Chart animations
           // reset and replay from scratch here — satisfying the requirement
           // that chart animations ONLY play on an active, visible slide.
-          reanimateCharts(incomingLabel);
+          // FR slides (odd index) are skipped — their charts stay static.
+          reanimateCharts(incomingLabel, incomingIndex);
 
           // ── Phase 6: Advance global state ───────────────────────────
           activeFrame = incomingLabel;
@@ -517,7 +528,7 @@
       // The first slide (cover) has no charts — reanimateCharts is a safe
       // no-op here. Included for consistency with any future slide at position 0.
       requestAnimationFrame(function () {
-        reanimateCharts("a");
+        reanimateCharts("a", 0);
       });
 
       // Preload slide 1 into frame B while slide 0 is on screen

@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
@@ -37,40 +38,22 @@
           province
         </h1>
         <p class="subtitle">
-          Terre-Neuve-et-Labrador et les Territoires du Nord-Ouest sont les
-          seules régions ayant terminé la décennie avec moins d'entreprises
-          employeuses qu'au départ — en recul de&nbsp;9,5 % et 7,0 %
-          respectivement.<br />L'Ontario et la Colombie-Britannique, à
+          De 2015 à 2025, Terre-Neuve-et-Labrador et les Territoires du
+          Nord-Ouest sont les seules régions ayant terminé la décennie avec
+          moins d'entreprises employeuses qu'au départ — en recul de&nbsp;9,5 %
+          et 7,0 % respectivement.<br />L'Ontario et la Colombie-Britannique, à
           l'inverse, ont capté la majeure partie de la croissance nette du pays.
         </p>
       </div>
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
-        <div class="chart-header">
-          <span class="chart-title"
-            >Classement de croissance provinciale – Employeurs, variation en %,
-            2015→2025
-          </span>
-        </div>
-
-        <div class="chart-canvas-wrap h-500">
+        <div class="chart-canvas-wrap h-600">
           <canvas
             id="chart-prov-growth"
             role="img"
             aria-label="Graphique à colonnes verticales. Ontario +14,7 %, Terre-Neuve −9,5 %."
           ></canvas>
-        </div>
-
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--navy)"></div>
-            En croissance
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--orange)"></div>
-            En déclin
-          </div>
         </div>
       </div>
     </main>
@@ -81,10 +64,10 @@
     <script>
       Chart.register(ChartDataLabels);
 
-      /* ── DONNÉES ────────────────────────────────────────────────────────────
-         Source : Statistique Canada, Dénombrements des entreprises canadiennes
-         Entreprises employeuses (avec employés) · Instantanés de décembre
-         Variation en % : dénombrements de déc. 2015 à déc. 2025, triés par ordre décroissant.
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Employer businesses (with employees) · December snapshots
+         % change: Dec 2015 to Dec 2025 counts, sorted descending.
       ────────────────────────────────────────────────────────────────────── */
       const provs = [
         "Ontario",
@@ -126,10 +109,10 @@
         },
         options: {
           ...RESPONSIVE_OPTS,
-          // animation: {
-          //   duration: 1800,
-          //   easing: "easeInOutCubic",
-          // },
+          animation: {
+            duration: 1800,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -139,8 +122,8 @@
               },
             },
             datalabels: {
-              color: PALETTE.ink,
-              font: { size: 14, family: FONT, weight: "600" },
+              color: PALETTE.mid,
+              font: { size: 16, family: FONT, weight: "600" },
               formatter: (v) => (v > 0 ? "+" : "") + v + " %",
               /* v > 0  → anchor at bar top,      align top    → label above bar
                  v === 0 → anchor at baseline,     align bottom → label below baseline
@@ -163,8 +146,8 @@
           scales: {
             x: {
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 maxRotation: 45,
                 minRotation: 45,
               },
@@ -173,8 +156,8 @@
             y: {
               ticks: {
                 display: false,
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: (v) => (v > 0 ? "+" : "") + v + " %",
               },
               grid: GRID_SUBTLE,

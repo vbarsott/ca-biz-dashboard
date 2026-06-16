@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
@@ -81,10 +82,10 @@
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
     <script>
-      /* ── DONNÉES ────────────────────────────────────────────────────────────
-         Source : Statistique Canada, Dénombrements des entreprises canadiennes
-         Période de référence : instantanés de décembre (CSV daté de janvier selon le cycle de StatCan)
-         Pré-COVID ≤ 2019 | COVID 2020–2021 | Post-COVID 2022+
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Reference period: December snapshots (January-dated CSV per StatCan cycle)
+         Pre-COVID ≤ 2019 | COVID 2020–2021 | Post-COVID 2022+
       ────────────────────────────────────────────────────────────────────── */
       const labels = [
         2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
@@ -161,10 +162,10 @@
         options: {
           ...RESPONSIVE_OPTS,
           interaction: { mode: "index", intersect: false },
-          // animation: {
-          //   duration: 1800,
-          //   easing: "easeInOutCubic",
-          // },
+          animation: {
+            duration: 1800,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -181,7 +182,8 @@
               grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
               },
               border: { color: PALETTE.border },
               title: {
@@ -191,11 +193,12 @@
               },
             },
             y: {
-              min: 900000,
+              min: 1000000,
               grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: fmtNum,
                 maxTicksLimit: 8,
               },

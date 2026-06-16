@@ -89,13 +89,13 @@ body {
 
   /*
     Base crossfade transition (EN → FR).
-    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (1500 ms).
+    ⚠️  Keep duration in sync with TRANSITION_MS in slideshow.js (1800 ms).
 
     For FR → EN (slower crossfade), slideshow.js injects an inline
     style that overrides this duration. The inline override is cleaned
     up after the transition completes, restoring this base value.
   */
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 1.8s ease-in-out;
 }
 
 /* ── Active slide — fully visible, sits on top ────────────── */
@@ -130,11 +130,17 @@ body {
   /* Hidden by default — only the stage-hover rule reveals them */
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, background 0.2s ease;
+  transition:
+    opacity 0.25s ease,
+    background 0.2s ease;
 }
 
-.dev-arrow--prev { left: 1rem; }
-.dev-arrow--next { right: 1rem; }
+.dev-arrow--prev {
+  left: 1rem;
+}
+.dev-arrow--next {
+  right: 1rem;
+}
 
 /* Reveal arrows when a mouse enters the stage */
 #slideshow-stage:hover .dev-arrow {

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
@@ -29,29 +30,21 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <h1>Size of Business Employers | Taille des entreprises employeurs</h1>
+        <h1>
+          Business Employer Size Breakdown | Répartition par taille des
+          employeurs
+        </h1>
         <p class="subtitle">
-          Fewer than 5% of employer businesses have 50 or more employees.<br />Of
-          1.37 million employer businesses, only ~67,000 cross the 50-employee
-          threshold — making large employers statistically rare in Canada's
-          economy.<br />
-          Canada's employer base is highly exposed to economic shocks because
-          most firms are extremely small.<br />Small firms carry less capital,
-          fewer redundancies, and a narrower ability to absorb disruption —
-          making the national employment base sensitive to sector-specific
-          downturns.
+          As of December 2025, 56.5% of Canada's 1.37 million employer
+          businesses had just 1 to 4 employees. Add the 5–19 band and small
+          businesses account for 86.8% of all employers — while firms with 50 or
+          more employees make up less than 5% of the total.
         </p>
       </div>
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
-        <div class="chart-header">
-          <span class="chart-title"
-            >Business Employer size breakdown – Dec 2025</span
-          >
-        </div>
-
-        <div class="chart-canvas-wrap h-500">
+        <div class="chart-canvas-wrap h-600">
           <canvas id="sizeBar"></canvas>
         </div>
       </div>
@@ -116,16 +109,19 @@
               min: 0,
               max: 60,
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: (v) => v + "%",
               },
               grid: { color: "rgba(0,0,0,0.06)" },
             },
             y: {
+              afterFit(scale) {
+                scale.width = 260; /* fixed label column — prevents truncation */
+              },
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
               },
               grid: { display: false },
             },

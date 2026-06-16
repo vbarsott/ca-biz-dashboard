@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
@@ -32,34 +33,22 @@
         <!-- Title block -->
         <div class="title-block">
           <h1>
-            Size of Business Employers | Taille des entreprises employeurs
+            Business Employer Size Breakdown | Répartition par taille des
+            employeurs
           </h1>
           <p class="subtitle">
-            Moins de 5 % des entreprises employeuses comptent 50 employés ou
-            plus.<br />
-            Sur 1,37 million d'entreprises employeuses, seulement ~67 000
-            franchissent le seuil de 50 employés — les grands employeurs sont
-            statistiquement rares dans l'économie canadienne.<br />
-            La base employeuse du Canada est très vulnérable aux chocs
-            économiques en raison de la très petite taille de la plupart des
-            entreprises.<br />
-            Les petites entreprises disposent de moins de capital, de moins de
-            redondances et d'une capacité limitée à absorber les perturbations —
-            ce qui rend la base nationale d'emploi sensible aux ralentissements
-            sectoriels.
+            En décembre 2025, 56,5 % des 1,37 million d'entreprises employeuses
+            canadiennes comptaient de 1 à 4 employés. En incluant les
+            entreprises de 5 à 19 employés, les petites entreprises représentent
+            86,8 % de l'ensemble des employeurs — tandis que celles de 50
+            employés et plus ne constituent pas même 5 % du total.
           </p>
         </div>
       </div>
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
-        <div class="chart-header">
-          <span class="chart-title">
-            Répartition par taille des employeurs – Déc 2025</span
-          >
-        </div>
-
-        <div class="chart-canvas-wrap h-500">
+        <div class="chart-canvas-wrap h-600">
           <canvas id="sizeBar"></canvas>
         </div>
       </div>
@@ -69,15 +58,15 @@
     <script src="../js/charts.js"></script>
 
     <script>
-      /* ── DONNÉES ────────────────────────────────────────────────────────────
-         Source : Statistique Canada, Tableau 33-10-0034-01, décembre 2025.
-         Regroupement :
-           « 1–4 »    = tranche 1–4               → 775 662  → 56,5 %
-           « 5–19 »   = tranches 5–9 + 10–19      → 416 280  → 30,3 %
-           « 20–49 »  = tranche 20–49             → 113 364  →  8,3 %
-           « 50–499 » = tranches 50–99+100–199+200–499 → 63 284 → 4,6 %
-           « 500+ »   = tranche 500+              →   3 519  →  0,3 %
-           Total :                                  1 372 109
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Table 33-10-0034-01, December 2025.
+         Grouping:
+           "1–4"    = band 1–4               → 775,662  → 56.5%
+           "5–19"   = bands 5–9 + 10–19      → 416,280  → 30.3%
+           "20–49"  = band 20–49             → 113,364  →  8.3%
+           "50–499" = bands 50–99+100–199+200–499 → 63,284 → 4.6%
+           "500+"   = band 500+              →   3,519  →  0.3%
+           Total:                              1,372,109
       ────────────────────────────────────────────────────────────────────── */
       new Chart(document.getElementById("sizeBar").getContext("2d"), {
         type: "bar",
@@ -108,7 +97,7 @@
           indexAxis: "y",
           responsive: true,
           maintainAspectRatio: false,
-          // animation: { duration: 1800, easing: "easeInOutCubic" },
+          animation: { duration: 1800, easing: "easeInOutCubic" },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -124,16 +113,19 @@
               min: 0,
               max: 60,
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: (v) => v + " %",
               },
               grid: { color: "rgba(0,0,0,0.06)" },
             },
             y: {
+              afterFit(scale) {
+                scale.width = 260; /* fixed label column — prevents truncation */
+              },
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
               },
               grid: { display: false },
             },

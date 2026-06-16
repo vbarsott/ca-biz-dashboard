@@ -36,13 +36,16 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <h1>The Per-Capita Picture | Le portrait per capita</h1>
+        <h1>
+          Business Density by Province & Territory | Densité des entreprises par
+          province et territoire
+        </h1>
         <p class="subtitle">
-          L'Ontario détient le plus grand nombre d'entreprises au Canada en
-          termes absolus — mais sa densité per capita se classe au 3e rang. Avec
-          plus de 16 millions d'habitants, ses ~2 millions d'entreprises
-          desservent une population bien plus grande, ramenant le taux à 125
-          pour 1 000 personnes.
+          En décembre 2025, la C.-B. arrive en tête de toutes les provinces et
+          territoires avec 145,2 entreprises pour 1 000 habitants — près de 4
+          fois le taux du Nunavut (34,9). L'Ontario se classe au 3e rang malgré
+          le plus grand nombre d'entreprises au pays : avec plus de 16 M
+          d'habitants, son taux descend à 125 pour 1 000.
         </p>
       </div>
 
@@ -51,13 +54,6 @@
         <!-- LEFT: Choropleth map -->
         <div class="chart-col">
           <div class="map-chart-section">
-            <div class="chart-header">
-              <span class="chart-title">
-                Total des entreprises pour 1 000 personnes — par province et
-                territoire, Déc. 2025
-              </span>
-            </div>
-
             <div id="canada-map"></div>
 
             <!-- Warm sequential palette legend -->
@@ -74,7 +70,6 @@
           <div class="table-chart-section">
             <div class="chart-header">
               <span class="chart-title">Classé par densité</span>
-              <span class="table-note">pour 1 000 habitants</span>
             </div>
 
             <!-- Column legend -->
@@ -102,53 +97,44 @@
                   <th class="col-solo">Autonome /1k</th>
                 </tr>
               </thead>
+
               <tbody>
                 <!-- 1. BC — total 145.2 (100%) | emp 38.5 (94%) | solo 106.7 (100%) -->
                 <tr>
                   <td class="td-rank">1</td>
                   <td class="td-prov">BC</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 100%,
                         transparent 100%
                       );
-                      text-align: right;
-                      font-weight: 900;
-                      font-size: 0.83rem;
-                      padding: 5px 5px;
-                      color: var(--navy);
                     "
                   >
                     145.2
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 94%,
                         transparent 94%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     38.5
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 100%,
                         transparent 100%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     106.7
@@ -160,45 +146,37 @@
                   <td class="td-rank">2</td>
                   <td class="td-prov">SK</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 86%,
                         transparent 86%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     125.4
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 84%,
                         transparent 84%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     34.3
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 85%,
                         transparent 85%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     91.1
@@ -210,45 +188,37 @@
                   <td class="td-rank">3</td>
                   <td class="td-prov">ON</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 86%,
                         transparent 86%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     125.1
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 78%,
                         transparent 78%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     31.8
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 87%,
                         transparent 87%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     93.3
@@ -260,45 +230,37 @@
                   <td class="td-rank">4</td>
                   <td class="td-prov">AB</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 85%,
                         transparent 85%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     123.7
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 88%,
                         transparent 88%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     35.9
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 82%,
                         transparent 82%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     87.7
@@ -310,52 +272,44 @@
                   <td class="td-rank">5</td>
                   <td class="td-prov">YT</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 84%,
                         transparent 84%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     121.3
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 100%,
                         transparent 100%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     41.0
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 75%,
                         transparent 75%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     80.3
                   </td>
                 </tr>
 
-                <!-- ── Ligne de référence moyenne nationale ── -->
+                <!-- ── National average reference ── -->
                 <tr class="row-avg-sep">
                   <td colspan="5">
                     ─── Moy. Canada &nbsp;121,2 &nbsp;/&nbsp; 33,0 &nbsp;/&nbsp;
@@ -368,45 +322,37 @@
                   <td class="td-rank">6</td>
                   <td class="td-prov">QC</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 78%,
                         transparent 78%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     112.9
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 75%,
                         transparent 75%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     30.8
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 77%,
                         transparent 77%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     82.1
@@ -418,45 +364,37 @@
                   <td class="td-rank">7</td>
                   <td class="td-prov">PE</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 75%,
                         transparent 75%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     109.1
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 93%,
                         transparent 93%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     38.0
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 67%,
                         transparent 67%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     71.1
@@ -468,45 +406,37 @@
                   <td class="td-rank">8</td>
                   <td class="td-prov">MB</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 66%,
                         transparent 66%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     95.7
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 71%,
                         transparent 71%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     29.3
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 62%,
                         transparent 62%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     66.4
@@ -518,45 +448,37 @@
                   <td class="td-rank">9</td>
                   <td class="td-prov">NS</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 61%,
                         transparent 61%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     88.5
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 74%,
                         transparent 74%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     30.3
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 55%,
                         transparent 55%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     58.2
@@ -568,45 +490,37 @@
                   <td class="td-rank">10</td>
                   <td class="td-prov">NL</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 57%,
                         transparent 57%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     82.7
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 84%,
                         transparent 84%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     34.6
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 45%,
                         transparent 45%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     48.1
@@ -618,45 +532,37 @@
                   <td class="td-rank">11</td>
                   <td class="td-prov">NT</td>
                   <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 54%,
                         transparent 54%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
                     "
                   >
                     78.7
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 86%,
                         transparent 86%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     35.3
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 41%,
                         transparent 41%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     43.4
@@ -666,53 +572,39 @@
                 <!-- 12. NB — total 75.7 (52%) | emp 30.8 (75%) | solo 44.9 (42%) -->
                 <tr>
                   <td class="td-rank">12</td>
+                  <td class="td-prov">NB</td>
                   <td
-                    class="td-prov"
-                    style="color: var(--red-dark); font-weight: 900"
-                  >
-                    NB
-                  </td>
-                  <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 52%,
                         transparent 52%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--red-dark);
                     "
                   >
                     75.7
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 75%,
                         transparent 75%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                     "
                   >
                     30.8
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 42%,
                         transparent 42%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                     "
                   >
                     44.9
@@ -722,55 +614,41 @@
                 <!-- 13. NU — total 34.9 (24%) | emp 18.4 (45%) | solo 16.5 (15%) -->
                 <tr style="border-bottom: none">
                   <td class="td-rank" style="border-bottom: none">13</td>
+                  <td class="td-prov" style="border-bottom: none">NU</td>
                   <td
-                    class="td-prov"
-                    style="color: var(--red-dark); border-bottom: none"
-                  >
-                    NU
-                  </td>
-                  <td
+                    class="td-number td-number-navy"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 51, 102, 0.18) 24%,
                         transparent 24%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--red-dark);
                       border-bottom: none;
                     "
                   >
                     34.9
                   </td>
                   <td
+                    class="td-number td-number-teal"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(0, 107, 94, 0.15) 45%,
                         transparent 45%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--teal);
                       border-bottom: none;
                     "
                   >
                     18.4
                   </td>
                   <td
+                    class="td-number td-number-orange"
                     style="
                       background: linear-gradient(
                         to right,
                         rgba(181, 71, 8, 0.15) 15%,
                         transparent 15%
                       );
-                      text-align: right;
-                      font-weight: 700;
-                      padding: 5px 5px;
-                      color: var(--orange);
                       border-bottom: none;
                     "
                   >
@@ -863,7 +741,8 @@
           Ontario: [0, -10], // centroid lands too far north
           Québec: [0, 12],
           Quebec: [0, 12],
-          Nunavut: [-5, 42],
+          Nunavut: [-35, 67],
+          "Northwest Territories": [-15, 17],
         };
 
         const topoUrl =
@@ -986,7 +865,7 @@
               g.append("text")
                 .attr("text-anchor", "middle")
                 .attr("dy", "-0.25em")
-                .style("font-size", "14px")
+                .style("font-size", "16px")
                 .style("font-family", FONT)
                 .style("font-weight", "900")
                 .style("fill", abFill)
@@ -1003,7 +882,7 @@
                 g.append("text")
                   .attr("text-anchor", "middle")
                   .attr("dy", "1.05em")
-                  .style("font-size", "12px")
+                  .style("font-size", "16px")
                   .style("font-family", FONT)
                   .style("font-weight", "700")
                   .style("fill", valFill)
@@ -1015,7 +894,7 @@
           .catch(() => {
             /* Graceful fallback if topology cannot be fetched */
             mapContainer.innerHTML =
-              '<div style="padding:32px;text-align:center;color:#555;font-size:14px;font-weight:700;">' +
+              '<div style="padding:32px;text-align:center;color:#555;font-size:16px;font-weight:700;">' +
               "Carte non disponible — consultez le tableau de densité pour les valeurs provinciales." +
               "</div>";
           });

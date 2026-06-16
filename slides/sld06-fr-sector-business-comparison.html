@@ -4,75 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Sld6 - Analyse sectorielle A — Entreprises employeurs et travailleurs
-      autonomes par secteur
+      Sld6 - Sector Business Comparison | Comparaison des entreprises par
+      secteur
     </title>
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
-      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
-        Statistique Canada · Portail du gouvernement ouvert<br />
-        Dénombrement des entreprises canadiennes par secteur SCIAN · Tableaux
-        33-10-0034-01 à 33-10-1096-01
+        <div class="slide-source-item">
+          Statistics Canada | Open Government Portal<br />
+          Canadian Business Counts by top-level NAICS sector | Tables
+          33-10-0034-01 to 33-10-1096-01
+        </div>
+        <div class="slide-source-item">
+          Statistique Canada | Portail du gouvernement ouvert<br />
+          Dénombrement des entreprises canadiennes par secteur SCIAN | Tableaux
+          33-10-0034-01 à 33-10-1096-01
+        </div>
       </div>
     </div>
 
     <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
     <div class="accent-bar" aria-hidden="true"></div>
 
-    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
-    <div class="hero-zone">
-      <h1>
-        Business Growth by Sector | Croissance des entreprises par secteur
-      </h1>
-      <p class="subtitle">
-        Dans 11 des 13 grands secteurs, les travailleurs autonomes sont plus
-        nombreux que les entreprises avec employés. L'immobilier mène avec
-        1&nbsp;045&nbsp;k opérateurs solo contre 60&nbsp;k avec personnel. Seuls
-        l'Hébergement &amp; restauration et le Commerce de gros font exception.
-      </p>
-    </div>
+    <main class="main-wrapper">
+      <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+      <div class="hero-zone">
+        <h1>
+          (Option 1) Business Sector Breakdown | Répartition des entreprises par
+          secteur
+        </h1>
+        <p class="subtitle">
+          En décembre 2025, les travailleurs autonomes surpassent les
+          entreprises employeurs dans 11 des 13 principaux secteurs.
+          L'immobilier est en tête avec 1 045 k travailleurs autonomes contre
+          seulement 60 k avec personnel. Seul l'hébergement-restauration ainsi
+          que le commerce de gros font exception à cette tendance.
+        </p>
+      </div>
 
-    <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
-    <div class="chart-section accent-teal fade-in">
-      <div class="chart-header">
-        <span class="chart-title">
-          Secteurs : entreprises employeurs et travailleurs autonomes &mdash;
-          Canada, déc. 2025
-        </span>
-      </div>
-      <div class="chart-canvas-wrap h-500">
-        <canvas
-          id="chart-sector-mirror"
-          role="img"
-          aria-label="Graphique à barres horizontales groupées. L'immobilier compte 60 k entreprises employeurs contre 1 045 k travailleurs autonomes. L'hébergement et restauration est le seul secteur où les entreprises employeurs sont plus nombreuses."
-        ></canvas>
-      </div>
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-dot" style="background: #003366"></div>
-          Entreprises employeurs
+      <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
+      <div class="chart-section">
+        <div class="chart-canvas-wrap h-600">
+          <canvas
+            id="chart-sector-mirror"
+            role="img"
+            aria-label="Graphique à barres horizontales groupées. L'immobilier compte 60 k entreprises employeurs contre 1 045 k travailleurs autonomes. L'hébergement et restauration est le seul secteur où les entreprises employeurs sont plus nombreuses."
+          ></canvas>
         </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background: #006b5e"></div>
-          Travailleurs autonomes
+
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #b54708"></div>
+            Entreprises employeurs
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #1a4a7a"></div>
+            Travailleurs autonomes
+          </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <script src="../js/wordmark.js"></script>
     <script src="../js/charts.js"></script>
 
     <script>
-      /* ── DONNÉES ───────────────────────────────────────────────────────────
-         Source : Statistique Canada, Dénombrement des entreprises canadiennes
-         Miroir sectoriel : entreprises employeurs et travailleurs autonomes, déc. 2025.
-         Valeurs divisées par 1 000 pour affichage en milliers.
-      ─────────────────────────────────────────────────────────────────────── */
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Sector mirror: employer businesses vs self-employed, Dec 2025.
+         Values divided by 1000 for display in thousands.
+      ────────────────────────────────────────────────────────────────────── */
       const sectorNamesM = [
         "Construction",
         "Services professionnels",
@@ -108,18 +115,18 @@
             {
               label: "Entreprises employeurs",
               data: sectorIdx.map((i) => withSectorM[i] / 1000),
-              backgroundColor: "rgba(0,51,102,0.75)",
-              borderColor: "#003366",
+              backgroundColor: "rgba(181,71,8,1)",
+              borderColor: "#b54708",
               borderWidth: 1,
-              borderRadius: 3,
+              borderRadius: 5,
             },
             {
               label: "Travailleurs autonomes",
               data: sectorIdx.map((i) => woSectorM[i] / 1000),
-              backgroundColor: "rgba(0,107,94,0.75)",
-              borderColor: "#006B5E",
+              backgroundColor: "rgba(26,74,122,1)",
+              borderColor: "#1a4a7a",
               borderWidth: 1,
-              borderRadius: 3,
+              borderRadius: 5,
             },
           ],
         },
@@ -127,10 +134,10 @@
           indexAxis: "y",
           responsive: true,
           maintainAspectRatio: false,
-          // animation: {
-          //   duration: 2000,
-          //   easing: "easeInOutCubic",
-          // },
+          animation: {
+            duration: 1800,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -145,14 +152,20 @@
           scales: {
             x: {
               ticks: {
-                color: "#888",
-                font: { size: 14, family: FONT },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: (v) => v + "k",
               },
               grid: { color: "rgba(0,0,0,0.06)" },
             },
             y: {
-              ticks: { color: "#1A1A1A", font: { size: 14, family: FONT } },
+              afterFit(scale) {
+                scale.width = 260; /* fixed label column — prevents truncation */
+              },
+              ticks: {
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
+              },
               grid: { display: false },
             },
           },

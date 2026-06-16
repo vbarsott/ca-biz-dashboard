@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </head>
+
   <body>
     <!-- ── HEADER ──────────────────────────────────────────────────────── -->
     <div class="slide-header">
@@ -180,7 +181,8 @@
               grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
               },
               border: { color: PALETTE.border },
               title: {
@@ -190,11 +192,12 @@
               },
             },
             y: {
-              min: 900000,
+              min: 1000000,
               grid: GRID_STYLE,
               ticks: {
                 ...AXIS_TICK,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: fmtNum,
                 maxTicksLimit: 8,
               },

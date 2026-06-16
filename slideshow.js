@@ -48,32 +48,34 @@
    * Order is non-negotiable per CLAUDE.md §8.
    */
   const SLIDES = [
-    "slides/dashboard-cover-en.html", //  0  EN
-    "slides/dashboard-cover-fr.html", //  1  FR
-    "slides/sld01-en-national-overview.html", //  2  EN
-    "slides/sld01-fr-national-overview.html", //  3  FR
-    "slides/sld02-en-business-size.html", //  4  EN
-    "slides/sld02-fr-business-size.html", //  5  FR
-    "slides/sld03-en-regional-growth-ranking.html", //  6  EN
-    "slides/sld03-fr-regional-growth-ranking.html", //  7  FR
-    "slides/sld04-en-regional-business-ratio.html", // 8  EN
-    "slides/sld04-fr-regional-business-ratio.html", // 9  FR
-    "slides/sld05-en-regional-business-per-capita.html", // 10  EN
-    "slides/sld05-fr-regional-business-per-capita.html", // 11  FR
-    "slides/sld06-en-sector-business-comparison.html", // 12  EN
-    "slides/sld06-fr-sector-business-comparison.html", // 13  FR
+    "slides/dashboard-cover-en.html", //  1  EN
+    "slides/dashboard-cover-fr.html", //  2  FR
+    "slides/sld01-en-national-overview.html", //  3  EN
+    "slides/sld01-fr-national-overview.html", //  4  FR
+    "slides/sld02-en-business-size.html", //  5  EN
+    "slides/sld02-fr-business-size.html", //  6  FR
+    "slides/sld03-en-regional-growth-ranking.html", //  7  EN
+    "slides/sld03-fr-regional-growth-ranking.html", //  8  FR
+    "slides/sld04-en-regional-business-ratio.html", // 9  EN
+    "slides/sld04-fr-regional-business-ratio.html", // 10  FR
+    "slides/sld05-en-regional-business-per-capita.html", // 11  EN
+    "slides/sld05-fr-regional-business-per-capita.html", // 12  FR
+    "slides/sld06-en-sector-business-comparison.html", // 13  EN
+    "slides/sld06-fr-sector-business-comparison.html", // 14  FR
+    "slides/sld06-opt-en-sector-business-comparison.html", // 15  EN
+    "slides/sld06-opt-fr-sector-business-comparison.html", // 16  FR
   ];
 
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 10000;
+  const SLIDE_DURATION_MS = 2000;
 
   /**
    * EN → FR crossfade duration (ms).
    * ⚠️  MUST match the CSS transition duration on .slide-frame in slideshow.css.
    */
-  const TRANSITION_MS = 1500;
+  const TRANSITION_MS = 1800;
 
   /**
    * FR → EN crossfade duration (ms).

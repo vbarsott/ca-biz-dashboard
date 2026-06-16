@@ -36,23 +36,17 @@
           travailleurs autonomes
         </h1>
         <p class="subtitle">
-          Nunavut is the only jurisdiction where employer businesses outnumber
-          the self-employed (0.87×) — a direct reflection of its
-          government-centred economy and limited private sector activity. At the
-          opposite end, Ontario (2.93×), British Columbia (2.77×), and Quebec
-          (2.67×) each meet or exceed the national average.
+          As of December 2025, Nunavut is the only jurisdiction where employer
+          businesses outnumber the self-employed (0.87×) — a direct reflection
+          of its government-centred economy and limited private sector activity.
+          At the opposite end, Ontario (2.93×), British Columbia (2.77×), and
+          Quebec (2.67×) each meet or exceed the national average.
         </p>
       </div>
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
-        <div class="chart-header">
-          <span class="chart-title"
-            >Self-employment ratio by province &amp; territory — Dec 2025</span
-          >
-        </div>
-
-        <div class="chart-canvas-wrap h-500">
+        <div class="chart-canvas-wrap h-600">
           <canvas
             id="chart-selfemp-ratio"
             role="img"
@@ -152,8 +146,8 @@
           scales: {
             x: {
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: (v) => v.toFixed(1) + "×",
               },
               grid: GRID_SUBTLE,
@@ -161,9 +155,12 @@
               max: 3,
             },
             y: {
+              afterFit(scale) {
+                scale.width = 260; /* fixed label column — prevents truncation */
+              },
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
               },
               grid: { display: false },
             },

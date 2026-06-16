@@ -46,13 +46,6 @@
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
-        <div class="chart-header">
-          <span class="chart-title"
-            >Ratio de travail autonome par province et territoire — Déc.
-            2025</span
-          >
-        </div>
-
         <div class="chart-canvas-wrap h-500">
           <canvas
             id="chart-selfemp-ratio"
@@ -85,10 +78,10 @@
     <script src="../js/charts.js"></script>
 
     <script>
-      /* ── DONNÉES ────────────────────────────────────────────────────────────
-         Source : Statistique Canada, Dénombrements des entreprises canadiennes
-         Ratio = entreprises sans employés ÷ entreprises employeuses, par province.
-         Instantané de décembre 2025 · Moyenne nationale : 2,67×
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts
+         Ratio = self-employed businesses ÷ employer businesses, by province.
+         December 2025 snapshot · National average: 2.67×
       ────────────────────────────────────────────────────────────────────── */
       const provRatioLabels = [
         "Ontario",
@@ -134,10 +127,10 @@
         options: {
           indexAxis: "y",
           ...RESPONSIVE_OPTS,
-          // animation: {
-          //   duration: 1800,
-          //   easing: "easeInOutCubic",
-          // },
+          animation: {
+            duration: 1800,
+            easing: "easeInOutCubic",
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -153,8 +146,8 @@
           scales: {
             x: {
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
                 callback: (v) => v.toFixed(1) + "×",
               },
               grid: GRID_SUBTLE,
@@ -162,9 +155,12 @@
               max: 3,
             },
             y: {
+              afterFit(scale) {
+                scale.width = 260; /* fixed label column — prevents truncation */
+              },
               ticks: {
-                color: PALETTE.ink,
-                font: { size: 14, family: FONT, weight: "600" },
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
               },
               grid: { display: false },
             },

@@ -23,12 +23,12 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <h1>Business Employer Size Breakdown</h1>
+        <h1>Size of Business Employer</h1>
         <p class="subtitle">
           As of December 2025, 56.5% of Canada's 1.37 million employer
-          businesses had just 1 to 4 employees.<br />Add the 5–19 band and small
-          businesses account for 86.8% of all employers — while firms with 50 or
-          more employees make up less than 5% of the total.
+          businesses had just 1 to 4 employees.<br />Add the 5-19 band and small
+          businesses account for 86.8% of all employers, while businesses with
+          50 or more employees make up less than 5% of the total.
         </p>
       </div>
 
@@ -47,23 +47,17 @@
       /* ── DATA ──────────────────────────────────────────────────────────────
          Source: Statistics Canada, Table 33-10-0034-01, December 2025.
          Grouping:
-           "1–4"    = band 1–4               → 775,662  → 56.5%
-           "5–19"   = bands 5–9 + 10–19      → 416,280  → 30.3%
-           "20–49"  = band 20–49             → 113,364  →  8.3%
-           "50–499" = bands 50–99+100–199+200–499 → 63,284 → 4.6%
-           "500+"   = band 500+              →   3,519  →  0.3%
-           Total:                              1,372,109
+           "1–4"    = band 1–4                    → 775,662  → 56.5%
+           "5–19"   = bands 5–9 + 10–19           → 416,280  → 30.3%
+           "20–49"  = band 20–49                  → 113,364  →  8.3%
+           "50–499" = bands 50–99+100–199+200–499 → 63,284   → 4.6%
+           "500+"   = band 500+                   → 3,519    →  0.3%
+           Total:                                   1,372,109
       ────────────────────────────────────────────────────────────────────── */
       new Chart(document.getElementById("sizeBar").getContext("2d"), {
         type: "bar",
         data: {
-          labels: [
-            "1–4 employees",
-            "5–19 employees",
-            "20–49 employees",
-            "50–499 employees",
-            "500+ employees",
-          ],
+          labels: ["1–4", "5–19", "20–49", "50–499", "500+"],
           datasets: [
             {
               data: [56.5, 30.3, 8.3, 4.6, 0.3],
@@ -106,8 +100,13 @@
               grid: { color: "rgba(0,0,0,0.06)" },
             },
             y: {
+              title: {
+                display: true,
+                text: "Employees",
+                font: { size: 16, family: FONT, weight: "600" },
+              },
               afterFit(scale) {
-                scale.width = 260; /* fixed label column — prevents truncation */
+                scale.width = 120; /* fixed label column — prevents truncation */
               },
               ticks: {
                 color: PALETTE.mid,

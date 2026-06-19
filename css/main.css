@@ -300,7 +300,7 @@ h1 {
 }
 .kpi-sublabel {
   font-size: 1rem;
-  /* font-style: italic; */
+  font-style: italic;
   color: var(--mid);
   line-height: 1.45;
   margin-top: auto;

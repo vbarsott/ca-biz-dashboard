@@ -37,7 +37,7 @@
 
       <!-- ── CHART SECTION ────────────────────────────────────────────────── -->
       <div class="chart-section">
-        <div class="chart-canvas-wrap h-600">
+        <div class="chart-canvas-wrap">
           <canvas
             id="chart-selfemp-ratio"
             ole="img"
@@ -96,68 +96,67 @@
       const nationalAvg = 2.67;
 
       initChartAfterFonts(function () {
-      new Chart(document.getElementById("chart-selfemp-ratio"), {
-        type: "bar",
-        data: {
-          labels: provRatioLabels,
-          datasets: [
-            {
-              label: "Ratio de travail autonome",
-              data: provRatios,
-              backgroundColor: provRatios.map((v) =>
-                v >= nationalAvg
-                  ? PALETTE.teal
-                  : v < 1.0
-                    ? PALETTE.orange
-                    : PALETTE.projectionBlue,
-              ),
-              borderWidth: 0,
-              borderRadius: 5,
+        new Chart(document.getElementById("chart-selfemp-ratio"), {
+          type: "bar",
+          data: {
+            labels: provRatioLabels,
+            datasets: [
+              {
+                label: "Ratio de travail autonome",
+                data: provRatios,
+                backgroundColor: provRatios.map((v) =>
+                  v >= nationalAvg
+                    ? PALETTE.teal
+                    : v < 1.0
+                      ? PALETTE.orange
+                      : PALETTE.projectionBlue,
+                ),
+                borderWidth: 0,
+                borderRadius: 5,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            ...RESPONSIVE_OPTS,
+            animation: false, // FR slide — static chart, no entrance animation
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                ...TOOLTIP_DEFAULTS,
+                callbacks: {
+                  label: (ctx) =>
+                    "  " +
+                    ctx.raw.toFixed(2) +
+                    "× travailleurs autonomes par entreprise employeuse",
+                },
+              },
             },
-          ],
-        },
-        options: {
-          indexAxis: "y",
-          ...RESPONSIVE_OPTS,
-          animation: false, // FR slide — static chart, no entrance animation
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              ...TOOLTIP_DEFAULTS,
-              callbacks: {
-                label: (ctx) =>
-                  "  " +
-                  ctx.raw.toFixed(2) +
-                  "× travailleurs autonomes par entreprise employeuse",
+            scales: {
+              x: {
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  callback: (v) => v.toFixed(1) + "×",
+                },
+                grid: GRID_SUBTLE,
+                min: 0,
+                max: 3,
+              },
+              y: {
+                afterFit(scale) {
+                  scale.width = 260; /* fixed label column — prevents truncation */
+                },
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                },
+                grid: { display: false },
               },
             },
           },
-          scales: {
-            x: {
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                callback: (v) => v.toFixed(1) + "×",
-              },
-              grid: GRID_SUBTLE,
-              min: 0,
-              max: 3,
-            },
-            y: {
-              afterFit(scale) {
-                scale.width = 260; /* fixed label column — prevents truncation */
-              },
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-              },
-              grid: { display: false },
-            },
-          },
-        },
-      });
+        });
       }); // initChartAfterFonts
-
     </script>
   </body>
 </html>

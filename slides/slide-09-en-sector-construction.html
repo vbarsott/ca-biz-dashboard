@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Construction — A Nation of Micro-Firms</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Government of Canada"></div>
+      <div class="slide-source">
+        Statistics Canada · Open Government Portal · ICBA Independent ·
+        GlobalData 2025<br />
+        Canadian Business Counts · Table 33-10-0034-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>Construction: A Nation of Micro-Firms</h1>
+      <p class="subtitle">
+        Small crews dominate — 9 in 10 construction employer firms have fewer
+        than 20 employees.
+      </p>
+    </div>
+
+    <!-- ── MAIN LAYOUT: Donut (left) · Stats + Insight (right) ──────────── -->
+    <div class="main-layout fade-in">
+      <!-- LEFT: Donut chart — styling follows slide-03-en-business-size.html -->
+      <div class="layout-left">
+        <div class="chart-section">
+          <div class="chart-header">
+            <span class="chart-title">
+              Firm size breakdown — construction employer firms, Dec 2025
+            </span>
+          </div>
+
+          <!-- Donut canvas centred -->
+          <div class="donut-outer">
+            <div class="donut-canvas-wrap">
+              <canvas
+                id="constSizeDonut"
+                role="img"
+                aria-label="Donut chart showing construction employer firm size. 61.8% have 1–4 employees, 29.3% have 5–19, 5.9% have 20–49, 2.7% have 50–199, 0.4% have 200+."
+              ></canvas>
+            </div>
+          </div>
+
+          <!-- Legend — circle swatches with percentages (5-band grouping) -->
+          <div class="legend" role="list" aria-label="Firm size band legend">
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #cc0000"></div>
+              1–4 employees <span class="legend-pct">61.8%</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #e74c3c"></div>
+              5–19 employees <span class="legend-pct">29.3%</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #e59866"></div>
+              20–49 employees <span class="legend-pct">5.9%</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #fad7a0"></div>
+              50–199 employees <span class="legend-pct">2.7%</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot circle" style="background: #aeb6bf"></div>
+              200+ employees <span class="legend-pct">0.4%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: 2×2 stat cards + Deep Dive chip -->
+      <div class="layout-right">
+        <!-- Stats — 2×2 grid of KPI cards -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+          "
+        >
+          <div class="kpi-card accent-red">
+            <div class="kpi-label">Micro-Firm Share</div>
+            <div class="kpi-value">61.8%</div>
+            <div class="kpi-sublabel">
+              of employer firms have only 1–4 employees
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Employer Firms</div>
+            <div class="kpi-value">160,648</div>
+            <div class="kpi-sublabel">
+              total construction employer firms (Dec 2025)
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Solo Operators</div>
+            <div class="kpi-value">255,915</div>
+            <div class="kpi-sublabel">firms with no employees at all</div>
+          </div>
+          <div class="kpi-card accent-green">
+            <div class="kpi-label">Sector Growth</div>
+            <div class="kpi-value">+13.7%</div>
+            <div class="kpi-sublabel">growth in employer firms since 2015</div>
+          </div>
+        </div>
+
+        <!-- Deep Dive insight chip -->
+        <div class="insight-chip accent-red">
+          <div class="chip-label">Deep Dive</div>
+          <div class="chip-stat">
+            Canada's construction industry is worth ~<strong
+              >$284 billion USD</strong
+            >
+            — yet nearly 1 in 4 construction workers is a solo operator with no
+            employees at all.
+          </div>
+          <div class="chip-detail">
+            That's over 255,000 one-person shops swinging hammers and signing
+            invoices simultaneously. Add in firms with 1–4 staff and you account
+            for <strong>over 80%</strong> of all construction businesses in
+            Canada.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script>
+      /* ── DATA ──────────────────────────────────────────────────────────────
+         Source: Statistics Canada, Canadian Business Counts, Dec 2025.
+         Table 33-10-0034-01 — Construction sector, employer firms by size band.
+         Regrouped into 5 buckets:
+           1–4:     99,222                   → 61.8%
+           5–19:    31,013 + 16,015 = 47,028 → 29.3%
+           20–49:   9,507                    →  5.9%
+           50–199:  3,120 + 1,212  = 4,332   →  2.7%
+           200+:    459 + 100                →  0.4%
+           Total:   160,648
+      ────────────────────────────────────────────────────────────────────── */
+
+      /* Centre-text plugin — shows dominant segment label in middle of donut */
+      const constCentreText = {
+        id: "centreText",
+        afterDatasetDraw(chart) {
+          const {
+            ctx,
+            chartArea: { top, bottom, left, right },
+          } = chart;
+          const cx = (left + right) / 2;
+          const cy = (top + bottom) / 2;
+
+          ctx.save();
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          ctx.font = `800 2.2rem ${FONT}, system-ui, sans-serif`;
+          ctx.fillStyle = "#CC0000";
+          ctx.fillText("61.8%", cx, cy - 12);
+
+          ctx.font = `600 0.75rem ${FONT}, system-ui, sans-serif`;
+          ctx.fillStyle = "#CC0000";
+          ctx.fillText("have 1–4 employees", cx, cy + 18);
+
+          ctx.restore();
+        },
+      };
+
+      new Chart(document.getElementById("constSizeDonut"), {
+        type: "doughnut",
+        plugins: [constCentreText],
+        data: {
+          labels: [
+            "1–4 employees",
+            "5–19 employees",
+            "20–49 employees",
+            "50–199 employees",
+            "200+ employees",
+          ],
+          datasets: [
+            {
+              /* Regrouped counts Dec 2025:
+                 1–4: 99,222 | 5–19: 31,013+16,015=47,028
+                 20–49: 9,507 | 50–199: 3,120+1,212=4,332 | 200+: 459+100=559 */
+              data: [99222, 47028, 9507, 4332, 559],
+              backgroundColor: [
+                "#CC0000" /* 1–4   */,
+                "#E74C3C" /* 5–19  */,
+                "#E59866" /* 20–49 */,
+                "#FAD7A0" /* 50–199 */,
+                "#AEB6BF" /* 200+  */,
+              ],
+              borderWidth: 2,
+              borderColor: "#fff",
+              hoverOffset: 10,
+            },
+          ],
+        },
+        options: {
+          ...RESPONSIVE_OPTS,
+          cutout: "62%",
+          animation: {
+            duration: 2000,
+            easing: "easeInOutCubic",
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label(ctx) {
+                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                  const pct = ((ctx.raw / total) * 100).toFixed(1);
+                  return `  ${ctx.label}: ${fmtLocale(ctx.raw)} firms (${pct}%)`;
+                },
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

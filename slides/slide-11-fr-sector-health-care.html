@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Analyse sectorielle — Soins de santé : le secteur solo à la croissance la
+      plus rapide
+    </title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── EN-TÊTE ────────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="slide-source">
+        Statistique Canada · Portail du gouvernement ouvert<br />
+        Dénombrement des entreprises canadiennes · ICIS Main-d'œuvre en santé
+        2024 · StatCan 75-006-x · EDSC COPS, SCIAN 62, 2024–2033
+      </div>
+    </div>
+
+    <!-- ── BARRE D'ACCENT ─────────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── ZONE HERO ──────────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>Soins de santé : une croissance portée par la démographie</h1>
+      <p class="subtitle">
+        Le vieillissement de la population canadienne accélère la demande de
+        services de santé indépendants et de praticiens spécialisés.
+      </p>
+    </div>
+
+    <!-- ── CORPS DE LA DIAPOSITIVE ──────────────────────────────────────────
+         .slide-body regroupe les trois sections principales — bande d'ICP,
+         graphiques à deux colonnes et encadré Zoom — en une colonne flex
+         avec un écart uniforme de 32 px entre elles.
+    ────────────────────────────────────────────────────────────────────── -->
+    <div class="slide-body">
+      <!-- ── BANDE D'ICP ────────────────────────────────────────────────────
+         Quatre indicateurs clés de performance.
+         accent-green → +50 % (croissance) ; accent-green → +6,9 % (main-d'œuvre) ;
+         navy par défaut pour les deux statistiques de dénombrement et de ratio.
+    ────────────────────────────────────────────────────────────────────── -->
+      <div class="kpi-strip fade-in">
+        <div class="kpi-card accent-green" style="flex: 1">
+          <div class="kpi-label">Entreprises solo en santé</div>
+          <div class="kpi-value">+50&nbsp;%</div>
+          <div class="kpi-sublabel">2015 → 2025</div>
+        </div>
+        <div class="kpi-card" style="flex: 1">
+          <div class="kpi-label">Entreprises solo en santé</div>
+          <div class="kpi-value">209&nbsp;861</div>
+          <div class="kpi-sublabel">en 2025</div>
+        </div>
+        <div class="kpi-card accent-green" style="flex: 1">
+          <div class="kpi-label">Croissance de la main-d'œuvre infirmière</div>
+          <div class="kpi-value">+6,9&nbsp;%</div>
+          <div class="kpi-sublabel">en 2024 seulement</div>
+        </div>
+        <div class="kpi-card" style="flex: 1">
+          <div class="kpi-label">
+            Santé c. ensemble des secteurs (depuis 1998)
+          </div>
+          <div class="kpi-value">2×</div>
+          <div class="kpi-sublabel">taux de croissance de la main-d'œuvre</div>
+        </div>
+      </div>
+
+      <!-- ── GRAPHIQUES À DEUX COLONNES ───────────────────────────────────── -->
+      <div class="chart-row fade-in" style="grid-template-columns: 1fr 1fr">
+        <!-- GAUCHE : Entreprises solo en santé au fil du temps (courbe) -->
+        <div class="chart-col">
+          <div class="chart-section accent-teal">
+            <div class="chart-header">
+              <span class="chart-title">
+                Croissance des entreprises solo en santé (2015–2025)
+              </span>
+            </div>
+            <div class="chart-canvas-wrap h-340">
+              <canvas
+                id="chart-ff-health"
+                role="img"
+                aria-label="Les entreprises solo en soins de santé sont passées de 140 192 en juillet 2015 à 209 861 en juillet 2025 — une hausse de 50 %."
+              ></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- DROITE : Professions à la croissance la plus rapide (barre horizontale) -->
+        <div class="chart-col">
+          <div class="chart-section accent-teal">
+            <div class="chart-header">
+              <span class="chart-title">
+                Où se concentre la croissance (pour 100 000 hab., 2024)
+              </span>
+            </div>
+            <div class="chart-canvas-wrap h-340">
+              <canvas
+                id="chart-ff-health-prof"
+                role="img"
+                aria-label="Les psychothérapeutes arrivent en tête à +10,9 % de croissance annuelle, suivis des infirmiers praticiens à +6,7 %, des sages-femmes à +5,0 %, des ergothérapeutes à +4,2 %, des paramédics à +3,8 % et des physiothérapeutes à +3,1 %."
+              ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ENCADRÉ ZOOM ───────────────────────────────────────────────────
+         Utilise insight-chip / accent-teal — étiquette « Zoom » en fr-CA.
+    ────────────────────────────────────────────────────────────────────── -->
+      <div class="insight-chip accent-teal fade-in">
+        <div class="chip-label">Zoom</div>
+        <div class="chip-detail">
+          Les soins de santé se distinguent par une demande qui progresse plus
+          vite que l'offre de main-d'œuvre. La croissance la plus forte touche
+          les professions communautaires — psychothérapie, infirmiers
+          praticiens, sages-femmes — signe d'un virage vers les soins
+          décentralisés et préventifs.
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script>
+      /* ── ÉTIQUETTES : semestrielles, déc.-15 → déc.-25 (21 périodes) ───── */
+      /* NOTE : FONT et fmtNum sont fournis par charts.js — non redéclarés ici */
+      const constLbl = [
+        "Déc-15",
+        "Juin-16",
+        "Déc-16",
+        "Juin-17",
+        "Déc-17",
+        "Juin-18",
+        "Déc-18",
+        "Juin-19",
+        "Déc-19",
+        "Juin-20",
+        "Déc-20",
+        "Juin-21",
+        "Déc-21",
+        "Juin-22",
+        "Déc-22",
+        "Juin-23",
+        "Déc-23",
+        "Juin-24",
+        "Déc-24",
+        "Juin-25",
+        "Déc-25",
+      ];
+
+      /* ── GRAPHIQUE 1 : Entreprises solo en santé au fil du temps ─────── */
+      const hlthLbl = constLbl;
+      const hlthData = [
+        140192, 142798, 138953, 148696, 149476, 154080, 154390, 156065, 157838,
+        160271, 157725, 164050, 149422, 154500, 167164, 174351, 179668, 188406,
+        198568, 204271, 209861,
+      ];
+
+      new Chart(document.getElementById("chart-ff-health"), {
+        type: "line",
+        data: {
+          labels: hlthLbl,
+          datasets: [
+            {
+              label: "Entreprises solo en santé",
+              data: hlthData,
+              borderColor: "#1D7A4F",
+              backgroundColor: "rgba(29,122,79,0.10)",
+              fill: true,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) =>
+                  ctx.raw.toLocaleString("fr-CA") + " entreprises",
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                callback: (_, i) => (i % 4 === 0 ? hlthLbl[i] : ""),
+                maxRotation: 45,
+                font: { size: 12, family: FONT },
+              },
+              grid: { color: "rgba(0,0,0,0.05)" },
+            },
+            y: {
+              min: 120000,
+              ticks: {
+                callback: (v) => fmtNum(v),
+                font: { size: 12, family: FONT },
+              },
+              grid: { color: "rgba(0,0,0,0.05)" },
+            },
+          },
+        },
+      });
+
+      /* ── GRAPHIQUE 2 : Professions à la croissance la plus rapide (barre horizontale) ── */
+      new Chart(document.getElementById("chart-ff-health-prof"), {
+        type: "bar",
+        data: {
+          labels: [
+            "Psychothérapeutes /\nThérapeutes en counseling",
+            "Infirmiers praticiens",
+            "Sages-femmes",
+            "Ergothérapeutes",
+            "Paramédics",
+            "Physiothérapeutes",
+          ],
+          datasets: [
+            {
+              label: "Croissance annuelle pour 100 000 hab. (%)",
+              data: [10.9, 6.7, 5.0, 4.2, 3.8, 3.1],
+              backgroundColor: [
+                "#1D7A4F",
+                "#27AE60",
+                "#52BE80",
+                "#82E0AA",
+                "#ABEBC6",
+                "#D5F5E3",
+              ],
+              borderRadius: 5,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: "y",
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: { label: (ctx) => "+" + ctx.raw + " % par an" },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                callback: (v) => "+" + v + " %",
+                font: { size: 12, family: FONT },
+              },
+              grid: { color: "rgba(0,0,0,0.05)" },
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 12, family: FONT } },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

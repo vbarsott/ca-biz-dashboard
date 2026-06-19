@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Régional B — L'Alberta face à la décennie de croissance de l'Ontario
+    </title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+    <div class="slide-header">
+      <div class="goc-wordmark" aria-label="Gouvernement du Canada"></div>
+      <div class="slide-source">
+        Statistique Canada · Portail du gouvernement ouvert<br />
+        Dénombrements des entreprises canadiennes · Tableaux 33-10-0034-01 à
+        33-10-1096-01
+      </div>
+    </div>
+
+    <!-- ── RED ACCENT BAR ──────────────────────────────────────────────── -->
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
+    <div class="hero-zone fade-in">
+      <h1>
+        L'Alberta — une décennie pour se relever face à la décennie de
+        croissance de l'Ontario
+      </h1>
+      <p class="subtitle">
+        Deux provinces. Une décennie. Des résultats radicalement différents.
+      </p>
+    </div>
+
+    <!-- ── FULL-WIDTH CHART ─────────────────────────────────────────────── -->
+    <div class="chart-wrapper">
+      <div class="chart-section accent-orange fade-in">
+        <div class="chart-header">
+          <span class="chart-title"
+            >Alberta c. Ontario — entreprises employeuses, 2015–2025</span
+          >
+        </div>
+        <div class="chart-canvas-wrap h-400">
+          <canvas
+            id="chart-ab-on"
+            role="img"
+            aria-label="L'Alberta a culminé à 181 773 (2015), chuté à 170 266 (2021) et récupéré à peine à 181 254 en 2025. L'Ontario a progressé régulièrement de 449 541 à 515 484."
+          ></canvas>
+        </div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--orange)"></div>
+            Alberta (axe gauche)
+          </div>
+          <div class="legend-item">
+            <div class="legend-dash"></div>
+            Ontario (axe droit)
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BOTTOM ROW: insight chip (left) | stats block (right) ────────── -->
+      <div
+        class="insight-row fade-in"
+        role="region"
+        aria-label="La décennie de l'Alberta"
+      >
+        <!-- Left: insight chip -->
+        <div class="insight-chip">
+          <div class="chip-label">La décennie de l'Alberta</div>
+          <div class="chip-stat">
+            Le dénombrement des entreprises employeuses de l'Alberta en déc.
+            2025 (181 254) était quasi identique à déc. 2015 (181 773).
+          </div>
+          <div class="chip-detail">
+            Une décennie entière marquée par l'effondrement du pétrole, une
+            pandémie et une lente reprise, se terminant par une perte nette de
+            519 entreprises. L'Ontario a progressé de +14,7 % sur la même
+            période, ajoutant près de 66 000 entreprises employeuses nettes.
+          </div>
+        </div>
+
+        <!-- Right: KPI stats block -->
+        <div class="stats-block">
+          <div class="panel-kpi-row">
+            <div class="panel-kpi">
+              <div class="panel-kpi-val">−519</div>
+              <div class="panel-kpi-label">
+                Variation nette des entreprises employeuses, 2015 → 2025<br />
+                (181 773 → 181 254)
+              </div>
+            </div>
+            <div class="panel-kpi">
+              <div class="panel-kpi-val">+65 943</div>
+              <div class="panel-kpi-label">
+                Nouvelles entreprises employeuses nettes en Ontario sur la même
+                période<br />
+                (449 541 → 515 484)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/wordmark.js"></script>
+    <script src="../js/charts.js"></script>
+    <script>
+      /* ── DONNÉES ────────────────────────────────────────────────────────────
+         Source : Statistique Canada, Dénombrements des entreprises canadiennes
+         Entreprises employeuses (avec employés) · Instantanés de décembre
+         L'Alberta utilise l'axe y gauche (yAB); l'Ontario utilise l'axe y droit (yON).
+      ────────────────────────────────────────────────────────────────────── */
+      const decLabels = [
+        "Déc. 2015",
+        "Déc. 2016",
+        "Déc. 2017",
+        "Déc. 2018",
+        "Déc. 2019",
+        "Déc. 2020",
+        "Déc. 2021",
+        "Déc. 2022",
+        "Déc. 2023",
+        "Déc. 2024",
+        "Déc. 2025",
+      ];
+
+      const abData = [
+        181773, 179341, 175921, 175346, 175385, 172755, 170266, 173441, 175383,
+        177582, 181254,
+      ];
+      const onData = [
+        449541, 459107, 463721, 471846, 484399, 480929, 482575, 499516, 506632,
+        509150, 515484,
+      ];
+
+      new Chart(document.getElementById("chart-ab-on"), {
+        type: "line",
+        data: {
+          labels: decLabels,
+          datasets: [
+            {
+              label: "Alberta",
+              data: abData,
+              borderColor: PALETTE.orange,
+              backgroundColor: "rgba(181,71,8,0.08)",
+              borderWidth: 2.5,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+              pointBackgroundColor: PALETTE.orange,
+              pointBorderColor: PALETTE.white,
+              pointBorderWidth: 2,
+              fill: true,
+              tension: 0.3,
+              yAxisID: "yAB",
+            },
+            {
+              label: "Ontario",
+              data: onData,
+              borderColor: PALETTE.navy,
+              backgroundColor: "transparent",
+              borderWidth: 2.5,
+              borderDash: [7, 3],
+              pointRadius: 5,
+              pointHoverRadius: 8,
+              pointBackgroundColor: PALETTE.navy,
+              pointBorderColor: PALETTE.white,
+              pointBorderWidth: 2,
+              fill: false,
+              tension: 0.3,
+              yAxisID: "yON",
+            },
+          ],
+        },
+        options: {
+          ...RESPONSIVE_OPTS,
+          interaction: { mode: "index", intersect: false },
+          animation: {
+            duration: 2000,
+            easing: "easeInOutCubic",
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              ...TOOLTIP_DEFAULTS,
+              callbacks: {
+                label: (ctx) => `  ${ctx.dataset.label}: ${fmtLocale(ctx.raw)}`,
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: PALETTE.mid,
+                font: { size: 12, family: FONT },
+                maxRotation: 30,
+              },
+              grid: GRID_SUBTLE,
+              border: { color: PALETTE.border },
+            },
+            yAB: {
+              position: "left",
+              min: 163000,
+              max: 193000,
+              ticks: {
+                color: PALETTE.orange,
+                font: { size: 12, family: FONT },
+                callback: (v) => (v / 1000).toFixed(0) + "k",
+              },
+              grid: GRID_SUBTLE,
+              title: {
+                display: true,
+                text: "Alberta (milliers)",
+                color: PALETTE.orange,
+                font: { size: 12, family: FONT },
+              },
+            },
+            yON: {
+              position: "right",
+              min: 430000,
+              max: 530000,
+              ticks: {
+                color: PALETTE.navy,
+                font: { size: 12, family: FONT },
+                callback: (v) => (v / 1000).toFixed(0) + "k",
+              },
+              grid: { display: false },
+              title: {
+                display: true,
+                text: "Ontario (milliers)",
+                color: PALETTE.navy,
+                font: { size: 12, family: FONT },
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

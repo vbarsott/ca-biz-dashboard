@@ -131,6 +131,45 @@ const bandPlugin = {
   },
 };
 
+/* ── FONT-READY CHART INITIALIZER ───────────────────────────────────────────
+   Defers chart creation until Lato is fully loaded AND the canvas font cache
+   has been updated, eliminating the fallback-font flash on static FR slides.
+
+   Usage:
+     initChartAfterFonts(function () {
+       new Chart(ctx, { ... });
+     });
+
+   Why two steps?
+   ─────────────────────────────────────────────────────────────────────────
+   1. document.fonts.load()
+      Explicitly downloads the specific Lato variants used in chart tick
+      labels. Unlike document.fonts.ready, fonts.load() resolves only when
+      the requested font face is actually downloaded — not during the
+      font-display:swap fallback period that Google Fonts uses. We load
+      the two weights that canvas will actually request: 400 (body) and 700
+      (the nearest loaded weight when charts ask for 600).
+
+   2. requestAnimationFrame()
+      document.fonts.load() resolves as a microtask, but the canvas 2D font
+      cache is updated on rAF paint-cycle boundaries. Without the rAF, a
+      synchronous chart render (animation:false) fires in the same microtask
+      before the canvas engine has picked up Lato — producing one frame of
+      fallback font. The rAF guarantees we're past that boundary.
+
+   Together these two steps make the fix reliable for both animated EN slides
+   (which would have been fine anyway) and static FR slides (animation:false)
+   which previously raced and lost.
+   ─────────────────────────────────────────────────────────────────────── */
+function initChartAfterFonts(initFn) {
+  Promise.all([
+    document.fonts.load('400 16px "Lato"'),
+    document.fonts.load('700 16px "Lato"'),
+  ]).then(function () {
+    requestAnimationFrame(initFn);
+  });
+}
+
 /* ── CENTRE-TEXT PLUGIN ─────────────────────────────────────────────────────
    Renders a headline stat + sub-label in the hole of a doughnut chart.
    Usage: pass options via chart.options.plugins.centreText = { value, label }

@@ -52,8 +52,6 @@
     <script src="../js/charts.js"></script>
 
     <script>
-      Chart.register(ChartDataLabels);
-
       /* ── DATA ──────────────────────────────────────────────────────────────
          Source: Statistics Canada, Canadian Business Counts
          Employer businesses (with employees) · December snapshots
@@ -79,6 +77,10 @@
         14.7, 11.8, 8.9, 8.4, 7.6, 5.8, 5.2, 0.0, -0.0, -0.1, -0.3, -7.0, -9.5,
       ];
 
+      initChartAfterFonts(function () {
+      // Register DataLabels inside the font-ready callback so the plugin's
+      // text rendering is guaranteed to fire after Lato is in the canvas cache.
+      Chart.register(ChartDataLabels);
       new Chart(document.getElementById("chart-prov-growth"), {
         type: "bar",
         data: {
@@ -158,6 +160,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

@@ -97,6 +97,7 @@
       const sectorIdx = woSectorM
         .map((_, i) => i)
         .sort((a, b) => woSectorM[b] - woSectorM[a]);
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("chart-sector-mirror"), {
         type: "bar",
         data: {
@@ -158,6 +159,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

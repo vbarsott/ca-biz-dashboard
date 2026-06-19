@@ -157,6 +157,7 @@
         101885,
       ];
 
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("chart-ff-gig"), {
         type: "line",
         data: {
@@ -245,6 +246,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

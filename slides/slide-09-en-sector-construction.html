@@ -177,6 +177,7 @@
         },
       };
 
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("constSizeDonut"), {
         type: "doughnut",
         plugins: [constCentreText],
@@ -229,6 +230,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

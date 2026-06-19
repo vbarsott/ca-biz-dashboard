@@ -180,6 +180,7 @@
         };
       }
 
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("chart-counts"), {
         type: "line",
         plugins: [covidBandPlugin()],
@@ -283,6 +284,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

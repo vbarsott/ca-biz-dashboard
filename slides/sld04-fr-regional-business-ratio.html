@@ -95,6 +95,7 @@
       ];
       const nationalAvg = 2.67;
 
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("chart-selfemp-ratio"), {
         type: "bar",
         data: {
@@ -155,6 +156,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

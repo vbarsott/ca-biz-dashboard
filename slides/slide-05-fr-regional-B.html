@@ -136,6 +136,7 @@
         509150, 515484,
       ];
 
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("chart-ab-on"), {
         type: "line",
         data: {
@@ -237,6 +238,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

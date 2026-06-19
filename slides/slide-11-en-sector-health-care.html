@@ -169,6 +169,7 @@
         198568, 204271, 209861,
       ];
 
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("chart-ff-health"), {
         type: "line",
         data: {
@@ -271,6 +272,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

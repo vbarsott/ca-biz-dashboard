@@ -58,6 +58,7 @@
            "500+"   = band 500+                   → 3,519    →  0.3%
            Total:                                   1,372,109
       ────────────────────────────────────────────────────────────────────── */
+      initChartAfterFonts(function () {
       new Chart(document.getElementById("sizeBar").getContext("2d"), {
         type: "bar",
         data: {
@@ -121,6 +122,8 @@
           },
         },
       });
+      }); // initChartAfterFonts
+
     </script>
   </body>
 </html>

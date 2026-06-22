@@ -3,8 +3,34 @@
    All slides link to this file. No per-slide palette or typography overrides.
    Font: Lato (weights 300 / 400 / 700 / 900) from Google Fonts.
    ═══════════════════════════════════════════════════════════════════════════ */
-
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/lato-300.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/lato-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/lato-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../fonts/lato-900.woff2") format("woff2");
+}
 
 /* ── DESIGN TOKENS ── */
 /* ─────────────────── */

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sld1 - National Overview | Aperçu national</title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="../js/vendor/chart.umd.min.js"></script>
   </head>
 
   <body>
@@ -116,99 +116,97 @@
         3667853, // post-COVID 2022–2025
       ];
       initChartAfterFonts(function () {
+        const ctx = document.getElementById("bizChart").getContext("2d");
 
-      const ctx = document.getElementById("bizChart").getContext("2d");
-
-      new Chart(ctx, {
-        type: "line",
-        plugins: [bandPlugin],
-        data: {
-          labels,
-          datasets: [
-            {
-              label: "Sans employés",
-              data: withoutEmp,
-              borderColor: PALETTE.teal,
-              backgroundColor: "rgba(0,107,94,0.08)",
-              borderWidth: 3,
-              pointRadius: 6,
-              pointHoverRadius: 9,
-              pointBackgroundColor: PALETTE.teal,
-              pointBorderColor: PALETTE.white,
-              pointBorderWidth: 2,
-              fill: false,
-              tension: 0.35,
-              order: 1,
+        new Chart(ctx, {
+          type: "line",
+          plugins: [bandPlugin],
+          data: {
+            labels,
+            datasets: [
+              {
+                label: "Sans employés",
+                data: withoutEmp,
+                borderColor: PALETTE.teal,
+                backgroundColor: "rgba(0,107,94,0.08)",
+                borderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 9,
+                pointBackgroundColor: PALETTE.teal,
+                pointBorderColor: PALETTE.white,
+                pointBorderWidth: 2,
+                fill: false,
+                tension: 0.35,
+                order: 1,
+              },
+              {
+                label: "Avec employés",
+                data: withEmp,
+                borderColor: PALETTE.navy,
+                backgroundColor: "rgba(0,51,102,0.06)",
+                borderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 9,
+                pointBackgroundColor: PALETTE.navy,
+                pointBorderColor: PALETTE.white,
+                pointBorderWidth: 2,
+                fill: false,
+                tension: 0.35,
+                order: 2,
+              },
+            ],
+          },
+          options: {
+            ...RESPONSIVE_OPTS,
+            interaction: { mode: "index", intersect: false },
+            animation: false, // FR slide — static chart, no entrance animation
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                ...TOOLTIP_DEFAULTS,
+                callbacks: {
+                  label(ctx) {
+                    return `  ${ctx.dataset.label}: ${fmtLocale(ctx.raw)}`;
+                  },
+                },
+              },
             },
-            {
-              label: "Avec employés",
-              data: withEmp,
-              borderColor: PALETTE.navy,
-              backgroundColor: "rgba(0,51,102,0.06)",
-              borderWidth: 3,
-              pointRadius: 6,
-              pointHoverRadius: 9,
-              pointBackgroundColor: PALETTE.navy,
-              pointBorderColor: PALETTE.white,
-              pointBorderWidth: 2,
-              fill: false,
-              tension: 0.35,
-              order: 2,
-            },
-          ],
-        },
-        options: {
-          ...RESPONSIVE_OPTS,
-          interaction: { mode: "index", intersect: false },
-          animation: false, // FR slide — static chart, no entrance animation
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              ...TOOLTIP_DEFAULTS,
-              callbacks: {
-                label(ctx) {
-                  return `  ${ctx.dataset.label}: ${fmtLocale(ctx.raw)}`;
+            scales: {
+              x: {
+                grid: GRID_STYLE,
+                ticks: {
+                  ...AXIS_TICK,
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                },
+                border: { color: PALETTE.border },
+                title: {
+                  display: false,
+                  text: "Année",
+                  ...AXIS_TITLE_STYLE,
+                },
+              },
+              y: {
+                min: 1000000,
+                grid: GRID_STYLE,
+                ticks: {
+                  ...AXIS_TICK,
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  callback: fmtNum,
+                  maxTicksLimit: 8,
+                },
+                border: { color: PALETTE.border },
+                title: {
+                  display: false,
+                  text: "Nombre d'entreprises",
+                  ...AXIS_TITLE_STYLE,
                 },
               },
             },
           },
-          scales: {
-            x: {
-              grid: GRID_STYLE,
-              ticks: {
-                ...AXIS_TICK,
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-              },
-              border: { color: PALETTE.border },
-              title: {
-                display: false,
-                text: "Année",
-                ...AXIS_TITLE_STYLE,
-              },
-            },
-            y: {
-              min: 1000000,
-              grid: GRID_STYLE,
-              ticks: {
-                ...AXIS_TICK,
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                callback: fmtNum,
-                maxTicksLimit: 8,
-              },
-              border: { color: PALETTE.border },
-              title: {
-                display: false,
-                text: "Nombre d'entreprises",
-                ...AXIS_TITLE_STYLE,
-              },
-            },
-          },
-        },
-      });
+        });
       }); // initChartAfterFonts
-
     </script>
   </body>
 </html>

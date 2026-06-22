@@ -8,7 +8,7 @@
       secteur
     </title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="../js/vendor/chart.umd.min.js"></script>
   </head>
 
   <body>
@@ -98,69 +98,68 @@
         .map((_, i) => i)
         .sort((a, b) => woSectorM[b] - woSectorM[a]);
       initChartAfterFonts(function () {
-      new Chart(document.getElementById("chart-sector-mirror"), {
-        type: "bar",
-        data: {
-          labels: sectorIdx.map((i) => sectorNamesM[i]),
-          datasets: [
-            {
-              label: "Entreprises employeurs",
-              data: sectorIdx.map((i) => withSectorM[i] / 1000),
-              backgroundColor: "rgba(181,71,8,1)",
-              borderColor: "#b54708",
-              borderWidth: 1,
-              borderRadius: 5,
+        new Chart(document.getElementById("chart-sector-mirror"), {
+          type: "bar",
+          data: {
+            labels: sectorIdx.map((i) => sectorNamesM[i]),
+            datasets: [
+              {
+                label: "Entreprises employeurs",
+                data: sectorIdx.map((i) => withSectorM[i] / 1000),
+                backgroundColor: "rgba(181,71,8,1)",
+                borderColor: "#b54708",
+                borderWidth: 1,
+                borderRadius: 5,
+              },
+              {
+                label: "Travailleurs autonomes",
+                data: sectorIdx.map((i) => woSectorM[i] / 1000),
+                backgroundColor: "rgba(26,74,122,1)",
+                borderColor: "#1a4a7a",
+                borderWidth: 1,
+                borderRadius: 5,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false, // FR slide — static chart, no entrance animation
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) =>
+                    ctx.dataset.label +
+                    " : " +
+                    (ctx.raw * 1000).toLocaleString("fr-CA"),
+                },
+              },
             },
-            {
-              label: "Travailleurs autonomes",
-              data: sectorIdx.map((i) => woSectorM[i] / 1000),
-              backgroundColor: "rgba(26,74,122,1)",
-              borderColor: "#1a4a7a",
-              borderWidth: 1,
-              borderRadius: 5,
-            },
-          ],
-        },
-        options: {
-          indexAxis: "y",
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: false, // FR slide — static chart, no entrance animation
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: (ctx) =>
-                  ctx.dataset.label +
-                  " : " +
-                  (ctx.raw * 1000).toLocaleString("fr-CA"),
+            scales: {
+              x: {
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  callback: (v) => v + "k",
+                },
+                grid: { color: "rgba(0,0,0,0.06)" },
+              },
+              y: {
+                afterFit(scale) {
+                  scale.width = 260; /* fixed label column — prevents truncation */
+                },
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                },
+                grid: { display: false },
               },
             },
           },
-          scales: {
-            x: {
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                callback: (v) => v + "k",
-              },
-              grid: { color: "rgba(0,0,0,0.06)" },
-            },
-            y: {
-              afterFit(scale) {
-                scale.width = 260; /* fixed label column — prevents truncation */
-              },
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-              },
-              grid: { display: false },
-            },
-          },
-        },
-      });
+        });
       }); // initChartAfterFonts
-
     </script>
   </body>
 </html>

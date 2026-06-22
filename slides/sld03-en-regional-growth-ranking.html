@@ -7,8 +7,8 @@
       Sld3 - Regional Growth Ranking | Classement de croissance régionale
     </title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+    <script src="../js/vendor/chart.umd.min.js"></script>
+    <script src="../js/vendor/chartjs-plugin-datalabels.min.js"></script>
   </head>
 
   <body>
@@ -78,90 +78,93 @@
       ];
 
       initChartAfterFonts(function () {
-      // Register DataLabels inside the font-ready callback so the plugin's
-      // text rendering is guaranteed to fire after Lato is in the canvas cache.
-      Chart.register(ChartDataLabels);
-      new Chart(document.getElementById("chart-prov-growth"), {
-        type: "bar",
-        data: {
-          labels: provs,
-          datasets: [
-            {
-              data: pcts,
-              /* Rule: v > 0 → green; v < 0 → ghost; v === 0 → no bar */
-              backgroundColor: pcts.map((v) =>
-                v === 0 ? "transparent" : v < 0 ? PALETTE.orange : PALETTE.navy,
-              ),
-              borderWidth: 0,
-              borderRadius: 5,
-              /* Option B: minimum visible bar height so near-zero values
+        // Register DataLabels inside the font-ready callback so the plugin's
+        // text rendering is guaranteed to fire after Lato is in the canvas cache.
+        Chart.register(ChartDataLabels);
+        new Chart(document.getElementById("chart-prov-growth"), {
+          type: "bar",
+          data: {
+            labels: provs,
+            datasets: [
+              {
+                data: pcts,
+                /* Rule: v > 0 → green; v < 0 → ghost; v === 0 → no bar */
+                backgroundColor: pcts.map((v) =>
+                  v === 0
+                    ? "transparent"
+                    : v < 0
+                      ? PALETTE.orange
+                      : PALETTE.navy,
+                ),
+                borderWidth: 0,
+                borderRadius: 5,
+                /* Option B: minimum visible bar height so near-zero values
                  (AB, NU, SK, NB) are never invisible — data unchanged */
-              // minBarLength: 6,
-            },
-          ],
-        },
-        options: {
-          ...RESPONSIVE_OPTS,
-          animation: {
-            duration: 1800,
-            easing: "easeInOutCubic",
-          },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              ...TOOLTIP_DEFAULTS,
-              callbacks: {
-                label: (ctx) => "  " + fmtPct(ctx.raw),
+                // minBarLength: 6,
               },
+            ],
+          },
+          options: {
+            ...RESPONSIVE_OPTS,
+            animation: {
+              duration: 1800,
+              easing: "easeInOutCubic",
             },
-            datalabels: {
-              color: PALETTE.mid,
-              font: { size: 16, family: FONT, weight: "600" },
-              formatter: (v) => (v > 0 ? "+" : "") + v + "%",
-              /* v > 0  → anchor at bar top,      align top    → label above bar
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                ...TOOLTIP_DEFAULTS,
+                callbacks: {
+                  label: (ctx) => "  " + fmtPct(ctx.raw),
+                },
+              },
+              datalabels: {
+                color: PALETTE.mid,
+                font: { size: 16, family: FONT, weight: "600" },
+                formatter: (v) => (v > 0 ? "+" : "") + v + "%",
+                /* v > 0  → anchor at bar top,      align top    → label above bar
                  v === 0 → anchor at baseline,     align bottom → label below baseline
                  v < 0  → anchor at bar bottom,    align end    → label below bar */
-              anchor: (ctx) => {
-                const v = ctx.dataset.data[ctx.dataIndex];
-                /* For 0-value bars the minBarLength stub extends upward, so "end"
+                anchor: (ctx) => {
+                  const v = ctx.dataset.data[ctx.dataIndex];
+                  /* For 0-value bars the minBarLength stub extends upward, so "end"
                    would land above the baseline. Use "start" (= baseline) instead. */
-                return v === 0 ? "start" : "end";
+                  return v === 0 ? "start" : "end";
+                },
+                align: (ctx) => {
+                  const v = ctx.dataset.data[ctx.dataIndex];
+                  if (v > 0) return "top";
+                  if (v === 0) return "top";
+                  return "end";
+                },
+                offset: 2,
               },
-              align: (ctx) => {
-                const v = ctx.dataset.data[ctx.dataIndex];
-                if (v > 0) return "top";
-                if (v === 0) return "top";
-                return "end";
+            },
+            scales: {
+              x: {
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  maxRotation: 45,
+                  minRotation: 45,
+                },
+                grid: { display: false },
               },
-              offset: 2,
+              y: {
+                ticks: {
+                  display: false,
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  callback: (v) => (v > 0 ? "+" : "") + v + " %",
+                },
+                grid: GRID_SUBTLE,
+                min: -15,
+                max: 20,
+              },
             },
           },
-          scales: {
-            x: {
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                maxRotation: 45,
-                minRotation: 45,
-              },
-              grid: { display: false },
-            },
-            y: {
-              ticks: {
-                display: false,
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                callback: (v) => (v > 0 ? "+" : "") + v + " %",
-              },
-              grid: GRID_SUBTLE,
-              min: -15,
-              max: 20,
-            },
-          },
-        },
-      });
+        });
       }); // initChartAfterFonts
-
     </script>
   </body>
 </html>

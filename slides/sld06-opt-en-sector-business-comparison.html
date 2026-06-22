@@ -8,7 +8,7 @@
       secteur
     </title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="../js/vendor/chart.umd.min.js"></script>
   </head>
 
   <body>
@@ -78,64 +78,63 @@
       ];
 
       initChartAfterFonts(function () {
-      new Chart(document.getElementById("chart-sector-shifts"), {
-        type: "bar",
-        data: {
-          labels: sectors,
-          datasets: [
-            {
-              data: spcts,
-              backgroundColor: spcts.map((v) =>
-                v >= 0 ? "#006b5e" : "#b54708",
-              ),
-              borderWidth: 0,
-              borderRadius: 5,
-            },
-          ],
-        },
-        options: {
-          indexAxis: "y",
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: {
-            duration: 1800,
-            easing: "easeInOutCubic",
+        new Chart(document.getElementById("chart-sector-shifts"), {
+          type: "bar",
+          data: {
+            labels: sectors,
+            datasets: [
+              {
+                data: spcts,
+                backgroundColor: spcts.map((v) =>
+                  v >= 0 ? "#006b5e" : "#b54708",
+                ),
+                borderWidth: 0,
+                borderRadius: 5,
+              },
+            ],
           },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: (ctx) =>
-                  (ctx.raw >= 0 ? "+" : "") + ctx.raw.toFixed(1) + "%",
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 1800,
+              easing: "easeInOutCubic",
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) =>
+                    (ctx.raw >= 0 ? "+" : "") + ctx.raw.toFixed(1) + "%",
+                },
+              },
+            },
+            scales: {
+              x: {
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  callback: (v) => (v > 0 ? "+" : "") + v + "%",
+                },
+                grid: { color: "rgba(0,0,0,0.06)" },
+                min: -15,
+                max: 35,
+              },
+              y: {
+                afterFit(scale) {
+                  scale.width = 260; /* fixed label column — prevents truncation */
+                },
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                },
+                grid: { display: false },
               },
             },
           },
-          scales: {
-            x: {
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                callback: (v) => (v > 0 ? "+" : "") + v + "%",
-              },
-              grid: { color: "rgba(0,0,0,0.06)" },
-              min: -15,
-              max: 35,
-            },
-            y: {
-              afterFit(scale) {
-                scale.width = 260; /* fixed label column — prevents truncation */
-              },
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-              },
-              grid: { display: false },
-            },
-          },
-        },
-      });
+        });
       }); // initChartAfterFonts
-
     </script>
   </body>
 </html>

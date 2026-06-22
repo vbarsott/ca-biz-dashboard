@@ -7,8 +7,8 @@
       Sld5 - Regional Business Per-Capita | Nombre d'entreprises par habitant
     </title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <script src="../js/vendor/d3.min.js"></script>
+    <script src="../js/vendor/topojson.min.js"></script>
   </head>
 
   <body>
@@ -665,6 +665,28 @@
          Source: StatCan Table 33-10-0034-01 + Table 17-10-0009-01 Q4 2025.
       ────────────────────────────────────────────────────────────────────── */
       (function () {
+        /* ── PROTOCOL GUARD ──────────────────────────────────────────────────────
+           fetch() is blocked by CORS when the page is opened via file:// protocol
+           (e.g. double-clicking in Finder). Always serve via localhost:
+             python3 -m http.server 8080
+           then open http://localhost:8080/slides/sld05-fr-regional-business-per-capita.html
+        ── */
+        if (window.location.protocol === "file:") {
+          const el = document.getElementById("canada-map");
+          if (el)
+            el.innerHTML =
+              '<div style="padding:32px;text-align:center;color:#cc0000;font-size:15px;font-weight:700;line-height:1.6;">' +
+              "⚠ La carte requiert un serveur local.<br>" +
+              "Démarrer: <code>python3 -m http.server 8080</code><br>" +
+              "puis ouvrir <code>http://localhost:8080</code>" +
+              "</div>";
+          console.error(
+            "[sld05-fr] file:// protocol detected — fetch() is blocked by CORS. " +
+              "Run: python3 -m http.server 8080",
+          );
+          return;
+        }
+
         const mapContainer = document.getElementById("canada-map");
         if (!mapContainer) return;
 
@@ -733,17 +755,27 @@
           "Northwest Territories": [-15, 17],
         };
 
-        const topoUrl =
-          "https://cdn.jsdelivr.net/npm/datamaps@0.5.9/src/js/data/can.topo.json";
+        const topoUrl = "../data/geo/can.topo.json";
 
         fetch(topoUrl)
           .then((r) => {
-            if (!r.ok) throw new Error("HTTP " + r.status);
+            if (!r.ok) throw new Error("HTTP " + r.status + " — " + topoUrl);
             return r.json();
           })
           .then((topoData) => {
-            const w = mapContainer.offsetWidth || 640;
-            const h = Math.round(w * 0.56);
+            /* ── Guard: offsetWidth can be 0 if layout hasn't settled; also
+               ensure h is at least 1 so d3.geoAlbers().fitSize() never
+               receives [0, 0] (which causes a divide-by-zero throw). ── */
+            const w =
+              mapContainer.offsetWidth > 0 ? mapContainer.offsetWidth : 640;
+            const h = Math.max(Math.round(w * 0.56), 1);
+
+            /* ── Guard: confirm topology has at least one named object ── */
+            const objKey = Object.keys(topoData.objects || {})[0];
+            if (!objKey)
+              throw new Error(
+                "[sld05-fr] TopoJSON: no objects found in topology",
+              );
 
             const svg = d3
               .select(mapContainer)
@@ -769,7 +801,6 @@
               .attr("flood-color", "rgba(0,0,0,0.75)")
               .attr("flood-opacity", 1);
 
-            const objKey = Object.keys(topoData.objects)[0];
             const features = topojson.feature(
               topoData,
               topoData.objects[objKey],
@@ -879,8 +910,12 @@
               }
             });
           })
-          .catch(() => {
-            /* Graceful fallback if topology cannot be fetched */
+          .catch((err) => {
+            /* Graceful fallback — log actual error so it's diagnosable */
+            console.error(
+              "[sld05-fr] Map render failed:",
+              err && (err.message || String(err)),
+            );
             mapContainer.innerHTML =
               '<div style="padding:32px;text-align:center;color:#555;font-size:16px;font-weight:700;">' +
               "Carte non disponible — consultez le tableau de densité pour les valeurs provinciales." +

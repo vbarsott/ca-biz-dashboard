@@ -79,10 +79,10 @@
 
   /**
    * FR → EN crossfade duration (ms).
-   * Same animation as EN → FR, but stretched ~0.5× for a slower, smoother feel.
+   * Same animation as EN → FR.
    * Applied as an inline style override — CSS base stays at TRANSITION_MS.
    */
-  const TRANSITION_LONG_MS = 2000;
+  const TRANSITION_LONG_MS = 0;
 
   /**
    * Maximum time to wait for an iframe to load before advancing anyway.

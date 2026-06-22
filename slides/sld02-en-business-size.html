@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sld2 - Business Size | Taille des entreprises</title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="../js/vendor/chart.umd.min.js"></script>
   </head>
 
   <body>
@@ -55,71 +55,70 @@
            Total:                                   1,372,109
       ────────────────────────────────────────────────────────────────────── */
       initChartAfterFonts(function () {
-      new Chart(document.getElementById("sizeBar").getContext("2d"), {
-        type: "bar",
-        data: {
-          labels: ["1–4", "5–19", "20–49", "50–499", "500+"],
-          datasets: [
-            {
-              data: [56.5, 30.3, 8.3, 4.6, 0.3],
-              backgroundColor: [
-                PALETTE.teal /* 1–4   */,
-                PALETTE.navyMid /* 5–19  */,
-                PALETTE.projectionBlue /* 20–49 */,
-                PALETTE.ghost /* 50–499*/,
-                PALETTE.orange /* 500+  */,
-              ],
-              borderWidth: 0,
-              borderRadius: 5,
+        new Chart(document.getElementById("sizeBar").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: ["1–4", "5–19", "20–49", "50–499", "500+"],
+            datasets: [
+              {
+                data: [56.5, 30.3, 8.3, 4.6, 0.3],
+                backgroundColor: [
+                  PALETTE.teal /* 1–4   */,
+                  PALETTE.navyMid /* 5–19  */,
+                  PALETTE.projectionBlue /* 20–49 */,
+                  PALETTE.ghost /* 50–499*/,
+                  PALETTE.orange /* 500+  */,
+                ],
+                borderWidth: 0,
+                borderRadius: 5,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 1800, easing: "easeInOutCubic" },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                ...TOOLTIP_DEFAULTS,
+                callbacks: {
+                  label: (ctx) =>
+                    `  ${ctx.raw.toFixed(1)}% of employer businesses`,
+                },
+              },
             },
-          ],
-        },
-        options: {
-          indexAxis: "y",
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: { duration: 1800, easing: "easeInOutCubic" },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              ...TOOLTIP_DEFAULTS,
-              callbacks: {
-                label: (ctx) =>
-                  `  ${ctx.raw.toFixed(1)}% of employer businesses`,
+            scales: {
+              x: {
+                min: 0,
+                max: 60,
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                  callback: (v) => v + "%",
+                },
+                grid: { color: "rgba(0,0,0,0.06)" },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Employees",
+                  font: { size: 16, family: FONT, weight: "600" },
+                },
+                afterFit(scale) {
+                  scale.width = 120; /* fixed label column — prevents truncation */
+                },
+                ticks: {
+                  color: PALETTE.mid,
+                  font: { size: 16, family: FONT, weight: "600" },
+                },
+                grid: { display: false },
               },
             },
           },
-          scales: {
-            x: {
-              min: 0,
-              max: 60,
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-                callback: (v) => v + "%",
-              },
-              grid: { color: "rgba(0,0,0,0.06)" },
-            },
-            y: {
-              title: {
-                display: true,
-                text: "Employees",
-                font: { size: 16, family: FONT, weight: "600" },
-              },
-              afterFit(scale) {
-                scale.width = 120; /* fixed label column — prevents truncation */
-              },
-              ticks: {
-                color: PALETTE.mid,
-                font: { size: 16, family: FONT, weight: "600" },
-              },
-              grid: { display: false },
-            },
-          },
-        },
-      });
+        });
       }); // initChartAfterFonts
-
     </script>
   </body>
 </html>

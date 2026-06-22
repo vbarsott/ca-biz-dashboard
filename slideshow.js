@@ -69,7 +69,7 @@
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 2000;
+  const SLIDE_DURATION_MS = 20000;
 
   /**
    * EN → FR crossfade duration (ms).
@@ -187,11 +187,19 @@
       var url = SLIDES[slideIndex];
       var settled = false;
 
+      // Tag the frame IMMEDIATELY (before src changes) so that any concurrent
+      // advance() / retreat() call sees the correct target index and never
+      // treats this frame as "already loaded" with a stale previous value.
+      // Previously this was set inside finish() — too late. Between the moment
+      // iframe.src is reassigned and the onload event fires, data-loaded-index
+      // still held the OLD value. retreat() could match that stale value against
+      // prevIdx(currentIndex), falsely skip loading, and crossfade to a frame
+      // showing blank or wrong content — causing the black screen.
+      iframe.dataset.loadedIndex = String(slideIndex);
+
       function finish() {
         if (!settled) {
           settled = true;
-          // Tag the frame so we can detect whether it is already preloaded
-          iframe.dataset.loadedIndex = String(slideIndex);
           resolve();
         }
       }
@@ -547,6 +555,7 @@
         });
       if (btnNext)
         btnNext.addEventListener("click", function () {
+          if (advanceTimer) clearTimeout(advanceTimer);
           advance();
         });
     });

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/main.css" />
     <script src="../js/vendor/d3.min.js"></script>
     <script src="../js/vendor/topojson.min.js"></script>
+    <script src="../js/vendor/can-topo-data.js"></script>
   </head>
 
   <body>
@@ -662,28 +663,6 @@
          Source: StatCan Table 33-10-0034-01 + Table 17-10-0009-01 Q4 2025.
       ────────────────────────────────────────────────────────────────────── */
       (function () {
-        /* ── PROTOCOL GUARD ──────────────────────────────────────────────────────
-           fetch() is blocked by CORS when the page is opened via file:// protocol
-           (e.g. double-clicking in Finder). Always serve via localhost:
-             python3 -m http.server 8080
-           then open http://localhost:8080/slides/sld05-en-regional-business-per-capita.html
-        ── */
-        if (window.location.protocol === "file:") {
-          const el = document.getElementById("canada-map");
-          if (el)
-            el.innerHTML =
-              '<div style="padding:32px;text-align:center;color:#cc0000;font-size:15px;font-weight:700;line-height:1.6;">' +
-              "⚠ Map requires a local server.<br>" +
-              "Open via: <code>python3 -m http.server 8080</code><br>" +
-              "then navigate to <code>http://localhost:8080</code>" +
-              "</div>";
-          console.error(
-            "[sld05-en] file:// protocol detected — fetch() is blocked by CORS. " +
-              "Run: python3 -m http.server 8080",
-          );
-          return;
-        }
-
         const mapContainer = document.getElementById("canada-map");
         if (!mapContainer) return;
 
@@ -752,14 +731,11 @@
           "Northwest Territories": [-15, 17],
         };
 
-        const topoUrl = "../data/geo/can.topo.json";
-
-        fetch(topoUrl)
-          .then((r) => {
-            if (!r.ok) throw new Error("HTTP " + r.status + " — " + topoUrl);
-            return r.json();
-          })
-          .then((topoData) => {
+        /* ── Use pre-loaded TopoJSON (works with file://, localhost, and GitHub Pages) ── */
+        try {
+          const topoData = window.canTopoData;
+          if (!topoData) throw new Error("[sld05-en] window.canTopoData not found — is can-topo-data.js loaded?");
+          (function (topoData) {
             /* ── Guard: offsetWidth can be 0 if layout hasn't settled; also
                ensure h is at least 1 so d3.geoAlbers().fitSize() never
                receives [0, 0] (which causes a divide-by-zero throw). ── */
@@ -906,18 +882,18 @@
                   .text(val.toFixed(1));
               }
             });
-          })
-          .catch((err) => {
-            /* Graceful fallback — log actual error so it's diagnosable */
-            console.error(
-              "[sld05-en] Map render failed:",
-              err && (err.message || String(err)),
-            );
-            mapContainer.innerHTML =
-              '<div style="padding:32px;text-align:center;color:#555;font-size:16px;font-weight:700;">' +
-              "Map unavailable — see the density table for provincial values." +
-              "</div>";
-          });
+          })(topoData);
+        } catch (err) {
+          /* Graceful fallback — log actual error so it's diagnosable */
+          console.error(
+            "[sld05-en] Map render failed:",
+            err && (err.message || String(err)),
+          );
+          mapContainer.innerHTML =
+            '<div style="padding:32px;text-align:center;color:#555;font-size:16px;font-weight:700;">' +
+            "Map unavailable — see the density table for provincial values." +
+            "</div>";
+        }
       })();
     </script>
   </body>

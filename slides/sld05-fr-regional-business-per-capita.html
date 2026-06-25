@@ -42,600 +42,595 @@
       <!-- ── CHART SECTION - TWO-COLUMN LAYOUT: Map (left 65%) · Ranked table (right 35%) ─── -->
       <div class="chart-row ratio-65-35">
         <!-- LEFT: Choropleth map -->
-        <div class="chart-col">
+        <div class="map-chart">
           <div class="map-col">
-            <div class="chart-canvas-wrap">
-              <div id="canada-map"></div>
-
-              <!-- Warm sequential palette legend -->
-              <div class="map-legend-bar-wrap">
-                <span>35</span>
-                <div class="map-legend-bar"></div>
-                <span>145</span>
-              </div>
+            <div id="canada-map"></div>
+            <!-- Warm sequential palette legend -->
+            <div class="map-legend-bar-wrap">
+              <span>35</span>
+              <div class="map-legend-bar"></div>
+              <span>145</span>
             </div>
           </div>
         </div>
 
         <!-- RIGHT: Ranked visual table -->
-        <div class="chart-col">
-          <div class="map-col">
-            <div class="chart-canvas-wrap">
-              <div class="chart-header">
-                <span class="chart-title">Classé par densité</span>
-              </div>
+        <div class="table-chart">
+          <div class="table-col">
+            <div class="chart-header">
+              <span class="chart-title">Classé par densité</span>
+            </div>
 
-              <!-- ── Ranked visual table — all provinces + territories ──────────
+            <!-- ── Ranked visual table — all provinces + territories ──────────
                Bars use gradient-behind-text: background fills from left
                proportional to (value / column_max):
                Total max = 145.2 | Employer max = 41.0 | Solo max = 106.7
           ──────────────────────────────────────────────────────────────── -->
-              <table
-                class="ranked-table"
-                aria-label="Tableau classé de la densité d'entreprises par province et territoire"
-              >
-                <thead>
-                  <tr>
-                    <th class="col-rank">#</th>
-                    <th class="col-prov">Province</th>
-                    <th class="col-total">Total/1k</th>
-                    <th class="col-emp">Employeur/1k</th>
-                    <th class="col-solo">Autonome/1k</th>
-                  </tr>
-                </thead>
+            <table
+              class="ranked-table"
+              aria-label="Tableau classé de la densité d'entreprises par province et territoire"
+            >
+              <thead>
+                <tr>
+                  <th class="col-rank">#</th>
+                  <th class="col-prov">Province</th>
+                  <th class="col-total">Total/1k</th>
+                  <th class="col-emp">Employeur/1k</th>
+                  <th class="col-solo">Autonome/1k</th>
+                </tr>
+              </thead>
 
-                <tbody>
-                  <!-- 1. BC — total 145.2 (100%) | emp 38.5 (94%) | solo 106.7 (100%) -->
-                  <tr>
-                    <td class="td-rank">1</td>
-                    <td class="td-prov">BC</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 100%,
-                          transparent 100%
-                        );
-                      "
-                    >
-                      145.2
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 94%,
-                          transparent 94%
-                        );
-                      "
-                    >
-                      38.5
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 100%,
-                          transparent 100%
-                        );
-                      "
-                    >
-                      106.7
-                    </td>
-                  </tr>
+              <tbody>
+                <!-- 1. BC — total 145.2 (100%) | emp 38.5 (94%) | solo 106.7 (100%) -->
+                <tr>
+                  <td class="td-rank">1</td>
+                  <td class="td-prov">BC</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 100%,
+                        transparent 100%
+                      );
+                    "
+                  >
+                    145.2
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 94%,
+                        transparent 94%
+                      );
+                    "
+                  >
+                    38.5
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 100%,
+                        transparent 100%
+                      );
+                    "
+                  >
+                    106.7
+                  </td>
+                </tr>
 
-                  <!-- 2. SK — total 125.4 (86%) | emp 34.3 (84%) | solo 91.1 (85%) -->
-                  <tr>
-                    <td class="td-rank">2</td>
-                    <td class="td-prov">SK</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 86%,
-                          transparent 86%
-                        );
-                      "
-                    >
-                      125.4
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 84%,
-                          transparent 84%
-                        );
-                      "
-                    >
-                      34.3
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 85%,
-                          transparent 85%
-                        );
-                      "
-                    >
-                      91.1
-                    </td>
-                  </tr>
+                <!-- 2. SK — total 125.4 (86%) | emp 34.3 (84%) | solo 91.1 (85%) -->
+                <tr>
+                  <td class="td-rank">2</td>
+                  <td class="td-prov">SK</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 86%,
+                        transparent 86%
+                      );
+                    "
+                  >
+                    125.4
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 84%,
+                        transparent 84%
+                      );
+                    "
+                  >
+                    34.3
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 85%,
+                        transparent 85%
+                      );
+                    "
+                  >
+                    91.1
+                  </td>
+                </tr>
 
-                  <!-- 3. ON — total 125.1 (86%) | emp 31.8 (78%) | solo 93.3 (87%) -->
-                  <tr>
-                    <td class="td-rank">3</td>
-                    <td class="td-prov">ON</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 86%,
-                          transparent 86%
-                        );
-                      "
-                    >
-                      125.1
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 78%,
-                          transparent 78%
-                        );
-                      "
-                    >
-                      31.8
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 87%,
-                          transparent 87%
-                        );
-                      "
-                    >
-                      93.3
-                    </td>
-                  </tr>
+                <!-- 3. ON — total 125.1 (86%) | emp 31.8 (78%) | solo 93.3 (87%) -->
+                <tr>
+                  <td class="td-rank">3</td>
+                  <td class="td-prov">ON</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 86%,
+                        transparent 86%
+                      );
+                    "
+                  >
+                    125.1
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 78%,
+                        transparent 78%
+                      );
+                    "
+                  >
+                    31.8
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 87%,
+                        transparent 87%
+                      );
+                    "
+                  >
+                    93.3
+                  </td>
+                </tr>
 
-                  <!-- 4. AB — total 123.7 (85%) | emp 35.9 (88%) | solo 87.7 (82%) -->
-                  <tr>
-                    <td class="td-rank">4</td>
-                    <td class="td-prov">AB</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 85%,
-                          transparent 85%
-                        );
-                      "
-                    >
-                      123.7
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 88%,
-                          transparent 88%
-                        );
-                      "
-                    >
-                      35.9
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 82%,
-                          transparent 82%
-                        );
-                      "
-                    >
-                      87.7
-                    </td>
-                  </tr>
+                <!-- 4. AB — total 123.7 (85%) | emp 35.9 (88%) | solo 87.7 (82%) -->
+                <tr>
+                  <td class="td-rank">4</td>
+                  <td class="td-prov">AB</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 85%,
+                        transparent 85%
+                      );
+                    "
+                  >
+                    123.7
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 88%,
+                        transparent 88%
+                      );
+                    "
+                  >
+                    35.9
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 82%,
+                        transparent 82%
+                      );
+                    "
+                  >
+                    87.7
+                  </td>
+                </tr>
 
-                  <!-- 5. YT — total 121.3 (84%) | emp 41.0 (100%) | solo 80.3 (75%) -->
-                  <tr>
-                    <td class="td-rank">5</td>
-                    <td class="td-prov">YT</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 84%,
-                          transparent 84%
-                        );
-                      "
-                    >
-                      121.3
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 100%,
-                          transparent 100%
-                        );
-                      "
-                    >
-                      41.0
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 75%,
-                          transparent 75%
-                        );
-                      "
-                    >
-                      80.3
-                    </td>
-                  </tr>
+                <!-- 5. YT — total 121.3 (84%) | emp 41.0 (100%) | solo 80.3 (75%) -->
+                <tr>
+                  <td class="td-rank">5</td>
+                  <td class="td-prov">YT</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 84%,
+                        transparent 84%
+                      );
+                    "
+                  >
+                    121.3
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 100%,
+                        transparent 100%
+                      );
+                    "
+                  >
+                    41.0
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 75%,
+                        transparent 75%
+                      );
+                    "
+                  >
+                    80.3
+                  </td>
+                </tr>
 
-                  <!-- 6. QC — total 112.9 (78%) | emp 30.8 (75%) | solo 82.1 (77%) -->
-                  <tr>
-                    <td class="td-rank">6</td>
-                    <td class="td-prov">QC</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 78%,
-                          transparent 78%
-                        );
-                      "
-                    >
-                      112.9
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 75%,
-                          transparent 75%
-                        );
-                      "
-                    >
-                      30.8
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 77%,
-                          transparent 77%
-                        );
-                      "
-                    >
-                      82.1
-                    </td>
-                  </tr>
+                <!-- 6. QC — total 112.9 (78%) | emp 30.8 (75%) | solo 82.1 (77%) -->
+                <tr>
+                  <td class="td-rank">6</td>
+                  <td class="td-prov">QC</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 78%,
+                        transparent 78%
+                      );
+                    "
+                  >
+                    112.9
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 75%,
+                        transparent 75%
+                      );
+                    "
+                  >
+                    30.8
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 77%,
+                        transparent 77%
+                      );
+                    "
+                  >
+                    82.1
+                  </td>
+                </tr>
 
-                  <!-- 7. PE — total 109.1 (75%) | emp 38.0 (93%) | solo 71.1 (67%) -->
-                  <tr>
-                    <td class="td-rank">7</td>
-                    <td class="td-prov">PE</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 75%,
-                          transparent 75%
-                        );
-                      "
-                    >
-                      109.1
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 93%,
-                          transparent 93%
-                        );
-                      "
-                    >
-                      38.0
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 67%,
-                          transparent 67%
-                        );
-                      "
-                    >
-                      71.1
-                    </td>
-                  </tr>
+                <!-- 7. PE — total 109.1 (75%) | emp 38.0 (93%) | solo 71.1 (67%) -->
+                <tr>
+                  <td class="td-rank">7</td>
+                  <td class="td-prov">PE</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 75%,
+                        transparent 75%
+                      );
+                    "
+                  >
+                    109.1
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 93%,
+                        transparent 93%
+                      );
+                    "
+                  >
+                    38.0
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 67%,
+                        transparent 67%
+                      );
+                    "
+                  >
+                    71.1
+                  </td>
+                </tr>
 
-                  <!-- 8. MB — total 95.7 (66%) | emp 29.3 (71%) | solo 66.4 (62%) -->
-                  <tr>
-                    <td class="td-rank">8</td>
-                    <td class="td-prov">MB</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 66%,
-                          transparent 66%
-                        );
-                      "
-                    >
-                      95.7
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 71%,
-                          transparent 71%
-                        );
-                      "
-                    >
-                      29.3
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 62%,
-                          transparent 62%
-                        );
-                      "
-                    >
-                      66.4
-                    </td>
-                  </tr>
+                <!-- 8. MB — total 95.7 (66%) | emp 29.3 (71%) | solo 66.4 (62%) -->
+                <tr>
+                  <td class="td-rank">8</td>
+                  <td class="td-prov">MB</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 66%,
+                        transparent 66%
+                      );
+                    "
+                  >
+                    95.7
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 71%,
+                        transparent 71%
+                      );
+                    "
+                  >
+                    29.3
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 62%,
+                        transparent 62%
+                      );
+                    "
+                  >
+                    66.4
+                  </td>
+                </tr>
 
-                  <!-- 9. NS — total 88.5 (61%) | emp 30.3 (74%) | solo 58.2 (55%) -->
-                  <tr>
-                    <td class="td-rank">9</td>
-                    <td class="td-prov">NS</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 61%,
-                          transparent 61%
-                        );
-                      "
-                    >
-                      88.5
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 74%,
-                          transparent 74%
-                        );
-                      "
-                    >
-                      30.3
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 55%,
-                          transparent 55%
-                        );
-                      "
-                    >
-                      58.2
-                    </td>
-                  </tr>
+                <!-- 9. NS — total 88.5 (61%) | emp 30.3 (74%) | solo 58.2 (55%) -->
+                <tr>
+                  <td class="td-rank">9</td>
+                  <td class="td-prov">NS</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 61%,
+                        transparent 61%
+                      );
+                    "
+                  >
+                    88.5
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 74%,
+                        transparent 74%
+                      );
+                    "
+                  >
+                    30.3
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 55%,
+                        transparent 55%
+                      );
+                    "
+                  >
+                    58.2
+                  </td>
+                </tr>
 
-                  <!-- 10. NL — total 82.7 (57%) | emp 34.6 (84%) | solo 48.1 (45%) -->
-                  <tr>
-                    <td class="td-rank">10</td>
-                    <td class="td-prov">NL</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 57%,
-                          transparent 57%
-                        );
-                      "
-                    >
-                      82.7
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 84%,
-                          transparent 84%
-                        );
-                      "
-                    >
-                      34.6
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 45%,
-                          transparent 45%
-                        );
-                      "
-                    >
-                      48.1
-                    </td>
-                  </tr>
+                <!-- 10. NL — total 82.7 (57%) | emp 34.6 (84%) | solo 48.1 (45%) -->
+                <tr>
+                  <td class="td-rank">10</td>
+                  <td class="td-prov">NL</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 57%,
+                        transparent 57%
+                      );
+                    "
+                  >
+                    82.7
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 84%,
+                        transparent 84%
+                      );
+                    "
+                  >
+                    34.6
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 45%,
+                        transparent 45%
+                      );
+                    "
+                  >
+                    48.1
+                  </td>
+                </tr>
 
-                  <!-- 11. NT — total 78.7 (54%) | emp 35.3 (86%) | solo 43.4 (41%) -->
-                  <tr>
-                    <td class="td-rank">11</td>
-                    <td class="td-prov">NT</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 54%,
-                          transparent 54%
-                        );
-                      "
-                    >
-                      78.7
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 86%,
-                          transparent 86%
-                        );
-                      "
-                    >
-                      35.3
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 41%,
-                          transparent 41%
-                        );
-                      "
-                    >
-                      43.4
-                    </td>
-                  </tr>
+                <!-- 11. NT — total 78.7 (54%) | emp 35.3 (86%) | solo 43.4 (41%) -->
+                <tr>
+                  <td class="td-rank">11</td>
+                  <td class="td-prov">NT</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 54%,
+                        transparent 54%
+                      );
+                    "
+                  >
+                    78.7
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 86%,
+                        transparent 86%
+                      );
+                    "
+                  >
+                    35.3
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 41%,
+                        transparent 41%
+                      );
+                    "
+                  >
+                    43.4
+                  </td>
+                </tr>
 
-                  <!-- 12. NB — total 75.7 (52%) | emp 30.8 (75%) | solo 44.9 (42%) -->
-                  <tr>
-                    <td class="td-rank">12</td>
-                    <td class="td-prov">NB</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 52%,
-                          transparent 52%
-                        );
-                      "
-                    >
-                      75.7
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 75%,
-                          transparent 75%
-                        );
-                      "
-                    >
-                      30.8
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 42%,
-                          transparent 42%
-                        );
-                      "
-                    >
-                      44.9
-                    </td>
-                  </tr>
+                <!-- 12. NB — total 75.7 (52%) | emp 30.8 (75%) | solo 44.9 (42%) -->
+                <tr>
+                  <td class="td-rank">12</td>
+                  <td class="td-prov">NB</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 52%,
+                        transparent 52%
+                      );
+                    "
+                  >
+                    75.7
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 75%,
+                        transparent 75%
+                      );
+                    "
+                  >
+                    30.8
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 42%,
+                        transparent 42%
+                      );
+                    "
+                  >
+                    44.9
+                  </td>
+                </tr>
 
-                  <!-- 13. NU — total 34.9 (24%) | emp 18.4 (45%) | solo 16.5 (15%) -->
-                  <tr style="border-bottom: none">
-                    <td class="td-rank" style="border-bottom: none">13</td>
-                    <td class="td-prov" style="border-bottom: none">NU</td>
-                    <td
-                      class="td-number td-number-navy"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 51, 102, 0.18) 24%,
-                          transparent 24%
-                        );
-                        border-bottom: none;
-                      "
-                    >
-                      34.9
-                    </td>
-                    <td
-                      class="td-number td-number-teal"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(0, 107, 94, 0.15) 45%,
-                          transparent 45%
-                        );
-                        border-bottom: none;
-                      "
-                    >
-                      18.4
-                    </td>
-                    <td
-                      class="td-number td-number-orange"
-                      style="
-                        background: linear-gradient(
-                          to right,
-                          rgba(181, 71, 8, 0.15) 15%,
-                          transparent 15%
-                        );
-                        border-bottom: none;
-                      "
-                    >
-                      16.5
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                <!-- 13. NU — total 34.9 (24%) | emp 18.4 (45%) | solo 16.5 (15%) -->
+                <tr style="border-bottom: none">
+                  <td class="td-rank" style="border-bottom: none">13</td>
+                  <td class="td-prov" style="border-bottom: none">NU</td>
+                  <td
+                    class="td-number td-number-navy"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 51, 102, 0.18) 24%,
+                        transparent 24%
+                      );
+                      border-bottom: none;
+                    "
+                  >
+                    34.9
+                  </td>
+                  <td
+                    class="td-number td-number-teal"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(0, 107, 94, 0.15) 45%,
+                        transparent 45%
+                      );
+                      border-bottom: none;
+                    "
+                  >
+                    18.4
+                  </td>
+                  <td
+                    class="td-number td-number-orange"
+                    style="
+                      background: linear-gradient(
+                        to right,
+                        rgba(181, 71, 8, 0.15) 15%,
+                        transparent 15%
+                      );
+                      border-bottom: none;
+                    "
+                  >
+                    16.5
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

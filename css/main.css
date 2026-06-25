@@ -248,18 +248,26 @@ h1 {
   min-height: 0;
   grid-template-columns: 1.55fr 1fr; /* default ratio — override with modifier */
 }
-
-/* Ratio variants */
-.chart-row.ratio-55-45 {
-  grid-template-columns: 1.55fr 1fr;
-}
 .chart-row.ratio-65-35 {
   grid-template-columns: 65fr 35fr;
+  flex: 1;
 }
-
-.chart-col {
+.chart-row.ratio-65-35 > .map-chart {
+  min-height: 0;
+}
+.chart-row.ratio-65-35 .map-chart > .map-col {
+  flex: 1;
+  min-height: 0;
+}
+.map-chart {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+}
+.table-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 14px;
 }
 
@@ -375,6 +383,17 @@ h1 {
   );
 }
 /* Table section */
+.table-col {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 32px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
 .table-chart-section {
   background: var(--white);
   border: 1px solid var(--border);

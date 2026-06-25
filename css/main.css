@@ -175,7 +175,7 @@ h1 {
   font-size: 1.2rem;
   color: var(--mid);
   line-height: 1.5;
-  max-width: 1100px;
+  max-width: 1200px;
 }
 
 /* ── CHART SECTION ── */
@@ -424,12 +424,28 @@ h1 {
   width: 100%;
   border-collapse: collapse;
   font-size: 1rem;
+  table-layout: fixed;
+}
+.ranked-table .col-rank {
+  width: 8%;
+}
+.ranked-table .col-prov {
+  width: 14%;
+}
+.ranked-table .col-total {
+  width: 20%;
+}
+.ranked-table .col-emp {
+  width: 30%;
+}
+.ranked-table .col-solo {
+  width: 28%;
 }
 .ranked-table thead tr {
   border-bottom: 2px solid var(--border);
 }
 .ranked-table th {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--mid);
   text-transform: uppercase;
@@ -486,133 +502,4 @@ td.td-number-orange {
   font-style: italic;
   border-bottom: none;
   font-weight: 700;
-}
-
-/* ── COVER SLIDE ELEMENTS ─── */
-/* ─────────────────────────── */
-/* Hero title block on dark background */
-.hero .accent-title {
-  font-size: 4rem;
-  font-weight: 800;
-  color: var(--accent-red-bright);
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.hero .description {
-  font-size: 1.25rem;
-  color: var(--dark-text-secondary);
-  line-height: 1.6;
-  max-width: 740px;
-}
-
-/* Horizontal divider */
-.divider {
-  width: 100%;
-  height: 1px;
-  background: var(--dark-border);
-  margin: 32px 0;
-}
-
-/* "What's Inside" section label */
-.preview-label {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--dark-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
-}
-
-/* Slide preview grid */
-.slides-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-bottom: 36px;
-}
-
-.slide-card {
-  padding: 8px 0px;
-}
-
-.slide-card-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--dark-text-primary);
-  line-height: 1.3;
-}
-
-/* ── DONUT CHARTS ─── */
-/* ─────────────────────────── */
-/* Donut canvas (fixed square) */
-.donut-canvas-wrap {
-  position: relative;
-  height: 440px;
-  width: 440px;
-  flex-shrink: 0;
-}
-.donut-outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-/* Donut / bar chart legend swatch (circle) */
-.legend-dot.circle {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* ── MAIN LAYOUT (donut + chips) ── */
-/* ───────────────────────────────── */
-.main-layout {
-  display: grid;
-  grid-template-columns: 1.75fr 1fr;
-  gap: 20px;
-  flex: 1;
-  align-items: stretch;
-}
-.layout-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.layout-left .chart-section {
-  /* flex: 1; */
-  margin-bottom: 0;
-}
-.layout-right {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
-}
-
-/* ── BODY — DARK THEME (cover slide) ── */
-/* ───────────────────────────────────── */
-body.theme-dark {
-  background: var(--dark-bg);
-  color: var(--dark-text-primary);
-  padding: 40px 44px;
-}
-body.theme-dark .slide-header {
-  margin-bottom: 22px;
-}
-/* Invert wordmark to white on dark background */
-body.theme-dark .goc-wordmark svg {
-  height: 28px;
-  filter: brightness(0) invert(1);
-}
-body.theme-dark .slide-source-item {
-  color: var(--dark-text-primary);
-  font-size: 0.68rem;
-}
-body.theme-dark h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  color: var(--dark-text-primary);
-  line-height: 1.1;
-  margin-bottom: 32px;
 }

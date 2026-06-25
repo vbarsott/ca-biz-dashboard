@@ -18,8 +18,8 @@
       <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
         <div class="slide-source-item">
-          Statistics Canada | 33-10-0034-01 → 33-10-1096-01
-          <br />Population: StatCan Table 17-10-0009-01, Q4 2025 estimates
+          Statistics Canada | 33-10-0034-01 → 33-10-1096-01 | Population:
+          17-10-0009-01, Q4 2025 estimates
         </div>
       </div>
     </div>
@@ -30,12 +30,12 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <h1>Business Density by Province & Territory</h1>
+        <h1>Business Density by Jurisdiction</h1>
         <p class="subtitle">
-          As of December 2025, BC leads all provinces and territories with 145.2
-          businesses per 1,000 people, almost four times Nunavut’s 34.9. Ontario
-          places third despite having the country’s largest business count: with
-          over 16M residents, its density drops to 125 per 1,000.
+          As of December 2025, British Columbia leads all provinces and
+          territories with 145.2 businesses per 1,000 residents, almost four
+          times Nunavut’s 34.9. Ontario places third despite having the
+          country’s largest business count.
         </p>
       </div>
 
@@ -77,9 +77,9 @@
                   <tr>
                     <th class="col-rank">#</th>
                     <th class="col-prov">Province</th>
-                    <th class="col-total">Total /1k</th>
-                    <th class="col-emp">Employer /1k</th>
-                    <th class="col-solo">Self-emp /1k</th>
+                    <th class="col-total">Total/1k</th>
+                    <th class="col-emp">Employer/1k</th>
+                    <th class="col-solo">Self-emp/1k</th>
                   </tr>
                 </thead>
 
@@ -291,14 +291,6 @@
                       "
                     >
                       80.3
-                    </td>
-                  </tr>
-
-                  <!-- ── National average reference ── -->
-                  <tr class="row-avg-sep">
-                    <td colspan="5">
-                      ─── Canada avg &nbsp;121.2 &nbsp;/&nbsp; 33.0
-                      &nbsp;/&nbsp; 88.2 ───
                     </td>
                   </tr>
 
@@ -734,7 +726,10 @@
         /* ── Use pre-loaded TopoJSON (works with file://, localhost, and GitHub Pages) ── */
         try {
           const topoData = window.canTopoData;
-          if (!topoData) throw new Error("[sld05-en] window.canTopoData not found — is can-topo-data.js loaded?");
+          if (!topoData)
+            throw new Error(
+              "[sld05-en] window.canTopoData not found — is can-topo-data.js loaded?",
+            );
           (function (topoData) {
             /* ── Guard: offsetWidth can be 0 if layout hasn't settled; also
                ensure h is at least 1 so d3.geoAlbers().fitSize() never
@@ -831,8 +826,8 @@
                   .attr("y1", y + 15) // just below the value text
                   .attr("x2", c[0]) // island centroid
                   .attr("y2", c[1])
-                  .attr("stroke", "#000")
-                  .attr("stroke-width", 1)
+                  .attr("stroke", "rgba(153,0,0,0.9)")
+                  .attr("stroke-width", 3)
                   .attr("opacity", 0.6)
                   .style("pointer-events", "none");
 
@@ -841,7 +836,7 @@
                   .attr("cx", c[0])
                   .attr("cy", c[1])
                   .attr("r", 2.5)
-                  .attr("fill", "#1a1a1a")
+                  .attr("fill", "#990000")
                   .attr("opacity", 0.75)
                   .style("pointer-events", "none");
               }
@@ -852,33 +847,34 @@
                 .style("pointer-events", "none");
 
               /* Province abbreviation — larger, bolder */
-              /* PE label floats in light Atlantic space, so override to dark ink. */
-              const abFill = name === "Prince Edward Island" ? "#1a1a1a" : fill;
+              /* All labels use white fill + dark stroke so they read on any background.
+                 paint-order: stroke renders the outline behind the fill. */
               g.append("text")
                 .attr("text-anchor", "middle")
                 .attr("dy", "-0.25em")
-                .style("font-size", "16px")
+                .style("font-size", "14px")
                 .style("font-family", FONT)
                 .style("font-weight", "900")
-                .style("fill", abFill)
-                .style("filter", "url(#txt-shadow)")
+                .style("fill", "#ffffff")
+                .style("stroke", "rgba(153,0,0,0.9)")
+                .style("stroke-width", "3px")
+                .style("stroke-linejoin", "round")
+                .style("paint-order", "stroke")
                 .text(ab);
 
               /* Numeric density value */
               if (val != null) {
-                /* PEI's province colour is mid-dark red (109.1 ≥ 108 → white fill),
-                   but the label sits outside the province in light Atlantic space,
-                   so override to dark ink for readability. */
-                const valFill =
-                  name === "Prince Edward Island" ? "#1a1a1a" : fill;
                 g.append("text")
                   .attr("text-anchor", "middle")
                   .attr("dy", "1.05em")
-                  .style("font-size", "16px")
+                  .style("font-size", "14px")
                   .style("font-family", FONT)
                   .style("font-weight", "700")
-                  .style("fill", valFill)
-                  .style("filter", "url(#txt-shadow)")
+                  .style("fill", "#ffffff")
+                  .style("stroke", "rgba(153,0,0,0.9)")
+                  .style("stroke-width", "3px")
+                  .style("stroke-linejoin", "round")
+                  .style("paint-order", "stroke")
                   .text(val.toFixed(1));
               }
             });

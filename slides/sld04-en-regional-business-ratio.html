@@ -27,11 +27,12 @@
       <div class="hero-zone">
         <h1>Business Employer to Self-Employed Ratio</h1>
         <p class="subtitle">
-          As of December 2025, Nunavut is the only jurisdiction where employer
-          businesses outnumber the self-employed (0.87×), a direct reflection of
-          its government-centred economy and limited private sector activity. At
-          the opposite end, Ontario (2.93×), British Columbia (2.77×), and
-          Quebec (2.67×) each meet or exceed the national average.
+          As of December 2025, Nunavut is the only jurisdiction where business
+          employers outnumber the self-employed (0.87×),<br />
+          a direct reflection of its government-centred economy and limited
+          private sector activity.<br />
+          At the opposite end, Ontario (2.93×) and British Columbia (2.77×) both
+          exceed the national average.
         </p>
       </div>
 
@@ -43,24 +44,6 @@
             role="img"
             aria-label="Ontario 2.93×, BC 2.77×, Quebec 2.67×. Nunavut 0.87× — employer-dominant."
           ></canvas>
-        </div>
-
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--teal)"></div>
-            Above national avg (2.67×)
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-dot"
-              style="background: var(--projection-blue)"
-            ></div>
-            Below avg
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--orange)"></div>
-            Employer-dominant (&lt;1×)
-          </div>
         </div>
       </div>
     </main>
@@ -75,19 +58,19 @@
          December 2025 snapshot · National average: 2.67×
       ────────────────────────────────────────────────────────────────────── */
       const provRatioLabels = [
-        "Ontario",
-        "British Columbia",
-        "Quebec",
-        "Saskatchewan",
-        "Alberta",
-        "Manitoba",
-        "Yukon",
-        "Nova Scotia",
-        "Prince Edward Island",
-        "New Brunswick",
-        "Newfoundland and Labrador",
-        "Northwest Territories",
-        "Nunavut",
+        "ON",
+        "BC",
+        "QC",
+        "SK",
+        "AB",
+        "MB",
+        "YT",
+        "NS",
+        "PE",
+        "NB",
+        "NL",
+        "NT",
+        "NU",
       ];
       const provRatios = [
         2.93, 2.77, 2.67, 2.66, 2.44, 2.27, 1.98, 1.92, 1.87, 1.46, 1.39, 1.31,
@@ -105,7 +88,7 @@
                 label: "Self-employment ratio",
                 data: provRatios,
                 backgroundColor: provRatios.map((v) =>
-                  v >= nationalAvg
+                  v > nationalAvg
                     ? PALETTE.teal
                     : v < 1.0
                       ? PALETTE.orange
@@ -148,7 +131,7 @@
               },
               y: {
                 afterFit(scale) {
-                  scale.width = 260; /* fixed label column — prevents truncation */
+                  scale.width = 100; /* fixed label column — prevents truncation */
                 },
                 ticks: {
                   color: PALETTE.mid,

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Sld6 - Sector Business Comparison | Comparaison des entreprises par
+      Sld6 Opt - Sector Business Comparison | Comparaison des entreprises par
       secteur
     </title>
     <link rel="stylesheet" href="../css/main.css" />
@@ -28,13 +28,13 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <h1>(Option 1) Répartition des entreprises par secteur</h1>
+        <h1>Répartition des entreprises par secteur</h1>
         <p class="subtitle">
-          En décembre 2025, les entreprises de travailleurs autonomes dépassent
-          celles avec employés dans 11 des 13 principaux secteurs. L’immobilier
-          domine avec 1 045k travailleurs autonomes contre seulement 60k
-          entreprises dotées de personnel. Seuls l’hébergement‑restauration et
-          le commerce de gros vont à l’encontre de cette tendance.
+          Entre décembre 2015 et décembre 2025, les entreprises de soins de
+          santé avec employé·e·s enregistrent la plus forte croissance (+31,8
+          %), tandis que le commerce de gros subit le recul le plus prononcé
+          (-10,5 %), un écart d’environ 42 points illustrant le virage du Canada
+          vers les secteurs de services.
         </p>
       </div>
 
@@ -42,21 +42,10 @@
       <div class="chart-section">
         <div class="chart-canvas-wrap">
           <canvas
-            id="chart-sector-mirror"
+            id="chart-sector-shifts"
             role="img"
-            aria-label="Graphique à barres horizontales groupées. L'immobilier compte 60 k entreprises employeurs contre 1 045 k travailleurs autonomes. L'hébergement et restauration est le seul secteur où les entreprises employeurs sont plus nombreuses."
+            aria-label="Graphique à barres horizontales montrant la variation en pourcentage des entreprises employeurs par secteur SCIAN de juillet 2015 à juillet 2025. Les soins de santé mènent à +31,8 %. Le commerce de gros accuse le recul le plus marqué à -10,5 %."
           ></canvas>
-        </div>
-
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background: #b54708"></div>
-            Entreprises employeurs
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background: #1a4a7a"></div>
-            Travailleurs autonomes
-          </div>
         </div>
       </div>
     </main>
@@ -66,57 +55,40 @@
 
     <script>
       /* ── DATA ──────────────────────────────────────────────────────────────
-         Source: Statistics Canada, Canadian Business Counts
-         Sector mirror: employer businesses vs self-employed, Dec 2025.
-         Values divided by 1000 for display in thousands.
+         Source: Statistics Canada, employer businesses (with employees)
+         by top-level NAICS sector. Percentage change: Dec 2015 → Dec 2025.
+         Sorted by magnitude of change (largest growth first).
       ────────────────────────────────────────────────────────────────────── */
-      const sectorNamesM = [
-        "Construction",
-        "Services professionnels",
-        "Immobilier et location",
+      const sectors = [
         "Soins de santé",
+        "Immobilier",
+        "Transport",
+        "Services professionnels",
+        "Construction",
+        "Hébergement",
         "Autres services",
+        "Fabrication",
         "Agriculture",
-        "Finance et assurance",
-        "Hébergement et restauration",
+        "Commerce de détail",
+        "Finance",
         "Commerce de gros",
-        "Admin. et soutien",
-        "Arts et divertissement",
-        "Information et culture",
-        "Services d'enseignement",
       ];
-      const withSectorM = [
-        160648, 159238, 60130, 145419, 110385, 48256, 40862, 86527, 53065,
-        54756, 19095, 18726, 15650,
-      ];
-      const woSectorM = [
-        255915, 372233, 1044726, 209861, 192165, 188711, 189980, 45386, 42809,
-        114489, 58195, 37290, 35694,
+      const spcts = [
+        31.8, 18.1, 12.8, 11.6, 11.4, 6.3, 1.3, 1.3, 0.8, -2.2, -3.4, -10.5,
       ];
 
-      const sectorIdx = woSectorM
-        .map((_, i) => i)
-        .sort((a, b) => woSectorM[b] - woSectorM[a]);
       initChartAfterFonts(function () {
-        new Chart(document.getElementById("chart-sector-mirror"), {
+        new Chart(document.getElementById("chart-sector-shifts"), {
           type: "bar",
           data: {
-            labels: sectorIdx.map((i) => sectorNamesM[i]),
+            labels: sectors,
             datasets: [
               {
-                label: "Entreprises employeurs",
-                data: sectorIdx.map((i) => withSectorM[i] / 1000),
-                backgroundColor: "rgba(181,71,8,1)",
-                borderColor: "#b54708",
-                borderWidth: 1,
-                borderRadius: 5,
-              },
-              {
-                label: "Travailleurs autonomes",
-                data: sectorIdx.map((i) => woSectorM[i] / 1000),
-                backgroundColor: "rgba(26,74,122,1)",
-                borderColor: "#1a4a7a",
-                borderWidth: 1,
+                data: spcts,
+                backgroundColor: spcts.map((v) =>
+                  v >= 0 ? "#006b5e" : "#b54708",
+                ),
+                borderWidth: 0,
                 borderRadius: 5,
               },
             ],
@@ -131,9 +103,7 @@
               tooltip: {
                 callbacks: {
                   label: (ctx) =>
-                    ctx.dataset.label +
-                    " : " +
-                    (ctx.raw * 1000).toLocaleString("fr-CA"),
+                    (ctx.raw >= 0 ? "+" : "") + ctx.raw.toFixed(1) + "%",
                 },
               },
             },
@@ -142,9 +112,11 @@
                 ticks: {
                   color: PALETTE.mid,
                   font: { size: 16, family: FONT, weight: "600" },
-                  callback: (v) => v + "k",
+                  callback: (v) => (v > 0 ? "+" : "") + v + "%",
                 },
                 grid: { color: "rgba(0,0,0,0.06)" },
+                min: -15,
+                max: 35,
               },
               y: {
                 afterFit(scale) {

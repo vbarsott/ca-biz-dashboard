@@ -18,9 +18,8 @@
       <div class="goc-wordmark" aria-label="Government of Canada"></div>
       <div class="slide-source">
         <div class="slide-source-item">
-          Statistique Canada | 33-10-0034-01 → 33-10-1096-01
-          <br />Population : Tableau 17-10-0009-01 de Statistique Canada,
-          estimations du T4 2025
+          Statistique Canada | 33-10-0034-01 → 33-10-1096-01 | Population :
+          17-10-0009-01, estimations du T4 2025
         </div>
       </div>
     </div>
@@ -31,13 +30,12 @@
     <main class="main-wrapper">
       <!-- ── HERO ZONE ───────────────────────────────────────────────────── -->
       <div class="hero-zone">
-        <h1>Densité des entreprises par province et territoire</h1>
+        <h1>Densité des entreprises par administration</h1>
         <p class="subtitle">
-          En décembre 2025, la C.-B. domine toutes les provinces et territoires
-          avec 145,2 entreprises pour 1 000 habitants, soit presque quatre fois
-          le Nunavut (34,9). L’Ontario arrive au 3e rang malgré le plus grand
-          nombre d’entreprises: avec plus de 16M d’habitants, son taux tombe à
-          125 pour 1 000.
+          En décembre 2025, la Colombie-Britannique domine toutes les provinces
+          et territoires avec 145,2 entreprises pour 1 000 habitants, soit
+          presque quatre fois le Nunavut (34,9). L’Ontario arrive au 3e rang
+          malgré le plus grand nombre d’entreprises.
         </p>
       </div>
 
@@ -80,9 +78,9 @@
                   <tr>
                     <th class="col-rank">#</th>
                     <th class="col-prov">Province</th>
-                    <th class="col-total">Total /1k</th>
-                    <th class="col-emp">Employeur /1k</th>
-                    <th class="col-solo">Autonome /1k</th>
+                    <th class="col-total">Total/1k</th>
+                    <th class="col-emp">Employeur/1k</th>
+                    <th class="col-solo">Autonome/1k</th>
                   </tr>
                 </thead>
 
@@ -294,14 +292,6 @@
                       "
                     >
                       80.3
-                    </td>
-                  </tr>
-
-                  <!-- ── National average reference ── -->
-                  <tr class="row-avg-sep">
-                    <td colspan="5">
-                      ─── Moy. Canada &nbsp;121,2 &nbsp;/&nbsp; 33,0
-                      &nbsp;/&nbsp; 88,2 ───
                     </td>
                   </tr>
 
@@ -737,7 +727,10 @@
         /* ── Use pre-loaded TopoJSON (works with file://, localhost, and GitHub Pages) ── */
         try {
           const topoData = window.canTopoData;
-          if (!topoData) throw new Error("[sld05-fr] window.canTopoData not found — is can-topo-data.js loaded?");
+          if (!topoData)
+            throw new Error(
+              "[sld05-fr] window.canTopoData not found — is can-topo-data.js loaded?",
+            );
           (function (topoData) {
             /* ── Guard: offsetWidth can be 0 if layout hasn't settled; also
                ensure h is at least 1 so d3.geoAlbers().fitSize() never
@@ -834,8 +827,8 @@
                   .attr("y1", y + 15) // juste sous le texte de valeur
                   .attr("x2", c[0]) // centroïde de l'île
                   .attr("y2", c[1])
-                  .attr("stroke", "#000")
-                  .attr("stroke-width", 1)
+                  .attr("stroke", "rgba(153,0,0,0.9)")
+                  .attr("stroke-width", 3)
                   .attr("opacity", 0.6)
                   .style("pointer-events", "none");
 
@@ -844,7 +837,7 @@
                   .attr("cx", c[0])
                   .attr("cy", c[1])
                   .attr("r", 2.5)
-                  .attr("fill", "#1a1a1a")
+                  .attr("fill", "#990000")
                   .attr("opacity", 0.75)
                   .style("pointer-events", "none");
               }
@@ -855,33 +848,34 @@
                 .style("pointer-events", "none");
 
               /* Province abbreviation — larger, bolder */
-              /* The PEI label floats in the clear Atlantic space → dark ink. */
-              const abFill = name === "Prince Edward Island" ? "#1a1a1a" : fill;
+              /* All labels use white fill + dark stroke so they read on any background.
+                 paint-order: stroke renders the outline behind the fill. */
               g.append("text")
                 .attr("text-anchor", "middle")
                 .attr("dy", "-0.25em")
-                .style("font-size", "16px")
+                .style("font-size", "14px")
                 .style("font-family", FONT)
                 .style("font-weight", "900")
-                .style("fill", abFill)
-                .style("filter", "url(#txt-shadow)")
+                .style("fill", "#ffffff")
+                .style("stroke", "rgba(153,0,0,0.9)")
+                .style("stroke-width", "3px")
+                .style("stroke-linejoin", "round")
+                .style("paint-order", "stroke")
                 .text(ab);
 
               /* Numerical density value */
               if (val != null) {
-                /* The province color of PEI is medium-dark red (109.1 ≥ 108 → white),
-                   but the label is located outside the province in the clear Atlantic space,
-                   so we override it with dark ink for readability. */
-                const valFill =
-                  name === "Prince Edward Island" ? "#1a1a1a" : fill;
                 g.append("text")
                   .attr("text-anchor", "middle")
                   .attr("dy", "1.05em")
-                  .style("font-size", "16px")
+                  .style("font-size", "14px")
                   .style("font-family", FONT)
                   .style("font-weight", "700")
-                  .style("fill", valFill)
-                  .style("filter", "url(#txt-shadow)")
+                  .style("fill", "#ffffff")
+                  .style("stroke", "rgba(153,0,0,0.9)")
+                  .style("stroke-width", "3px")
+                  .style("stroke-linejoin", "round")
+                  .style("paint-order", "stroke")
                   .text(val.toFixed(1));
               }
             });

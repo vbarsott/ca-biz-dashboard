@@ -48,28 +48,24 @@
    * Order is non-negotiable per CLAUDE.md §8.
    */
   const SLIDES = [
-    "slides/dashboard-cover-en.html", //  1  EN
-    "slides/dashboard-cover-fr.html", //  2  FR
-    "slides/sld01-en-national-overview.html", //  3  EN
-    "slides/sld01-fr-national-overview.html", //  4  FR
-    "slides/sld02-en-business-size.html", //  5  EN
-    "slides/sld02-fr-business-size.html", //  6  FR
-    "slides/sld03-en-regional-growth-ranking.html", //  7  EN
-    "slides/sld03-fr-regional-growth-ranking.html", //  8  FR
-    "slides/sld04-en-regional-business-ratio.html", // 9  EN
-    "slides/sld04-fr-regional-business-ratio.html", // 10  FR
-    "slides/sld05-en-regional-business-per-capita.html", // 11  EN
-    "slides/sld05-fr-regional-business-per-capita.html", // 12  FR
-    "slides/sld06-en-sector-business-comparison.html", // 13  EN
-    "slides/sld06-fr-sector-business-comparison.html", // 14  FR
-    "slides/sld06-opt-en-sector-business-comparison.html", // 15  EN
-    "slides/sld06-opt-fr-sector-business-comparison.html", // 16  FR
+    "slides/sld01-en-national-overview.html", //  1  EN
+    "slides/sld01-fr-national-overview.html", //  2  FR
+    "slides/sld02-en-business-size.html", //  3  EN
+    "slides/sld02-fr-business-size.html", //  4  FR
+    "slides/sld03-en-regional-growth-ranking.html", //  5  EN
+    "slides/sld03-fr-regional-growth-ranking.html", //  6  FR
+    "slides/sld04-en-regional-business-ratio.html", // 7  EN
+    "slides/sld04-fr-regional-business-ratio.html", // 8 FR
+    "slides/sld05-en-regional-business-per-capita.html", // 9  EN
+    "slides/sld05-fr-regional-business-per-capita.html", // 10  FR
+    "slides/sld06-en-sector-business-comparison.html", // 11  EN
+    "slides/sld06-fr-sector-business-comparison.html", // 12  FR
   ];
 
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 20000;
+  const SLIDE_DURATION_MS = 3000;
 
   /**
    * EN → FR crossfade duration (ms).

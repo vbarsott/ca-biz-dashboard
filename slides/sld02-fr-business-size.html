@@ -25,13 +25,14 @@
       <div class="hero-zone">
         <!-- Title block -->
         <div class="title-block">
-          <h1>Taille des employeurs</h1>
+          <h1>Taille des entreprises employeuses</h1>
           <p class="subtitle">
             En décembre 2025, 56,5 % des 1,37 million d'entreprises employeuses
             canadiennes comptaient de 1 à 4 employés.<br />En incluant les
-            entreprises de 5-19 employés, les petites entreprises représentent
-            86,8 % de l'ensemble des employeurs, tandis que celles de 50
-            employés et plus ne constituent pas même 5 % du total.
+            entreprises de 5-19 employé·e·s, les petites entreprises
+            représentent 86,8 % de l'ensemble des employeurs,<br />tandis que
+            celles de 50 employé·e·s et plus ne constituent pas même 5 % du
+            total.
           </p>
         </div>
       </div>
@@ -100,15 +101,20 @@
                 ticks: {
                   color: PALETTE.mid,
                   font: { size: 16, family: FONT, weight: "600" },
-                  callback: (v) => v + " %",
+                  callback: (v) => v + "%",
                 },
                 grid: { color: "rgba(0,0,0,0.06)" },
               },
               y: {
                 title: {
                   display: true,
-                  text: "Employés",
-                  font: { size: 16, family: FONT, weight: "600" },
+                  text: "   Employé·e·s",
+                  font: {
+                    size: 16,
+                    family: FONT,
+                    weight: "600",
+                    align: "left",
+                  },
                 },
                 afterFit(scale) {
                   scale.width = 120; /* fixed label column — prevents truncation */

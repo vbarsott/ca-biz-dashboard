@@ -27,11 +27,12 @@
       <div class="hero-zone">
         <h1>Ratio des employeurs aux travailleurs autonomes</h1>
         <p class="subtitle">
-          Le Nunavut est le seul territoire où les entreprises employeuses
-          surpassent les travailleurs autonomes (0,87×), reflet d'une économie
-          centrée sur l'État et d'une activité du secteur privé limitée. À
-          l'opposé, l'Ontario (2,93×), la Colombie-Britannique (2,77×) et le
-          Québec (2,67×) égalent ou dépassent chacun la moyenne nationale.
+          Le Nunavut est le seul administration où les entreprises employeuses
+          surpassent les travailleurs autonomes (0,87×),<br />
+          reflet d'une économie centrée sur l'État et d'une activité du secteur
+          privé limitée.<br />
+          À l'opposé, l'Ontario (2,93×) et la Colombie-Britannique (2,77×)
+          dépassent toutes deux la moyenne nationale.
         </p>
       </div>
 
@@ -43,24 +44,6 @@
             ole="img"
             aria-label="Ontario 2,93×, C.-B. 2,77×, Québec 2,67×. Nunavut 0,87× — à prédominance d'employeurs."
           ></canvas>
-        </div>
-
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--teal)"></div>
-            Au-dessus de la moyenne nationale (2,67×)
-          </div>
-          <div class="legend-item">
-            <div
-              class="legend-dot"
-              style="background: var(--projection-blue)"
-            ></div>
-            Sous la moyenne
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background: var(--orange)"></div>
-            Prédominance d'employeurs (&lt;1×)
-          </div>
         </div>
       </div>
     </main>
@@ -75,19 +58,19 @@
          December 2025 snapshot · National average: 2.67×
       ────────────────────────────────────────────────────────────────────── */
       const provRatioLabels = [
-        "Ontario",
-        "Colombie-Britannique",
-        "Québec",
-        "Saskatchewan",
-        "Alberta",
-        "Manitoba",
-        "Yukon",
-        "Nouvelle-Écosse",
-        "Île-du-Prince-Édouard",
-        "Nouveau-Brunswick",
-        "Terre-Neuve-et-Labrador",
-        "Territoires du Nord-Ouest",
-        "Nunavut",
+        "ON",
+        "BC",
+        "QC",
+        "SK",
+        "AB",
+        "MB",
+        "YT",
+        "NS",
+        "PE",
+        "NB",
+        "NL",
+        "NT",
+        "NU",
       ];
       const provRatios = [
         2.93, 2.77, 2.67, 2.66, 2.44, 2.27, 1.98, 1.92, 1.87, 1.46, 1.39, 1.31,
@@ -105,7 +88,7 @@
                 label: "Ratio de travail autonome",
                 data: provRatios,
                 backgroundColor: provRatios.map((v) =>
-                  v >= nationalAvg
+                  v > nationalAvg
                     ? PALETTE.teal
                     : v < 1.0
                       ? PALETTE.orange
@@ -145,7 +128,7 @@
               },
               y: {
                 afterFit(scale) {
-                  scale.width = 260; /* fixed label column — prevents truncation */
+                  scale.width = 100; /* fixed label column — prevents truncation */
                 },
                 ticks: {
                   color: PALETTE.mid,

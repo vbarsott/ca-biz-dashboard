@@ -3,26 +3,33 @@
  * ============================================================
  * Controls dynamic slide loading, timing, transitions,
  * chart-animation reset, preloading, and loop logic for
- * 14 bilingual HTML slides (7 EN + 7 FR, interleaved).
+ * 12 bilingual HTML slides (6 EN + 6 FR, interleaved).
  *
  * Depends on:  index.html   (two <iframe> elements: #frame-a, #frame-b)
  *              slideshow.css (defines the .active opacity transition, 1.8 s)
  *
- * Single transition mode — crossfade for ALL slide changes:
- *   EN → FR  (even → odd index) : standard crossfade, TRANSITION_MS
- *   FR → EN  (odd  → even index): slow crossfade,     TRANSITION_LONG_MS
+ * Two transition modes:
+ *   EN → FR  (even → odd index) : plain opacity crossfade, TRANSITION_MS
+ *   FR → EN  (odd  → even index): dark-to-light reveal,   TRANSITION_LONG_MS
+ *                                  (opacity + brightness filter, distinct effect)
  *
  * Chart animation strategy:
  *   Chart.js runs its entrance animation on DOMContentLoaded inside
  *   each preloaded iframe — BEFORE the slide is visible. Charts are
  *   at their "completed" state by the time the slide is shown.
  *
- *   Fix: after each crossfade transition COMPLETES (slide fully visible),
- *   reach into the incoming iframe's contentWindow and call:
- *     chart.reset()  — rewinds to pre-animation state (one render frame,
- *                      imperceptible at 60 fps) — Chart.js 3.x + 4.x safe
- *     chart.update() — triggers the entrance animation from scratch
- *   Result: charts animate on a fully visible slide, every time.
+ *   EN → FR  : no chart animation needed (FR slides are static).
+ *
+ *   FR → EN  : charts must animate on the fully visible slide.
+ *              Fix — two-phase approach:
+ *                Phase A (before crossfade, frame at opacity:0):
+ *                  chart.reset()  — snaps charts to pre-animation state.
+ *                  Frame is invisible, so the snap is never seen.
+ *                Phase B (after crossfade completes):
+ *                  chart.update() — triggers entrance animation from zero.
+ *              This prevents charts from appearing "fully drawn" during
+ *              the dark-to-light fade-in, and eliminates the jarring
+ *              reset-after-reveal that forced TRANSITION_LONG_MS = 0.
  *
  * z-index strategy:
  *   During every transition, the incoming frame is elevated to z-index:3
@@ -65,7 +72,7 @@
   /**
    * How long each slide stays fully visible (ms).
    */
-  const SLIDE_DURATION_MS = 3000;
+  const SLIDE_DURATION_MS = 20000;
 
   /**
    * EN → FR crossfade duration (ms).
@@ -74,11 +81,16 @@
   const TRANSITION_MS = 1800;
 
   /**
-   * FR → EN crossfade duration (ms).
-   * Same animation as EN → FR.
-   * Applied as an inline style override — CSS base stays at TRANSITION_MS.
+   * FR → EN dark-to-light reveal duration (ms).
+   * Uses a combined opacity + brightness filter transition (distinct from EN → FR).
+   * Applied entirely as inline style overrides — CSS base stays at TRANSITION_MS.
+   *
+   * Previously set to 0 to avoid charts appearing fully drawn during the fade.
+   * That workaround is no longer needed: charts are now pre-reset before the
+   * transition starts (while the frame is at opacity:0), so they are always in
+   * their zero/start state by the time the fade-in begins.
    */
-  const TRANSITION_LONG_MS = 0;
+  const TRANSITION_LONG_MS = 1800;
 
   /**
    * Maximum time to wait for an iframe to load before advancing anyway.
@@ -235,38 +247,108 @@
   }
 
   /* ============================================================
-     CHART RE-ANIMATION
+     CHART HELPERS
      ============================================================
-     Called AFTER a transition completes, when the incoming slide
-     is fully visible at opacity: 1.
+     Three focused helpers replace the old single reanimateCharts():
 
-     Sequence per chart instance:
-       1. chart.reset()  — snaps all elements back to their
-                           pre-animation state (zero / start).
-                           One render frame (~16 ms at 60 fps),
-                           imperceptible to the viewer.
-                           Chart.js 3.x: resets state, no animation.
-                           Chart.js 4.x: reset() = update('reset'),
-                             triggers animation; immediately calling
-                             update() below re-queues from start.
-       2. chart.update() — triggers the entrance animation from
-                           whatever state the chart is in (0 / start).
+     resetChartsOnly(frameLabel)
+       Called BEFORE a FR→EN transition starts, while the incoming
+       English frame is still at opacity:0 (invisible to the viewer).
+       Snaps every chart to its pre-animation (zero/start) state.
+         Chart.js 3.x: reset() is instant — snaps to zero, no animation.
+         Chart.js 4.x: reset() = update('reset'), starts a brief animation
+           to zero (invisible since frame is still opaque-0; completes well
+           within the 1800 ms transition window).
+       After this call the frame's charts are at their start state, so
+       no "fully drawn" chart is ever visible during the fade-in.
 
-     This is a safe no-op if:
-       - The frame hasn't finished loading
-       - The slide has no Chart.js instances (e.g. cover slide)
-       - Cross-origin restrictions apply (all same origin — shouldn't happen)
+     animateChartsOnly(frameLabel)
+       Called AFTER a FR→EN transition completes (slide fully visible).
+       Triggers only update() — no reset() — because the charts are
+       already at their zero/start state from the earlier resetChartsOnly().
+       This fires the entrance animation on the now-visible slide.
+
+     reanimateCharts(frameLabel, slideIndex)
+       Legacy helper used for EN slides reached via retreat() (manual
+       navigation). Does the full reset() + update() pair since we
+       don't pre-reset charts for manual navigation transitions.
+       FR slides (odd index) are always skipped — no chart animation.
      ============================================================ */
 
   /**
-   * Re-animates charts in the given frame, but ONLY for English slides.
-   * FR slides (odd index) must remain static — no reset(), no update().
+   * Phase A of FR→EN chart strategy.
+   * Resets all charts to their start state BEFORE the transition begins.
+   * Safe to call while the frame is at opacity:0 — the snap is invisible.
+   *
+   * @param {string} frameLabel  'a' | 'b'
+   */
+  function resetChartsOnly(frameLabel) {
+    try {
+      var cw = frames[frameLabel].contentWindow;
+      if (!cw || !cw.Chart) return;
+
+      var instances = cw.Chart.instances;
+      if (!instances) return;
+
+      Object.keys(instances).forEach(function (id) {
+        var chart = instances[id];
+        if (!chart) return;
+        try {
+          chart.reset(); // snap to zero (3.x instant; 4.x brief invisible animation)
+        } catch (e) {
+          console.warn(
+            "[Slideshow] Chart pre-reset failed (id=" + id + "):",
+            e,
+          );
+        }
+      });
+    } catch (e) {
+      /* Safe to swallow — frame not ready or cross-origin */
+    }
+  }
+
+  /**
+   * Phase B of FR→EN chart strategy.
+   * Triggers the entrance animation AFTER the dark-to-light transition
+   * completes and the slide is fully visible.
+   * Charts are already at zero/start state from resetChartsOnly().
+   *
+   * @param {string} frameLabel  'a' | 'b'
+   */
+  function animateChartsOnly(frameLabel) {
+    try {
+      var cw = frames[frameLabel].contentWindow;
+      if (!cw || !cw.Chart) return;
+
+      var instances = cw.Chart.instances;
+      if (!instances) return;
+
+      Object.keys(instances).forEach(function (id) {
+        var chart = instances[id];
+        if (!chart) return;
+        try {
+          chart.update(); // play entrance animation from zero/start state
+        } catch (e) {
+          console.warn(
+            "[Slideshow] Chart animate-only failed (id=" + id + "):",
+            e,
+          );
+        }
+      });
+    } catch (e) {
+      /* Safe to swallow — cross-origin or frame not ready */
+    }
+  }
+
+  /**
+   * Full reset + animate. Used for EN slides reached via manual retreat().
+   * FR slides (odd index) are always skipped — their charts stay static.
    *
    * @param {string} frameLabel   'a' | 'b'
    * @param {number} slideIndex   index into SLIDES array (even = EN, odd = FR)
    */
   function reanimateCharts(frameLabel, slideIndex) {
-    // FR slides (odd index) are always static — skip chart animation entirely.
+    // FR slides (odd index) are always static — no chart animation.
     if (slideIndex % 2 === 1) return;
 
     try {
@@ -281,7 +363,7 @@
         var chart = instances[id];
         if (!chart) return;
         try {
-          // reset() rewinds to pre-animation state (instant, one frame).
+          // reset() rewinds to pre-animation state.
           // update() triggers the entrance animation from scratch.
           chart.reset();
           chart.update();
@@ -348,10 +430,19 @@
   /* ============================================================
      CROSSFADE  (all transitions — EN → FR and FR → EN)
      ============================================================
-     Uses CSS opacity transition. A single function handles both
-     directions; the only difference is the duration parameter:
-       EN → FR : TRANSITION_MS       (standard, matches CSS)
-       FR → EN : TRANSITION_LONG_MS  (slower, injected inline)
+     Uses CSS opacity transition. Accepts an optional frToEn flag
+     to apply the distinct FR→EN dark-to-light reveal effect.
+
+       EN → FR (frToEn=false): plain opacity crossfade, TRANSITION_MS.
+                               Matches the CSS base transition exactly.
+
+       FR → EN (frToEn=true) : combined opacity + brightness filter
+                               transition, TRANSITION_LONG_MS.
+                               Starts at brightness(0.15) → brightness(1),
+                               visually distinct from the EN→FR crossfade.
+                               Charts are pre-reset before this call so
+                               no "fully drawn" chart appears during the
+                               fade-in; animateChartsOnly() fires after.
 
      z-index strategy:
        The incoming frame is elevated to z-index:3 (inline) for the
@@ -360,30 +451,43 @@
        frame-a) from being invisible behind the outgoing frame-b.
        The inline z-index is cleaned up after transition completes.
 
-     Chart animation timing:
-       Charts are NOT touched before the transition. The incoming
-       slide fades in showing its preloaded (completed) chart state,
-       which looks natural. Once the fade is fully complete and the
-       slide is at opacity:1, reanimateCharts() is called — charts
-       reset to zero and play their entrance animation on the now-
-       fully-visible slide.
+     Chart animation timing (FR→EN only):
+       Phase A — resetChartsOnly() is called by advance() BEFORE
+         crossfade() is invoked, while the frame is at opacity:0.
+         Charts snap to their zero/start state invisibly.
+       Phase B — animateChartsOnly() is called here AFTER the
+         transition completes. Charts play their entrance animation
+         on the now-fully-visible slide.
      ============================================================ */
 
   /**
-   * @param {string} incomingLabel  'a' | 'b'
-   * @param {number} incomingIndex  index into SLIDES array
-   * @param {number} duration       ms for the opacity transition
+   * @param {string}  incomingLabel  'a' | 'b'
+   * @param {number}  incomingIndex  index into SLIDES array
+   * @param {number}  duration       ms for the opacity transition
+   * @param {boolean} [frToEn]       true → apply dark-to-light FR→EN effect
    */
-  function crossfade(incomingLabel, incomingIndex, duration) {
+  function crossfade(incomingLabel, incomingIndex, duration, frToEn) {
     var outgoingLabel = activeFrame;
     var outgoingIndex = currentIndex;
     var inEl = frames[incomingLabel];
     var outEl = frames[outgoingLabel];
 
-    // ── Phase 1: Override transition duration if non-standard ───────────
-    // The base CSS uses TRANSITION_MS. For FR → EN we need TRANSITION_LONG_MS,
-    // injected inline so it overrides the stylesheet without modifying it.
-    if (duration !== TRANSITION_MS) {
+    // ── Phase 1: Override transition properties ──────────────────────────
+    // The base CSS uses TRANSITION_MS (opacity only).
+    // FR → EN also transitions filter (brightness), both injected inline.
+    if (frToEn) {
+      // Dark-to-light reveal: start at near-black brightness.
+      // Frame is still at opacity:0 (not .active) — the snap is invisible.
+      inEl.style.filter = "brightness(0.15)";
+      inEl.style.transition =
+        "opacity " +
+        duration +
+        "ms ease-in-out, " +
+        "filter " +
+        duration +
+        "ms ease-in-out";
+    } else if (duration !== TRANSITION_MS) {
+      // Non-standard duration override (kept for forward compatibility).
       inEl.style.transition = "opacity " + duration + "ms ease-in-out";
     }
 
@@ -395,9 +499,17 @@
 
     // ── Phase 3: Begin fade-in (one rAF ensures Phase 1+2 are painted) ──
     requestAnimationFrame(function () {
-      // Adding .active to the incoming frame triggers the opacity 0 → 1
-      // transition (CSS or inline override, whichever applies).
+      // Adding .active triggers the opacity 0 → 1 transition.
       inEl.classList.add("active");
+
+      // FR → EN: a second rAF commits the initial brightness(0.15) paint
+      // before we transition to brightness(1). Without this beat the browser
+      // may coalesce the two filter writes and skip the transition entirely.
+      if (frToEn) {
+        requestAnimationFrame(function () {
+          inEl.style.filter = "brightness(1)";
+        });
+      }
 
       notifyActivate(incomingLabel, incomingIndex);
       notifyDeactivate(outgoingLabel, outgoingIndex);
@@ -405,34 +517,37 @@
       // ── Phase 4: Cleanup after transition completes ──────────────────
       setTimeout(function () {
         // Snap the outgoing frame invisible without a CSS transition.
-        // (If we let the CSS transition fire here it would fade the outgoing
-        // from opacity:1 → 0 over 2 s — visible if it somehow peeked above
-        // the incoming frame. Snapping is cleaner.)
         outEl.style.transition = "none";
         outEl.style.opacity = "0";
         outEl.classList.remove("active");
 
         // One rAF: wait for the browser to commit the above paint before
-        // stripping the inline overrides (prevents accidental transition flash).
+        // stripping the inline overrides (prevents accidental flash).
         requestAnimationFrame(function () {
           // Restore outgoing frame to clean CSS state.
-          // computed opacity is already 0 (no .active, CSS = 0) → no transition fires.
           outEl.style.transition = "";
           outEl.style.opacity = "";
           outEl.style.zIndex = ""; // was never set on outEl, harmless
 
-          // Restore incoming frame CSS overrides.
-          // .active gives opacity:1 and z-index:2 via CSS — matching the
-          // inline values we're removing, so no visible change occurs.
+          // Restore incoming frame to clean CSS state.
+          // .active gives opacity:1 and z-index:2 via CSS so removing the
+          // inline overrides causes no visible change.
           inEl.style.transition = "";
           inEl.style.zIndex = "";
+          if (frToEn) {
+            inEl.style.filter = ""; // CSS has no filter — removing is safe
+          }
 
-          // ── Phase 5: Re-animate charts ──────────────────────────────
-          // The slide is now fully visible (opacity:1). Chart animations
-          // reset and replay from scratch here — satisfying the requirement
-          // that chart animations ONLY play on an active, visible slide.
-          // FR slides (odd index) are skipped — their charts stay static.
-          reanimateCharts(incomingLabel, incomingIndex);
+          // ── Phase 5: Chart animation ─────────────────────────────────
+          // FR → EN: charts were pre-reset to zero before this crossfade;
+          //   only update() is needed to play the entrance animation.
+          // EN → FR: FR slides are always static — reanimateCharts() skips.
+          // Manual retreat (EN→EN or FR→FR): full reset+update via reanimateCharts().
+          if (frToEn) {
+            animateChartsOnly(incomingLabel);
+          } else {
+            reanimateCharts(incomingLabel, incomingIndex);
+          }
 
           // ── Phase 6: Advance global state ───────────────────────────
           activeFrame = incomingLabel;
@@ -452,8 +567,16 @@
   /* ============================================================
      ADVANCE
      Moves to the next slide. Called by the auto-advance timer.
-     Routes to crossfade with the correct duration based on
-     whether the current slide is FR (odd) → EN (even).
+     Routes to crossfade with the correct duration and effect flag
+     based on whether the current slide is FR (odd) → EN (even).
+
+     FR → EN sequence:
+       1. Pre-reset charts on the incoming English frame BEFORE
+          calling crossfade(). Frame is still at opacity:0 here,
+          so the snap to zero is invisible to the viewer.
+       2. Call crossfade() with frToEn=true to trigger the
+          dark-to-light reveal and schedule animateChartsOnly()
+          after the transition completes.
      ============================================================ */
 
   function advance() {
@@ -461,14 +584,20 @@
     var nextLabel = otherFrame(activeFrame);
     var nextIframe = frames[nextLabel];
 
-    // FR → EN transitions use the slower crossfade; all others standard.
-    var duration = isFrToEn(currentIndex) ? TRANSITION_LONG_MS : TRANSITION_MS;
+    var frToEn = isFrToEn(currentIndex);
+    var duration = frToEn ? TRANSITION_LONG_MS : TRANSITION_MS;
 
     // Is the idle frame already holding the right slide?
     var alreadyLoaded = nextIframe.dataset.loadedIndex === String(nextSlide);
 
     function doTransition() {
-      crossfade(nextLabel, nextSlide, duration);
+      // FR → EN: pre-reset charts while the frame is invisible (opacity:0).
+      // This must happen immediately before crossfade() so there is no
+      // window where a completed chart could appear during the fade-in.
+      if (frToEn) {
+        resetChartsOnly(nextLabel);
+      }
+      crossfade(nextLabel, nextSlide, duration, frToEn);
     }
 
     if (alreadyLoaded) {

@@ -1,10 +1,14 @@
 /* ============================================================
    slideshow.css — Canadian Business Dashboard
-   Fullscreen 16:9 layout with a single, unified transition mode:
-     Crossfade (opacity only) for ALL slide transitions.
-     EN → FR : standard duration  (TRANSITION_MS in slideshow.js)
-     FR → EN : longer duration    (TRANSITION_LONG_MS in slideshow.js,
-               applied as an inline style override by slideshow.js)
+   Fullscreen 16:9 layout with two distinct transition modes:
+
+     EN → FR : plain opacity crossfade (TRANSITION_MS in slideshow.js)
+               Handled entirely by the CSS transition on .slide-frame.
+
+     FR → EN : dark-to-light reveal (TRANSITION_LONG_MS in slideshow.js)
+               Combined opacity + brightness filter, applied as inline
+               style overrides by slideshow.js. Visually distinct from
+               the EN → FR crossfade.
 
    Architecture:
    - #slideshow-wrapper   fills the entire viewport (100vw × 100vh)
@@ -15,10 +19,11 @@
                           always stacked at the same position (inset:0).
                           Only one is ever visible at a time.
 
-   All transitions use CSS opacity (this file).
-   The FR → EN longer-duration override is applied inline by slideshow.js.
+   The base CSS handles only the EN → FR opacity transition.
+   All FR → EN overrides (duration, filter) are applied inline by slideshow.js
+   and removed after the transition completes.
 
-   IMPORTANT: TRANSITION_MS in slideshow.js (1500 ms) must stay in
+   IMPORTANT: TRANSITION_MS in slideshow.js (1800 ms) must stay in
    sync with the base transition duration on .slide-frame below.
    ============================================================ */
 
